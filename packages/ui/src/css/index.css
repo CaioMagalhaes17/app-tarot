@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+@import "./sweetalert.css";
+
+@import "./button.css";
+
+@import "./mantine-datatable.css";
+
+@import "./animate.css";
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .scrollable::-webkit-scrollbar {
+    width: 8px; /* Largura da barra */
+  }
+
+  .scrollable::-webkit-scrollbar-track {
+    background: rgb(45, 45, 45); /* Fundo da barra */
+  }
+
+  .scrollable::-webkit-scrollbar-thumb {
+    background: #858585; /* Cor da barra de rolagem */
+    border-radius: 4px;
+  }
+
+  .scrollable::-webkit-scrollbar-thumb:hover {
+    background: #6f6f6f; /* Cor ao passar o mouse */
+  }
+}
+
+@layer components {
+  .toggle-sidebar .navbarside {
+    left: -260px !important;
+  }
+
+  .vertical .sidebar {
+    left: 0;
+  }
+
+  .main-content {
+    @apply bg-white dark:bg-[#060818]
+  }
+
+  input.form-input-custom,
+  input.form-textarea-custom,
+  input.form-select-custom,
+  input.form-multiselect-custom {
+    @apply w-full rounded-md dark:border bg-[#f7f7f7] px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary;
+  }
+
+  .has-error input.form-input-custom,
+  .has-error input.form-textarea-custom,
+  .has-error input.form-select-custom,
+  .has-error input.form-multiselect-custom,
+  .has-error input.multiselect__tags {
+    @apply border-danger bg-danger/[0.08] text-danger placeholder-danger/70 focus:border-danger;
+  }
+
+  .has-success input.form-input-custom,
+  .has-success input.form-textarea-custom,
+  .has-success input.form-select-custom,
+  .has-success input.form-multiselect-custom,
+  .has-success input.multiselect__tags {
+    @apply border-success bg-success/[0.08] text-success placeholder-success/70 focus:border-success;
+  }
+
+  .form-input-lg,
+  .form-textarea-lg,
+  .form-select-lg,
+  .form-multiselect-lg {
+    @apply py-2.5 text-base;
+  }
+
+  .form-input-sm,
+  .form-textarea-sm,
+  .form-select-sm,
+  .form-multiselect-sm {
+    @apply py-1.5 text-xs;
+  }
+
+  .form-radio,
+    .form-checkbox {
+        @apply h-5 w-5 cursor-pointer rounded border-2 border-white-light bg-transparent text-primary !shadow-none !outline-none !ring-0 !ring-offset-0 checked:bg-[length:90%_90%] disabled:cursor-not-allowed disabled:bg-[#eee] 
+      dark:border-[#253b5c] dark:checked:border-transparent dark:disabled:bg-[#1b2e4b];
+    }
+
+  input.form-radio {
+    @apply rounded-full;
+  }
+
+  .sidebar .nav-item>a {
+    @apply mb-1 flex w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md p-2.5 text-[#506690] text-white dark:text-[#506690] hover:bg-[#000]/[0.08] hover:text-white;
+  }
+
+  .panel {
+    @apply relative rounded-md p-5 sombra dark:shadow-[#060818]
+  }
+
+  .navbar-sticky header {
+    @apply sticky top-0 z-20
+  }
+
+  label {
+    @apply mb-1.5 block font-semibold;
+  }
+
+  .leftbar {
+    @apply dark:bg-black bg-white dark:border-r-[#323b45] shadow-2xl;
+    padding: 25px;
+    width: 305px;
+    top: 72px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 6;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width .5s ease;
+    scrollbar-width: none;
+  }
+
+  .page-container {
+    left: 305px;
+    right: 0px;
+    bottom: 0;
+    top: 80px;
+    position: absolute;
+    text-align: center;
+    margin-right: 0;
+    transition: all .5s ease;
+  }
+
+  .pointer-all {
+    pointer-events: all !important;
+  }
+
+  .scrollable {
+    overflow-y: auto !important;
+  }
+
+  .sombra {
+    @apply shadow-[0_10px_30px_-10px_rgba(13,15,24)];
+  }
+  
+}
+  

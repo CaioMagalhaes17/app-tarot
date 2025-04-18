@@ -1,0 +1,84 @@
+  /* Buttons */
+  .btn {
+    @apply relative flex items-center justify-center rounded-md border px-5 py-2 text-sm font-extrabold shadow-[0_10px_20px_-10px] outline-none transition duration-300 hover:shadow-none;
+  }
+
+  .btn-lg {
+    @apply px-7 py-2.5 text-base;
+  }
+
+  .btn-sm {
+    @apply px-2.5 py-1.5 text-xs;
+  }
+
+  .btn[disabled] {
+    @apply cursor-not-allowed opacity-60;
+  }
+
+  .btn-black {
+    @apply hover:bg-[#1e202e] hover:border-[#1e202e] border-dark bg-dark text-white shadow-[000];
+  }
+
+  .btn-green {
+    @apply border-[#009e3b] bg-[#009e3b] text-white shadow-[000];
+  }
+
+  .btn-outline-green {
+    @apply border-green text-green shadow-none hover:bg-green hover:text-white;
+  }
+
+  .btn-outline-blue {
+    @apply border-blue text-blue shadow-none hover:bg-blue hover:text-white;
+  }
+
+  .btn-blue {
+    @apply hover:bg-blue hover:border-blue border-blue bg-blue text-white shadow-[000];
+  }
+
+  .btn-twitch {
+    @apply border-[#9147ff] bg-[#9147ff] text-white shadow-[000];
+  }
+
+  .btn-primary {
+    @apply border-black dark:border-primary bg-black dark:bg-primary text-white shadow-[000];
+  }
+
+  .btn-primary-dark {
+    @apply border-primary-dark bg-primary-dark text-white shadow-[000];
+  }
+
+  .btn-outline-primary {
+    @apply border-black dark:border-white-dark hover:dark:text-white text-black dark:text-white shadow-none hover:bg-black hover:dark:bg-primary hover:text-white;
+  }
+
+  .btn-outline-warning {
+    @apply border-warning text-warning shadow-none hover:bg-warning hover:text-white;
+  }
+
+  .btn-outline-primary-dark {
+    @apply border-primary-dark text-primary-dark shadow-none hover:bg-primary-dark hover:text-white;
+  }
+
+  .btn-success {
+    @apply border-success bg-success text-white shadow-[000];
+  }
+
+  .btn-outline-success {
+    @apply border-success text-success shadow-none hover:bg-success hover:text-white;
+  }
+
+  .btn-outline-green {
+    @apply border-green text-green shadow-none hover:bg-green hover:text-white;
+  }
+
+  .btn-danger {
+    @apply border-danger bg-danger text-white shadow-danger/60;
+  }
+
+  .btn-outline-danger {
+    @apply border-danger text-danger shadow-none hover:bg-danger hover:text-white;
+  }
+
+  .btn-warning {
+    @apply border-warning bg-warning text-white shadow-warning/60;
+  }
