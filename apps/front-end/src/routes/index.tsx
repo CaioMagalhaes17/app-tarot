@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom"
-import { Home } from "../pages/Home"
+import { ClientHome } from "../pages/Home/client"
 import DefaultLayout from "../components/DefaultLayout"
 
 
@@ -10,7 +10,7 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <ClientHome />
       }
     ]
 

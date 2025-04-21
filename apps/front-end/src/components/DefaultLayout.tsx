@@ -15,6 +15,14 @@ export default function DefaultLayout() {
                 <Box className="hidden shadow-3xl shadow-4xl teste-default bg-success bg-warning bg-danger text-warning text-success text-danger text-primary" />
                 <Box data-overlap="false" id="page-container" className="animate__fadeIn animate__animated page-container scrollable">
                   <Outlet />
+                  <footer className="text-white py-6 px-4" style={{ backgroundColor: '#26123c' }}>
+                    <div className="max-w-6xl mx-auto text-center space-y-2">
+                      <p className="text-lg font-semibold">Nome do Site</p>
+                      <p className="text-sm">© 2025 Nome do Site. Todos os direitos reservados.</p>
+                      <p className="text-sm">Contato: contato@seudominio.com</p>
+                      <p className="text-sm">Redes Sociais</p>
+                    </div>
+                  </footer>
                 </Box>
               </Suspense>
             </Box>
