@@ -1,10 +1,12 @@
-import { Button, Panel, Text } from "@app/ui";
+import { Button, IconChat, Panel, Text } from "@app/ui";
 import { Atendents } from "./components/Atendents";
 import { Specialties } from "./components/Specialties";
 import { Plans } from "./components/Plans";
 import { HowItWorks } from "./components/HowItWorks";
+import { useNavigate } from "react-router-dom";
 
 export function ClientHome() {
+  const navigate = useNavigate()
   return (
     <>
       <div className="min-h-screen border-lg rounded-xl max-w-[1200px] ml-auto mr-auto ">
@@ -14,7 +16,7 @@ export function ClientHome() {
             <Text as="h1" className="text-xl text-white-dark">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
             <div className="flex flex-row gap-5 mr-20 mt-20">
               <Button onClick={() => document.getElementById('atendents')?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary text-2xl">Procurar Atendentes</Button>
-              <Button className="btn-outline-primary text-2xl">Comprar Minutos</Button>
+              <Button onClick={() => navigate('/chat')} className="btn-outline-primary text-2xl flex flex-row gap-2 items-center "><IconChat />Abrir o Chat</Button>
             </div>
           </div>
         </Panel>

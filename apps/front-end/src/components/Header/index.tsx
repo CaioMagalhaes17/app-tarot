@@ -1,11 +1,12 @@
 import { Button, Text, Header as UIHeader } from "@app/ui";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
-
+  const navigate = useNavigate()
   return (
     <UIHeader>
       <div className="h-[80px] backdrop-blur-lg shadow-md relative flex w-full items-center px-5 py-2.5 ">
-        <Text as="h1" className="font-extrabold text-3xl ml-20">Astrologia Online</Text>
+        <Text as="h1" className="font-extrabold text-3xl ml-20 cursor-pointer" onClick={() => navigate('/')}>Astrologia Online</Text>
         <div className="ml-auto" />
 
         <div className="font-bold text-white text-lg flex flex-row gap-10 mr-[100px]">

@@ -1,5 +1,6 @@
 import { Button, IconChat, IconSearch, IconUser, Text } from "@app/ui";
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function Atendents() {
   const specialists = [
@@ -34,6 +35,7 @@ export function Atendents() {
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
     }
   ]
+  const navigate = useNavigate()
   return (
     <div id="atendents" className="backdrop-blur-md border-[#6028dc1a] bg-[#26123c]/20 border rounded-xl w-full p-6 ml-auto mr-auto">
       <div className=" max-w-[1200px] ml-auto mr-auto mt-10">
@@ -41,7 +43,7 @@ export function Atendents() {
         <div className="flex flex-row mb-5 gap-5 mr-[100px]">
           <div className="ml-auto" />
           <Button className="btn-outline-primary">Quero ser Atendente</Button>
-          <Button className="btn-primary"><IconSearch className="mr-2" />Procurar mais</Button>
+          <Button onClick={() => navigate('/atendents/list')} className="btn-primary"><IconSearch className="mr-2" />Procurar mais</Button>
         </div>
         <div className="font-bold flex mb-10 flex-wrap items-center font-bold gap-10 justify-center">
           {specialists.map((item) => (
@@ -60,7 +62,7 @@ export function Atendents() {
               </div>
               <div className="flex flex-row mt-5 gap-5">
                 <Button className="btn-outline-primary"><IconUser className="mr-2" />Perfil</Button>
-                <Button className="btn-primary"><IconChat /><span className="ml-2">Chamar</span></Button>
+                <Button onClick={() => navigate('/chat')} className="btn-primary"><IconChat /><span className="ml-2">Chamar</span></Button>
               </div>
             </div>
           ))}
