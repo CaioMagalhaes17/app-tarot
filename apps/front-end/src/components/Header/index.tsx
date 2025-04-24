@@ -16,8 +16,8 @@ export function Header() {
           <Text onClick={() => document.getElementById('howItWorks')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Como Funciona</Text>
         </div>
         <div className="flex flex-row gap-5">
-          <Button className="btn-primary">Entrar</Button>
-          <Button className="btn-outline-primary">Cadastrar</Button>
+          <Button onClick={() => navigate('/login')} className="btn-primary">Entrar</Button>
+          <Button onClick={() => navigate('/signup')} className="btn-outline-primary">Cadastrar</Button>
         </div>
       </div>
     </UIHeader>

@@ -3,6 +3,8 @@ import { ClientHome } from "../pages/Home/client"
 import DefaultLayout from "../components/DefaultLayout"
 import { ChatComponent } from "../components/Chat"
 import { AtendentsListComponent } from "../components/Atendents/List"
+import { LoginPage } from "../pages/Login/Login"
+import SignUpPage from "../pages/Login/Signup"
 
 
 export const routes: RouteObject[] = [
@@ -21,9 +23,18 @@ export const routes: RouteObject[] = [
       {
         path: '/atendents/list',
         element: <AtendentsListComponent />
-      }
+      },
+
     ]
 
+  },
+  {
+    path: '/login',
+    element: <LoginPage />
+  },
+  {
+    path: '/signup',
+    element: <SignUpPage />
   }
 
 ]
