@@ -4,6 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { login } from "../../api/login";
 import { Button, IconLockDots, IconMail, IconPhone, Input, Text } from "@app/ui";
+import useStore from "../../state";
 
 interface LoginForm {
   login: string;
@@ -28,6 +29,7 @@ export function LoginPage() {
     localStorage.setItem('isAtendent', 'false')
     window.location.replace('/')
   };
+  const { isMobile } = useStore()
   return (
     <>
       <div style={{ backgroundImage: 'url("/stars2.png")' }} className="absolute inset-0">
@@ -42,7 +44,7 @@ export function LoginPage() {
 
               </div>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-white">
-                <div className="flex items-center space-x-4 mb-4">
+                <div className={`flex mb-4 gap-5 ${isMobile ? 'flex-col' : 'flex-row'}`}>
                   <label className="flex items-center text-white">
                     <input type="radio" onClick={() => setUseEmail(true)} className="mr-2" checked={useEmail} />
                     <span>Usar Email</span>
@@ -108,11 +110,7 @@ export function LoginPage() {
                 </Link>
               </div>
 
-              <div className="text-center text-white">
-                <Link to="/store/login" className="uppercase text-primary underline transition">
-                  Entrar em conta LOJA
-                </Link>
-              </div>
+
             </div>
           </div>
         </div>

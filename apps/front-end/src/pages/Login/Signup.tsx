@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link, useSearchParams } from "react-router-dom";
 import { signup } from "../../api/signup";
+import useStore from "../../state";
 
 export default function SignUpPage() {
   const [useEmail, setUseEmail] = useState<boolean>(true)
@@ -37,7 +38,7 @@ export default function SignUpPage() {
     }
     window.location.replace('/')
   }
-
+  const { isMobile } = useStore()
   return (
     <>
       <div style={{ backgroundImage: 'url("/stars2.png")' }} className="absolute inset-0">
@@ -51,8 +52,8 @@ export default function SignUpPage() {
                 <h1 className="text-3xl font-extrabold text-black dark:text-white">Crie sua conta</h1>
                 <div className="w-full border-black/60 border mt-2" />
               </div>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-dark dark:text-white">
-                <div>
+              <form onSubmit={handleSubmit(onSubmit)} className="text-dark dark:text-white">
+                <div className="mb-2">
                   <label htmlFor="Name">Nome</label>
                   <div className="relative text-white-dark">
                     <Input {...register('name', { required: true })} type="text" placeholder="Digite seu nome completo" className="form-input !ps-10 placeholder:text-white-dark" />
@@ -62,12 +63,12 @@ export default function SignUpPage() {
                   </div>
                   {errors.name && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
                 </div>
-                <div className="flex items-center space-x-4 mb-4">
-                  <label className="flex items-center">
+                <div className={`flex mb-4 gap-5 ${isMobile ? 'flex-col' : 'flex-row'}`}>
+                  <label className="flex items-center text-white">
                     <input type="radio" onClick={() => setUseEmail(true)} className="mr-2" checked={useEmail} />
-                    <span>Usar Email e Senha</span>
+                    <span>Usar Email</span>
                   </label>
-                  <label className="flex items-center">
+                  <label className="flex items-center text-white">
                     <input type="radio" onClick={() => setUseEmail(false)} className="mr-2" checked={!useEmail} />
                     <span>Usar Número de Telefone</span>
                   </label>
@@ -141,11 +142,7 @@ export default function SignUpPage() {
                 </Link>
               </div>
 
-              <div className="text-center text-white">
-                <Link to="/store/signup" className="uppercase text-primary underline transition">
-                  Cadastro de conta LOJA
-                </Link>
-              </div>
+
             </div>
           </div>
         </div>

@@ -14,6 +14,8 @@ type ClientInfos = {
 type StateManager = {
   clientInfos: ClientInfos
   setClientInfos: (clientInfos: ClientInfos) => void
+  setIsMobile: (isMobile: boolean) => void
+  isMobile: boolean
 }
 
 const useStore = create<StateManager>((set) => {
@@ -33,6 +35,12 @@ const useStore = create<StateManager>((set) => {
         clientInfos
       })
     },
+    isMobile: false,
+    setIsMobile: (isMobile: boolean) => {
+      set({
+        isMobile
+      })
+    }
   }
 })
 
