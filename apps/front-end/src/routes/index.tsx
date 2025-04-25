@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom"
 import { ClientHome } from "../pages/Home/client"
 import DefaultLayout from "../components/DefaultLayout"
-import { ChatComponent } from "../components/Chat"
-import { AtendentsListComponent } from "../components/Atendents/List"
 import { LoginPage } from "../pages/Login/Login"
 import SignUpPage from "../pages/Login/Signup"
+import { ChatPage } from "../pages/Chat/Client"
+import { AtendentsSearchPage } from "../pages/Atendents/Search"
 
 
 export const routes: RouteObject[] = [
@@ -18,11 +18,11 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/chat',
-        element: <ChatComponent />
+        element: <ChatPage />
       },
       {
         path: '/atendents/list',
-        element: <AtendentsListComponent />
+        element: <AtendentsSearchPage />
       },
 
     ]

@@ -1,65 +1,8 @@
 import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, HSeparator, IconThreeDots, Input, Panel, Text } from "@app/ui";
+import { ContactType, MessageType } from "../../../../@types/chat.type";
 
-export function ChatComponent() {
-  const contacts = [
-    {
-      profileImg: 'https://react.vristo.sbthemes.com/assets/images/profile-16.jpeg',
-      name: 'Atendente 1',
-      lastMessage: 'Última Mensagem',
-      lastMessageTime: '11:15'
-    },
-    {
-      profileImg: 'https://react.vristo.sbthemes.com/assets/images/profile-16.jpeg',
-      name: 'Atendente 1',
-      lastMessage: 'Última Mensagem',
-      lastMessageTime: '08:00'
-    },
-    {
-      profileImg: 'https://react.vristo.sbthemes.com/assets/images/profile-16.jpeg',
-      name: 'Atendente 1',
-      lastMessage: 'Última Mensagem',
-      lastMessageTime: '08:00'
-    },
-    {
-      profileImg: 'https://react.vristo.sbthemes.com/assets/images/profile-16.jpeg',
-      name: 'Atendente 1',
-      lastMessage: 'Última Mensagem',
-      lastMessageTime: '08:00'
-    },
-    {
-      profileImg: 'https://react.vristo.sbthemes.com/assets/images/profile-16.jpeg',
-      name: 'Atendente 1',
-      lastMessage: 'Última Mensagemr',
-      lastMessageTime: '08:00'
-    },
-    {
-      profileImg: 'https://react.vristo.sbthemes.com/assets/images/profile-16.jpeg',
-      name: 'Atendente 1',
-      lastMessage: 'Última Mensagem',
-      lastMessageTime: '08:00'
-    },
-    {
-      profileImg: 'https://react.vristo.sbthemes.com/assets/images/profile-16.jpeg',
-      name: 'Atendente 1',
-      lastMessage: 'Última Mensagem',
-      lastMessageTime: '08:00'
-    },
-    {
-      profileImg: 'https://react.vristo.sbthemes.com/assets/images/profile-16.jpeg',
-      name: 'Atendente 1',
-      lastMessage: 'Última Mensagem',
-      lastMessageTime: '08:00'
-    },
+export function DesktopChat({ contacts, messages }: { contacts: ContactType[], messages: MessageType[] }) {
 
-  ]
-
-  const messages = [
-    { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30' },
-    { text: 'dasdsa', time: '21:30' },
-    { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30' },
-    { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid untamet, consectetur adipiscing elit, sed do eiusmod tempor incidid untamet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt', time: '21:30' },
-    { text: 'dasdsa', time: '21:30' },
-  ]
   return (
     <>
       <div className="min-h-screen mt-2 max-w-[1400px] ml-auto mr-auto">

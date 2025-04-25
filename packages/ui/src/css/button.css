@@ -4,11 +4,11 @@
   }
 
   .btn-lg {
-    @apply px-7 py-2.5 text-base;
+    @apply px-7 py-2.5 relative flex items-center justify-center rounded-md border font-extrabold shadow-[0_10px_20px_-10px] outline-none transition duration-300 hover:shadow-none;
   }
 
   .btn-sm {
-    @apply px-2.5 py-1.5 text-xs;
+    @apply px-2.5 py-1.5 relative flex items-center text-[13px] justify-center rounded-md border font-extrabold shadow-[0_10px_20px_-10px] outline-none transition duration-300 hover:shadow-none;
   }
 
   .btn[disabled] {

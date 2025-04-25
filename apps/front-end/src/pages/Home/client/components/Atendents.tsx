@@ -42,12 +42,12 @@ export function Atendents() {
     <div id="atendents" className="backdrop-blur-md border-[#6028dc1a] bg-[#26123c]/20 border rounded-xl w-full p-6 ml-auto mr-auto">
       <div className="max-w-[1200px] ml-auto mr-auto mt-10">
         <Text as="h1" className="text-5xl mb-20 text-center font-extrabold text-white">Atendentes Disponíveis</Text>
-        <div className={`flex flex-row mb-5 gap-5 ${!isMobile ? 'mr-[100px]' : ''}`}>
+        <div className={`flex flex-row mb-5 justify-center gap-5 ${!isMobile ? 'mr-[100px]' : ''}`}>
           {!isMobile && (
             <div className="ml-auto" />
           )}
-          <Button className="btn-outline-primary">Quero ser Atendente</Button>
-          <Button onClick={() => navigate('/atendents/list')} className="btn-primary"><IconSearch className="mr-2" />Procurar mais</Button>
+          <Button className={`btn-outline-primary ${isMobile ? 'btn-sm' : ''}`}>Quero ser Atendente</Button>
+          <Button onClick={() => navigate('/atendents/list')} className={`btn-primary ${isMobile ? 'btn-sm' : ''}`}><IconSearch className="mr-2" />Procurar mais</Button>
         </div>
         <div className="font-bold flex mb-10 flex-wrap items-center font-bold gap-10 justify-center">
           {specialists.map((item) => (
