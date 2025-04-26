@@ -7,7 +7,7 @@ export function MobileAtendentsListComponent({ atendents }: { atendents: Atenden
   const navigate = useNavigate()
   return (
     <div className="min-h-screen mt-2 max-w-[1700px] ml-auto mr-auto">
-      <div className="h-[800px] flex flex-col gap-5 p-6">
+      <div className="h-full flex flex-col p-3">
         <Panel className="border-[#6028dc1a] backdrop-blur-lg border-[4px] bg-[#26123c]/80 h-full max-w-[450px]  rounded-xl flex flex-col p-4 font-bold">
           <Text as="h1" className="text-white text-3xl  ">
             Procurar Atendentes
@@ -28,28 +28,33 @@ export function MobileAtendentsListComponent({ atendents }: { atendents: Atenden
             <HSeparator />
           </div>
         </Panel>
-        <Panel className="border-[#6028dc1a] backdrop-blur-lg border-[4px] bg-[#26123c]/50  w-full rounded-xl flex flex-col p-4 font-bold ">
-          <div className="font-bold flex mb-10 flex-wrap items-center font-bold justify-center gap-5 ">
+        <Panel className="border-[#6028dc1a] w-full rounded-xl flex flex-col mt-5 font-bold ">
+          <div className="font-bold flex mb-10 flex-wrap items-center font-bold justify-center gap-2">
             {atendents.map((item) => (
-              <div className="flex flex-col items-center hover:bg-[#26123c] cursor-pointer bg-[#26123c]/50 border-[#6028dc1a] border-[4px] rounded-xl w-[290px] h-[380px] p-2">
-                <Text className="text-white text-xl" as="h1">{item.name}</Text>
-                <img src={item.profileImg} width={'150px'} className="rounded-full mt-5" />
-                <div className="flex flex-row mt-5">
-                  {[...Array(item.rating)].map((_, index) => (
-                    <Star
-                      key={index}
-                      className={index < 5 ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
-                      size={16}
-                    />
-                  ))}
+              <>
+                <div className="flex flex-row gap-2 items-center backdrop-blur-lg hover:bg-[#26123c] cursor-pointer bg-[#26123c]/50 border-[#6028dc1a] border-[4px] rounded-xl  p-2">
+                  <div className="flex flex-col ">
+                    <img src={item.profileImg} width={'50px'} className="rounded-full" />
+                    <Text className="text-white " as="h1">{item.name}</Text>
+                    <div className="flex flex-row ">
+                      {[...Array(item.rating)].map((_, index) => (
+                        <Star
+                          key={index}
+                          className={index < 5 ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
+                          size={16}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="text-left">
+                    <Text as="span" className="mt-3 text-sm text-white-dark">{item.bio}</Text>
+                    <div className="flex flex-row mt-2 gap-2">
+                      <Button className="btn-outline-primary ml-auto btn-sm"><IconUser className="mr-2" />Perfil</Button>
+                      <Button onClick={() => navigate('/chat')} className="btn-primary btn-sm"><IconChat /><span className="ml-2">Chamar</span></Button>
+                    </div>
+                  </div>
                 </div>
-                <Text as="span" className="mt-3 text-white-dark">{item.bio}</Text>
-
-                <div className="flex flex-row mt-2 gap-5">
-                  <Button className="btn-outline-primary"><IconUser className="mr-2" />Perfil</Button>
-                  <Button onClick={() => navigate('/chat')} className="btn-primary"><IconChat /><span className="ml-2">Chamar</span></Button>
-                </div>
-              </div>
+              </>
             ))}
           </div>
         </Panel>

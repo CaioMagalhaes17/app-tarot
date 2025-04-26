@@ -1,5 +1,6 @@
-import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, HSeparator, IconArrowBackward, IconThreeDots, Input, Panel, Text } from "@app/ui";
+import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, HSeparator, IconArrowBackward, IconMute, IconThreeDots, IconTrash, IconUser, IconWarning, Input, Panel, Text } from "@app/ui";
 import { ContactType, MessageType } from "../../../../@types/chat.type";
+import { Star } from "lucide-react";
 
 export function MobileChatMessage({ contact, messages, setSelectedContact }: { setSelectedContact: React.Dispatch<React.SetStateAction<ContactType | undefined>>, contact: ContactType, messages: MessageType[] }) {
   return (
@@ -18,18 +19,18 @@ export function MobileChatMessage({ contact, messages, setSelectedContact }: { s
               <Text as="span" className="">Digitando...</Text>
             </div>
           </div>
-          <div className="ml-auto mr-5">
+          <div className="ml-auto ">
             <DropdownMenu >
               <DropdownMenuTrigger>
                 <IconThreeDots />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-dark mt-5 w-[250px] mr-[160px] p-4 flex text-white font-extrabold flex-col">
+              <DropdownMenuContent className="bg-dark w-[250px] p-4 flex text-white font-extrabold flex-col">
                 <div className="flex flex-col gap-2">
-                  <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg" as="span">Perfil</Text>
-                  <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg" as="span">Adicionar aos favoritos</Text>
-                  <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg" as="span">Silenciar</Text>
-                  <Text className="cursor-pointer text-warning hover:bg-white/20 hover:rounded-lg" as="span">Apagar Conversa</Text>
-                  <Text className="cursor-pointer text-danger hover:bg-white/20 hover:rounded-lg" as="span">Denunciar</Text>
+                  <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center" as="span"><IconUser />Perfil</Text>
+                  <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center" as="span"><Star className="fill-yellow-500 text-yellow-500" />Adicionar aos favoritos</Text>
+                  <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center " as="span"><IconMute />Silenciar</Text>
+                  <Text className="cursor-pointer text-warning hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center" as="span"><IconTrash />Apagar Conversa</Text>
+                  <Text className="cursor-pointer text-danger hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center" as="span"><IconWarning />Denunciar</Text>
                 </div>
               </DropdownMenuContent>
             </DropdownMenu >
@@ -41,7 +42,7 @@ export function MobileChatMessage({ contact, messages, setSelectedContact }: { s
           {messages.map((item, index) => (
             <>
               <div className={`flex flex-col ${index % 2 === 0 ? 'ml-auto' : 'mr-auto'}`}>
-                <div className={`flex p-4 rounded-xl  h-full max-w-[600px] text-left text-white flex-row ${index % 2 === 0 ? 'bg-primary' : 'bg-[#26123c]'}`}>
+                <div className={`flex p-4 rounded-xl  h-full max-w-[250px] text-left text-white flex-row ${index % 2 === 0 ? 'bg-primary' : 'bg-[#26123c]'}`}>
                   {item.text}
                 </div>
                 <span className={`${index % 2 === 0 ? 'ml-auto' : 'mr-auto'}`}>{item.time}</span>
@@ -55,7 +56,7 @@ export function MobileChatMessage({ contact, messages, setSelectedContact }: { s
             <Button className="btn-primary ml-5">Mic</Button>
           </div>
         </div>
-      </Panel>
+      </Panel >
     </>
   )
 }

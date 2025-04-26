@@ -39,7 +39,6 @@ export { IconInstagram } from './Icons/IconInstagram'
 export { IconBell } from './Icons/IconBell'
 export { IconThreeDots } from './Icons/IconThreeDots'
 export { IconWhatsApp } from './Icons/IconWhatsapp'
-
 export {
   Carousel,
   CarouselContent,
@@ -84,6 +83,7 @@ export {
 export { HSeparator } from "./atoms/HSeparator";
 export { VSeparator } from "./atoms/VSeparator";
 import './css/index.css'
+export { IconMute } from "./Icons/IconMute";
 export { IconWarning } from "./Icons/IconWarning";
 export { IconOldPhone } from "./Icons/IconOldPhone";
 export { IconClock } from "./Icons/IconClock";

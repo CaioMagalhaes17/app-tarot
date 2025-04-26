@@ -13,9 +13,9 @@ export function MobileChatContactsList({ contacts, setSelectedContact }: { setSe
             <HSeparator />
             <Input type="text" className="mt-5" placeholder="Pesquisar..." />
             <div className="flex flex-row gap-5 mt-3">
-              <Button className="btn-outline-primary">Todas</Button>
-              <Button className="btn-outline-primary">Em andamento</Button>
-              <Button className="btn-outline-primary">Concluídas</Button>
+              <Button className="btn-outline-primary btn-sm">Todas</Button>
+              <Button className="btn-outline-primary btn-sm">Em andamento</Button>
+              <Button className="btn-outline-primary btn-sm">Concluídas</Button>
             </div>
             <HSeparator />
             <div className="flex flex-col scrollable">

@@ -1,5 +1,6 @@
-import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, HSeparator, IconThreeDots, Input, Panel, Text } from "@app/ui";
+import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, HSeparator, IconMute, IconThreeDots, IconTrash, IconUser, IconWarning, Input, Panel, Text } from "@app/ui";
 import { ContactType, MessageType } from "../../../../@types/chat.type";
+import { Star } from "lucide-react";
 
 export function DesktopChat({ contacts, messages }: { contacts: ContactType[], messages: MessageType[] }) {
 
@@ -60,11 +61,11 @@ export function DesktopChat({ contacts, messages }: { contacts: ContactType[], m
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="bg-dark mt-5 w-[250px] mr-[160px] p-4 flex text-white font-extrabold flex-col">
                     <div className="flex flex-col gap-2">
-                      <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg" as="span">Perfil</Text>
-                      <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg" as="span">Adicionar aos favoritos</Text>
-                      <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg" as="span">Silenciar</Text>
-                      <Text className="cursor-pointer text-warning hover:bg-white/20 hover:rounded-lg" as="span">Apagar Conversa</Text>
-                      <Text className="cursor-pointer text-danger hover:bg-white/20 hover:rounded-lg" as="span">Denunciar</Text>
+                      <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center" as="span"><IconUser />Perfil</Text>
+                      <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center" as="span"><Star className="fill-yellow-500 text-yellow-500" />Adicionar aos favoritos</Text>
+                      <Text className="cursor-pointer hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center " as="span"><IconMute />Silenciar</Text>
+                      <Text className="cursor-pointer text-warning hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center" as="span"><IconTrash />Apagar Conversa</Text>
+                      <Text className="cursor-pointer text-danger hover:bg-white/20 hover:rounded-lg flex flex-row gap-2 items-center" as="span"><IconWarning />Denunciar</Text>
                     </div>
                   </DropdownMenuContent>
                 </DropdownMenu >
