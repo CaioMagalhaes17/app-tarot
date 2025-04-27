@@ -16,6 +16,8 @@ type StateManager = {
   setClientInfos: (clientInfos: ClientInfos) => void
   setIsMobile: (isMobile: boolean) => void
   isMobile: boolean
+  setIsAtendent: (isMobile: boolean) => void
+  isAtendent: boolean
 }
 
 const useStore = create<StateManager>((set) => {
@@ -29,6 +31,12 @@ const useStore = create<StateManager>((set) => {
         longitude: 0,
         radius: 0
       }
+    },
+    isAtendent: false,
+    setIsAtendent: (isAtendent: boolean) => {
+      set({
+        isAtendent
+      })
     },
     setClientInfos: (clientInfos: ClientInfos) => {
       set({

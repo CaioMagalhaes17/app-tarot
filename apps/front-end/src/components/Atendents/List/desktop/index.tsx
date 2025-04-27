@@ -47,7 +47,7 @@ export function AtendentsListComponent({ atendents }: { atendents: AtendentType[
                 <Text as="span" className="mt-3 text-white-dark">{item.bio}</Text>
 
                 <div className="flex flex-row mt-2 gap-5">
-                  <Button className="btn-outline-primary"><IconUser className="mr-2" />Perfil</Button>
+                  <Button onClick={() => navigate('/atendents/profile/123')} className="btn-outline-primary"><IconUser className="mr-2" />Perfil</Button>
                   <Button onClick={() => navigate('/chat')} className="btn-primary"><IconChat /><span className="ml-2">Chamar</span></Button>
                 </div>
               </div>

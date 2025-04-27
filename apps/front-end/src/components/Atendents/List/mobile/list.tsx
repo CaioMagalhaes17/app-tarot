@@ -1,10 +1,8 @@
-import { Button, HSeparator, IconChat, IconUser, Input, Panel, Text } from "@app/ui";
-import { Star } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { HSeparator, Input, Panel, Text } from "@app/ui";
 import { AtendentType } from "../../../../@types/atendent.type";
+import { MobileAtendentRow } from "./atendentRow";
 
 export function MobileAtendentsListComponent({ atendents }: { atendents: AtendentType[] }) {
-  const navigate = useNavigate()
   return (
     <div className="min-h-screen mt-2 max-w-[1700px] ml-auto mr-auto">
       <div className="h-full flex flex-col p-3">
@@ -30,30 +28,9 @@ export function MobileAtendentsListComponent({ atendents }: { atendents: Atenden
         </Panel>
         <Panel className="border-[#6028dc1a] w-full rounded-xl flex flex-col mt-5 font-bold ">
           <div className="font-bold flex mb-10 flex-wrap items-center font-bold justify-center gap-2">
-            {atendents.map((item) => (
+            {atendents.map((item, i) => (
               <>
-                <div className="flex flex-row gap-2 items-center backdrop-blur-lg hover:bg-[#26123c] cursor-pointer bg-[#26123c]/50 border-[#6028dc1a] border-[4px] rounded-xl  p-2">
-                  <div className="flex flex-col ">
-                    <img src={item.profileImg} width={'50px'} className="rounded-full" />
-                    <Text className="text-white " as="h1">{item.name}</Text>
-                    <div className="flex flex-row ">
-                      {[...Array(item.rating)].map((_, index) => (
-                        <Star
-                          key={index}
-                          className={index < 5 ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
-                          size={16}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="text-left">
-                    <Text as="span" className="mt-3 text-sm text-white-dark">{item.bio}</Text>
-                    <div className="flex flex-row mt-2 gap-2">
-                      <Button className="btn-outline-primary ml-auto btn-sm"><IconUser className="mr-2" />Perfil</Button>
-                      <Button onClick={() => navigate('/chat')} className="btn-primary btn-sm"><IconChat /><span className="ml-2">Chamar</span></Button>
-                    </div>
-                  </div>
-                </div>
+                <MobileAtendentRow bio={item.bio} name={item.name} profileImg={item.profileImg} rating={item.rating} key={i} />
               </>
             ))}
           </div>

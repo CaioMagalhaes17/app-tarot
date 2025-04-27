@@ -43,6 +43,10 @@
     @apply border-black dark:border-primary bg-black dark:bg-primary text-white shadow-[000];
   }
 
+  .btn-purple {
+    @apply border-[#6028dc1a] bg-[#6028dc1a] text-white shadow-[000];
+  }
+
   .btn-primary-dark {
     @apply border-primary-dark bg-primary-dark text-white shadow-[000];
   }

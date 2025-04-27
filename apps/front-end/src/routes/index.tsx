@@ -5,6 +5,7 @@ import { LoginPage } from "../pages/Login/Login"
 import SignUpPage from "../pages/Login/Signup"
 import { ChatPage } from "../pages/Chat/Client"
 import { AtendentsSearchPage } from "../pages/Atendents/Search"
+import { AtendentProfilePage } from "../pages/Atendents/Profile"
 
 
 export const routes: RouteObject[] = [
@@ -24,6 +25,10 @@ export const routes: RouteObject[] = [
         path: '/atendents/list',
         element: <AtendentsSearchPage />
       },
+      {
+        path: '/atendents/profile/:id',
+        element: <AtendentProfilePage />
+      }
 
     ]
 

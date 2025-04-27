@@ -1,4 +1,4 @@
-import { Button, Text, Header as UIHeader } from "@app/ui";
+import { Button, IconMenu, Text, Header as UIHeader, VSeparator } from "@app/ui";
 import { useNavigate } from "react-router-dom";
 import useStore from "../../state";
 
@@ -8,7 +8,9 @@ export function Header() {
   return (
     <UIHeader>
       <div className="h-[80px] backdrop-blur-lg shadow-md relative flex w-full items-center px-5 py-2.5 ">
-        {isMobile && (
+        <button onClick={() => ''} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
+        <VSeparator />
+        {!isMobile && (
           <Text as="h1" className={`${!isMobile ? 'text-3xl ml-20' : 'text-lg'} font-extrabold cursor-pointer`} onClick={() => navigate('/')}>Astrologia Online</Text>
         )}
         <div className="ml-auto" />
@@ -22,7 +24,7 @@ export function Header() {
             </div>
           </>
         )}
-        <div className="flex flex-row gap-5">
+        <div className={`flex flex-row ${isMobile ? 'gap-2' : 'gap-5'}`}>
           <Button onClick={() => navigate('/login')} className={`btn-primary ${isMobile ? 'btn-sm' : ''}`}>Entrar</Button>
           <Button onClick={() => navigate('/signup')} className={`btn-outline-primary ${isMobile ? 'btn-sm' : ''}`}>Cadastrar</Button>
         </div>

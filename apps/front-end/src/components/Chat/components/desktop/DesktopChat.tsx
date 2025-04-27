@@ -73,7 +73,7 @@ export function DesktopChat({ contacts, messages }: { contacts: ContactType[], m
               </div>
             </div>
             <HSeparator />
-            <div className="flex flex-col p-6">
+            <div className="flex flex-col p-6 scrollable">
               {messages.map((item, index) => (
                 <>
                   <div className={`flex flex-col ${index % 2 === 0 ? 'ml-auto' : 'mr-auto'}`}>
