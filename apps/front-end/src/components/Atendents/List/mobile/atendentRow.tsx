@@ -6,10 +6,9 @@ export function MobileAtendentRow({ name, profileImg, rating, bio }: { name: str
   const navigate = useNavigate()
   return (
     <>
-      <div className="flex flex-row gap-2 items-center backdrop-blur-lg hover:bg-[#26123c] cursor-pointer bg-[#26123c]/50 border-[#6028dc1a] border-[4px] rounded-xl  p-2">
-        <div className="flex flex-col items-center">
-          <img src={profileImg} width={'80px'} className="rounded-full" />
-
+      <div className="flex flex-row gap-5 items-center backdrop-blur-lg hover:bg-[#26123c] cursor-pointer bg-[#26123c]/50 border-[#6028dc1a] border-[4px] rounded-xl  p-2">
+        <div className="flex flex-col items-center gap-5">
+          <img src={profileImg} width={'250px'} className="rounded-full" />
           <div className="flex flex-row ">
             {[...Array(rating)].map((_, index) => (
               <Star
@@ -24,7 +23,7 @@ export function MobileAtendentRow({ name, profileImg, rating, bio }: { name: str
           <Text className="text-white text-lg" as="h1">{name}</Text>
           <Text as="span" className="mt-3 text-sm text-white-dark">{bio}</Text>
           <div className="flex flex-row mt-2 gap-2 mr-5">
-            <Button className="btn-outline-primary ml-auto btn-sm"><IconUser className="mr-2" />Perfil</Button>
+            <Button onClick={() => navigate('/atendents/profile/123')} className="btn-outline-primary ml-auto btn-sm"><IconUser className="mr-2" />Perfil</Button>
             <Button onClick={() => navigate('/chat')} className="btn-primary btn-sm"><IconChat /><span className="ml-2">Chamar</span></Button>
           </div>
         </div>
