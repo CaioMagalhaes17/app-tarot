@@ -4,4 +4,16 @@ export type UserSignupProps = {
   isAtendent: boolean,
   permission: string
   name: string
+  isVerified: boolean
+}
+
+export type UserType = {
+  login: string,
+  isAtendent: boolean,
+  permission: string,
+  name: string,
+  isVerified: boolean
+  id: string,
+  profileImg: string
+  createdAt: string
 }

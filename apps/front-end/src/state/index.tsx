@@ -4,11 +4,11 @@ type ClientInfos = {
   id: string,
   name: string,
   profileImg: string,
-  location: {
-    latitude: number,
-    longitude: number,
-    radius: number
-  }
+  login: string,
+  createdAt: string
+  isAtendent: boolean,
+  isVerified: boolean,
+  permission: string
 }
 
 type StateManager = {
@@ -26,11 +26,11 @@ const useStore = create<StateManager>((set) => {
       id: '',
       name: '',
       profileImg: '',
-      location: {
-        latitude: 0,
-        longitude: 0,
-        radius: 0
-      }
+      login: '',
+      createdAt: '',
+      isAtendent: false,
+      isVerified: false,
+      permission: '',
     },
     isAtendent: false,
     setIsAtendent: (isAtendent: boolean) => {

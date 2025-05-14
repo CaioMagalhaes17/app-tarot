@@ -1,20 +1,20 @@
 import { Button, IconMenu, Text, Header as UIHeader, VSeparator } from "@app/ui";
-import { useNavigate } from "react-router-dom";
-import useStore from "../../state";
+import { useHeaderController } from "./useHeaderController";
+import { LoginButtons } from "./LoginButtons";
+import { UserButtons } from "./UserButtons";
 
 export function Header() {
-  const navigate = useNavigate()
-  const { isMobile } = useStore()
+  const { isMobile, isLogged, navigate } = useHeaderController()
   return (
     <UIHeader>
       <div className="h-[80px] backdrop-blur-lg shadow-md relative flex w-full items-center px-5 py-2.5 ">
         <button onClick={() => ''} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
         <VSeparator />
         {!isMobile && (
-          <Text as="h1" className={`${!isMobile ? 'text-3xl ml-20' : 'text-lg'} font-extrabold cursor-pointer`} onClick={() => navigate('/')}>Astrologia Online</Text>
+          <Text as="h1" className={`${!isMobile ? 'text-3xl 10' : 'text-lg'} font-extrabold cursor-pointer`} onClick={() => navigate('/')}>Astrologia Online</Text>
         )}
         <div className="ml-auto" />
-        {!isMobile && (
+        {!isMobile && !isLogged() ? (
           <>
             <div className="font-bold text-white text-lg flex flex-row gap-10 mr-[100px]">
               <Text onClick={() => document.getElementById('atendents')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Atendentes</Text>
@@ -23,11 +23,21 @@ export function Header() {
               <Text onClick={() => document.getElementById('howItWorks')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Como Funciona</Text>
             </div>
           </>
+        ) : ''}
+
+        {!isLogged() ? (
+          <LoginButtons />
+        ) : (
+          (
+            <>
+              <div className="flex flex-row items-center gap-5">
+                <Button className="btn-primary ">Comprar minutos</Button>
+                <VSeparator className="mr-1" />
+                <UserButtons />
+              </div>
+            </>
+          )
         )}
-        <div className={`flex flex-row ${isMobile ? 'gap-2' : 'gap-5'}`}>
-          <Button onClick={() => navigate('/login')} className={`btn-primary ${isMobile ? 'btn-sm' : ''}`}>Entrar</Button>
-          <Button onClick={() => navigate('/signup')} className={`btn-outline-primary ${isMobile ? 'btn-sm' : ''}`}>Cadastrar</Button>
-        </div>
       </div>
     </UIHeader>
   )

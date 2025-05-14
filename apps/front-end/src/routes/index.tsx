@@ -6,12 +6,18 @@ import SignUpPage from "../pages/Login/Signup"
 import { ChatPage } from "../pages/Chat/Client"
 import { AtendentsSearchPage } from "../pages/Atendents/Search"
 import { AtendentProfilePage } from "../pages/Atendents/Profile"
+import { VerifyEmailMagicLink } from "../pages/Login/VerifyEmailMagicLink"
+import { ProtectedRoutes } from "./auth/ProtectedRoutes"
 
 
 export const routes: RouteObject[] = [
 
   {
-    element: <DefaultLayout />,
+    element: (
+      <ProtectedRoutes>
+        <DefaultLayout />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         path: '/',
@@ -40,6 +46,10 @@ export const routes: RouteObject[] = [
   {
     path: '/signup',
     element: <SignUpPage />
+  },
+  {
+    path: '/auth/magic-link/:token',
+    element: <VerifyEmailMagicLink />
   }
 
 ]
