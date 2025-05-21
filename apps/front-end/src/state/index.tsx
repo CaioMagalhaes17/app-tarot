@@ -18,6 +18,8 @@ type StateManager = {
   isMobile: boolean
   setIsAtendent: (isMobile: boolean) => void
   isAtendent: boolean
+  initParticles: boolean
+  setInitParticles: (initParticles: boolean) => void
 }
 
 const useStore = create<StateManager>((set) => {
@@ -47,6 +49,12 @@ const useStore = create<StateManager>((set) => {
     setIsMobile: (isMobile: boolean) => {
       set({
         isMobile
+      })
+    },
+    initParticles: false,
+    setInitParticles: (initParticles: boolean) => {
+      set({
+        initParticles
       })
     }
   }

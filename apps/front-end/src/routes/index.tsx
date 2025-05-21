@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom"
-import { ClientHome } from "../pages/Home/client"
 import DefaultLayout from "../components/DefaultLayout"
 import { LoginPage } from "../pages/Login/Login"
 import SignUpPage from "../pages/Login/Signup"
@@ -8,6 +7,8 @@ import { AtendentsSearchPage } from "../pages/Atendents/Search"
 import { AtendentProfilePage } from "../pages/Atendents/Profile"
 import { VerifyEmailMagicLink } from "../pages/Login/VerifyEmailMagicLink"
 import { ProtectedRoutes } from "./auth/ProtectedRoutes"
+import { ClientProfilePage } from "../pages/Profile/client"
+import { TimelinePage } from "../pages/Timeline"
 
 
 export const routes: RouteObject[] = [
@@ -21,7 +22,7 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <ClientHome />
+        element: <TimelinePage />
       },
       {
         path: '/chat',
@@ -34,6 +35,10 @@ export const routes: RouteObject[] = [
       {
         path: '/atendents/profile/:id',
         element: <AtendentProfilePage />
+      },
+      {
+        path: '/profile',
+        element: <ClientProfilePage />
       }
 
     ]

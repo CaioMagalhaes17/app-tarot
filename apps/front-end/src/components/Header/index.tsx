@@ -7,7 +7,7 @@ export function Header() {
   const { isMobile, isLogged, navigate } = useHeaderController()
   return (
     <UIHeader>
-      <div className="h-[80px] backdrop-blur-lg shadow-md relative flex w-full items-center px-5 py-2.5 ">
+      <div className="h-[80px] backdrop-blur-lg border-b border-b-[#323b45] shadow-md relative flex w-full items-center px-5 py-2.5 ">
         <button onClick={() => ''} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
         <VSeparator />
         {!isMobile && (

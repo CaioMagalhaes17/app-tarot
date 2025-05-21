@@ -1,4 +1,4 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconLogout, IconSettings, Text } from "@app/ui";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconLogout, IconSettings, IconUser, Text } from "@app/ui";
 import { userImg } from "../../constants/images";
 import { useHeaderController } from "./useHeaderController";
 import { Link } from "react-router-dom";
@@ -17,8 +17,14 @@ export function UserButtons() {
             <Text className="text-black dark:text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos.name}</Text>
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-[#d9d9d963] dark:bg-black mt-5 font-extrabold">
-          <DropdownMenuItem className="flex flex-row gap-2 text-dark dark:text-white">
+        <DropdownMenuContent className="bg-[#d9d9d963] dark:bg-black mt-5 font-bold flex flex-col ">
+          <DropdownMenuItem className="text-dark dark:text-white">
+            <Link to="/profile" className=" flex flex-row gap-2">
+              <IconUser />
+              Perfil
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-dark dark:text-white">
             <Link to="/configurations" className=" flex flex-row gap-2">
               <IconSettings />
               Configurações

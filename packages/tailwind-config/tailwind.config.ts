@@ -45,7 +45,7 @@ const config: Omit<Config, 'content'> = {
           'dark-light': 'rgba(226,160,63,.15)',
         },
         black: {
-          DEFAULT: '#0e1726',
+          DEFAULT: '#13171a',
           light: '#e3e4eb',
           'dark-light': 'rgba(14,23,38,.15)',
         },

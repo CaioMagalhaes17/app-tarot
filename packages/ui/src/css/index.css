@@ -44,7 +44,7 @@ body {
   input.form-textarea-custom,
   input.form-select-custom,
   input.form-multiselect-custom {
-    @apply w-full rounded-md dark:border bg-[#f7f7f7] px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary;
+    @apply w-full rounded-md dark:border bg-[#0f1218] px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:text-white-dark dark:focus:border-primary;
   }
 
   .has-error input.form-input-custom,
