@@ -4,8 +4,7 @@ import { useHeaderController } from "./useHeaderController";
 import { Link } from "react-router-dom";
 
 export function UserButtons() {
-  const { clientInfos, handleLogout } = useHeaderController()
-  console.log(clientInfos)
+  const { clientInfos, handleLogout, isMobile } = useHeaderController()
   return (
     <>
       <DropdownMenu>
@@ -14,7 +13,9 @@ export function UserButtons() {
             <div className="w-[60px]">
               <img width="50" height="50" src={clientInfos.profileImg || userImg} className="sombra rounded-3xl" />
             </div>
-            <Text className="text-black dark:text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos.name}</Text>
+            {!isMobile && (
+              <Text className="text-black dark:text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos.name}</Text>
+            )}
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-[#d9d9d963] dark:bg-black mt-5 font-bold flex flex-col ">

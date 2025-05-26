@@ -20,10 +20,18 @@ type StateManager = {
   isAtendent: boolean
   initParticles: boolean
   setInitParticles: (initParticles: boolean) => void
+  closeSidebar: boolean
+  setCloseSidebar: (closeSidebar: boolean) => void
 }
 
 const useStore = create<StateManager>((set) => {
   return {
+    closeSidebar: true,
+    setCloseSidebar: (closeSidebar: boolean) => {
+      set({
+        closeSidebar
+      })
+    },
     clientInfos: {
       id: '',
       name: '',

@@ -2,11 +2,11 @@ import { TimelineComponent } from "../../components/Timeline";
 import { useTimelineController } from "./useTimelineController";
 
 export function TimelinePage() {
-  const { isMobile } = useTimelineController()
+  const { isMobile, messages, posts } = useTimelineController()
 
   return (
     <>
-      <TimelineComponent isMobile={isMobile} />
+      <TimelineComponent posts={posts} isMobile={isMobile} messages={messages} />
     </>
   )
 }

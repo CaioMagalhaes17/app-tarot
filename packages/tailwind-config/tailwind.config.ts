@@ -9,7 +9,7 @@ const config: Omit<Config, 'content'> = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#635bff',
+          DEFAULT: '#7239dd',
           dark: '#888ea8'
         },
         green: {

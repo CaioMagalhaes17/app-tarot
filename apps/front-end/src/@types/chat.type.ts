@@ -10,6 +10,5 @@ export type MessageType = {
   id: string,
   text: string,
   time: string,
-  senderId: string,
-  receiverId: string
+  sender: ContactType
 }

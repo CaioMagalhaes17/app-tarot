@@ -8,7 +8,7 @@ export type PostType = {
   authorStatus: string,
   postId: string,
   postDescription: string,
-  postType: string,
+  postType: 'simple' | 'servicePromoting',
   postImages: string[],
   postLikes: number,
   postComents: number,

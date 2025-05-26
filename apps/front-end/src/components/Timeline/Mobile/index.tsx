@@ -1,9 +1,9 @@
 import { IconChat, IconHeart, Panel, Text } from "@app/ui";
 import { ClientPostBox } from "../Desktop/ClientPostBox";
-import { postsMock } from "../../../mocks/posts";
+import { PostType } from "../../../@types/post";
 
 
-export function MobileTimeline() {
+export function MobileTimeline({ posts }: { posts: PostType[] }) {
   return (
     <>
       <Panel className="mt-5 p-2 mb-[500px]">
@@ -11,7 +11,7 @@ export function MobileTimeline() {
           <div className="bg-black w-full rounded-xl flex flex-col p-4 mb-5">
             <ClientPostBox />
           </div>
-          {postsMock.map((item) => (
+          {posts.map((item) => (
             <>
               <div className="bg-black w-full rounded-xl flex flex-col p-4 mb-5">
                 <div className="flex items-center mb-5 gap-3 flex-row">

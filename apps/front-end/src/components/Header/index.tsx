@@ -4,11 +4,11 @@ import { LoginButtons } from "./LoginButtons";
 import { UserButtons } from "./UserButtons";
 
 export function Header() {
-  const { isMobile, isLogged, navigate } = useHeaderController()
+  const { isMobile, isLogged, navigate, setCloseSidebar, closeSidebar } = useHeaderController()
   return (
     <UIHeader>
       <div className="h-[80px] backdrop-blur-lg border-b border-b-[#323b45] shadow-md relative flex w-full items-center px-5 py-2.5 ">
-        <button onClick={() => ''} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
+        <button onClick={() => setCloseSidebar(!closeSidebar)} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
         <VSeparator />
         {!isMobile && (
           <Text as="h1" className={`${!isMobile ? 'text-3xl 10' : 'text-lg'} font-extrabold cursor-pointer`} onClick={() => navigate('/')}>Astrologia Online</Text>
@@ -31,7 +31,9 @@ export function Header() {
           (
             <>
               <div className="flex flex-row items-center gap-5">
-                <Button className="btn-primary ">Comprar minutos</Button>
+                {!isMobile && (
+                  <Button className="btn-primary btn-sm">Comprar minutos</Button>
+                )}
                 <VSeparator className="mr-1" />
                 <UserButtons />
               </div>

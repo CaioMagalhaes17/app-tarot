@@ -1,6 +1,17 @@
-export function Sidebar({ children, style }: { style?: React.CSSProperties, children: React.ReactNode }) {
+import { cn } from "@/utils";
+import { cva, VariantProps } from "class-variance-authority";
+import { ComponentProps } from "react";
+
+const panelStyle = cva([
+  "leftbar",
+])
+
+type SidebarProps = ComponentProps<"div"> & VariantProps<typeof panelStyle>;
+
+export function Sidebar({ children, className, ...rest }: SidebarProps) {
+
   return (
-    <nav style={style ? style : {}} className="leftbar">
+    <nav className={cn(panelStyle({ className }))} {...rest}>
       {children}
     </nav>
   )

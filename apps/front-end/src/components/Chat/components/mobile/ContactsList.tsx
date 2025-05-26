@@ -4,7 +4,7 @@ import { ContactType } from "../../../../@types/chat.type";
 export function MobileChatContactsList({ contacts, setSelectedContact }: { setSelectedContact: React.Dispatch<React.SetStateAction<ContactType | undefined>>, contacts: ContactType[] }) {
   return (
     <>
-      <div className="min-h-screen mt-2 max-w-[1400px] ml-auto mr-auto">
+      <div className="min-h-screen max-w-[1400px] ml-auto mr-auto">
         <div className="h-full flex flex-row gap-5">
           <Panel className="bg-black h-full w-[450px]  rounded-xl flex flex-col p-4 font-bold">
             <Text as="h1" className="text-white text-4xl mt-5 ">

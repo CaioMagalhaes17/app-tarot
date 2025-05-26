@@ -1,4 +1,5 @@
 import { ContactType, MessageType } from "../../../@types/chat.type";
+import { userImg } from "../../../constants/images";
 import useStore from "../../../state";
 
 export function useChatController() {
@@ -69,17 +70,7 @@ export function useChatController() {
 
   function getMessagesHistory(): MessageType[] {
     const messages = [
-      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', senderId: '11', receiverId: '11', id: '1' },
-      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', senderId: '11', receiverId: '11', id: '1' },
-      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', senderId: '11', receiverId: '11', id: '1' },
-      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', senderId: '11', receiverId: '11', id: '1' },
-      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', senderId: '11', receiverId: '11', id: '1' },
-
-      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', senderId: '11', receiverId: '11', id: '1' },
-
-      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', senderId: '11', receiverId: '11', id: '1' },
-
-      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', senderId: '11', receiverId: '11', id: '1' },
+      { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt', time: '21:30', sender: { id: '1', lastMessage: 'hello', lastMessageTime: '1', name: 'Caio Magalhães', profileImg: userImg }, id: '1' },
 
     ]
     return messages
