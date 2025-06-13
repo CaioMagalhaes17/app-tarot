@@ -8,9 +8,7 @@ export async function getUser() {
     return response.data
   } catch (error) {
     if (error instanceof AxiosError) {
-      if (error.response?.status === 401 && window.location.pathname !== '/') {
-        window.location.replace('/login')
-      }
+
       // Swal.fire({
       //   title: 'Erro não tratado',
       //   icon: 'error'

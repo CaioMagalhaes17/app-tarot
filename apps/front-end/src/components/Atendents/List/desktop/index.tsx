@@ -6,10 +6,10 @@ import { AtendentType } from "../../../../@types/atendent.type";
 export function AtendentsListComponent({ atendents }: { atendents: AtendentType[] }) {
   const navigate = useNavigate()
   return (
-    <div className="min-h-screen mt-2 max-w-[1700px] ml-auto mr-auto">
-      <div className="h-[800px] flex flex-row gap-5">
-        <Panel className="border-[#6028dc1a] backdrop-blur-lg border-[4px] bg-[#26123c]/80 h-full w-[450px]  rounded-xl flex flex-col p-4 font-bold">
-          <Text as="h1" className="text-white text-3xl  ">
+    <div className="bg-[#10092c] mb-10 border-[#1b1145] border min-h-screen max-w-[1300px] ml-auto mr-auto">
+      <div className=" flex flex-col gap-5 items-center">
+        <Panel className="h-full w-[550px]  rounded-xl flex flex-col p-4 font-bold">
+          <Text as="h1" className=" text-white text-2xl  ">
             Procurar Atendentes
           </Text>
           <HSeparator />
@@ -20,22 +20,21 @@ export function AtendentsListComponent({ atendents }: { atendents: AtendentType[
               <Text className="ml-auto cursor-pointer" as="h1">Limpar Filtros</Text>
             </div>
             <div className="flex flex-wrap gap-2 mt-2">
-              <Text className="rounded-full p-2 border-2  bg-dark border-dark text-white" as="span">Online Agora</Text>
-              <Text className="rounded-full p-2 border-2  bg-dark border-dark text-white" as="span">Baralho Cigano</Text>
-              <Text className="rounded-full p-2 border-2  bg-dark border-dark text-white" as="span">Búzios</Text>
-              <Text className="rounded-full p-2 border-2  bg-dark border-dark text-white" as="span">Runas </Text>
+              <Text className="rounded-full p-1 bg-dark border-dark text-white" as="span">Online Agora</Text>
+              <Text className="rounded-full p-1 bg-dark border-dark text-white" as="span">Baralho Cigano</Text>
+              <Text className="rounded-full p-1 bg-dark border-dark text-white" as="span">Búzios</Text>
+              <Text className="rounded-full p-1 bg-dark border-dark text-white" as="span">Runas </Text>
             </div>
             <HSeparator />
           </div>
         </Panel>
-        <Panel className="border-[#6028dc1a] backdrop-blur-lg border-[4px] bg-[#26123c]/50 h-full w-full rounded-xl flex flex-col p-4 font-bold ">
-
-          <div className="font-bold flex mb-10 flex-wrap items-center font-bold gap-5  scrollable">
+        <Panel className="h-full w-full rounded-xl flex flex-col p-4 font-bold ">
+          <div className="font-bold flex mb-10 flex-wrap items-center font-bold gap-5">
             {atendents.map((item) => (
-              <div className="flex flex-col items-center hover:bg-[#26123c] cursor-pointer bg-[#26123c]/50 border-[#6028dc1a] border-[4px] rounded-xl w-[290px] h-[380px] p-2">
-                <Text className="text-white text-xl" as="h1">{item.name}</Text>
+              <div className="flex border-[#1b1145] border flex-col items-center cursor-pointer rounded-xl w-[290px] h-[380px] p-2">
                 <img src={item.profileImg} width={'150px'} className="rounded-full mt-5" />
-                <div className="flex flex-row mt-5">
+                <Text className="text-white text-xl" as="h1">{item.name}</Text>
+                <div className="flex flex-row ">
                   {[...Array(item.rating)].map((_, index) => (
                     <Star
                       key={index}

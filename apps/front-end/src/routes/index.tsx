@@ -6,23 +6,24 @@ import { ChatPage } from "../pages/Chat/Client"
 import { AtendentsSearchPage } from "../pages/Atendents/Search"
 import { AtendentProfilePage } from "../pages/Atendents/Profile"
 import { VerifyEmailMagicLink } from "../pages/Login/VerifyEmailMagicLink"
-import { ProtectedRoutes } from "./auth/ProtectedRoutes"
+import { RoutesMiddleware } from "./auth/RoutesMiddleware"
 import { ClientProfilePage } from "../pages/Profile/client"
 import { TimelinePage } from "../pages/Timeline"
+import { HomePage } from "../pages/Home"
 
 
 export const routes: RouteObject[] = [
 
   {
     element: (
-      <ProtectedRoutes>
+      <RoutesMiddleware>
         <DefaultLayout />
-      </ProtectedRoutes>
+      </RoutesMiddleware>
     ),
     children: [
       {
         path: '/',
-        element: <TimelinePage />
+        element: <HomePage />
       },
       {
         path: '/chat',

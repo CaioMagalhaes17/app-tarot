@@ -52,6 +52,7 @@ const config: Omit<Config, 'content'> = {
       },
       fontFamily: {
         nunito: ['Nunito', 'sans-serif'],
+        smythe: ['Smythe', 'sans-serif'],
       },
       gridTemplateColumns: {
         '5': 'repeat(5, minmax(0, 1fr))',

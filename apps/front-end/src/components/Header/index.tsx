@@ -11,19 +11,19 @@ export function Header() {
         <button onClick={() => setCloseSidebar(!closeSidebar)} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
         <VSeparator />
         {!isMobile && (
-          <Text as="h1" className={`${!isMobile ? 'text-3xl 10' : 'text-lg'} font-extrabold cursor-pointer`} onClick={() => navigate('/')}>Astrologia Online</Text>
+          <Text as="h1" className={`font-smythe text-white ${!isMobile ? 'text-5xl 10' : 'text-lg'} cursor-pointer`} onClick={() => navigate('/')}>Astrologia Online</Text>
         )}
         <div className="ml-auto" />
-        {!isMobile && !isLogged() ? (
+        {!isMobile && (
           <>
             <div className="font-bold text-white text-lg flex flex-row gap-10 mr-[100px]">
-              <Text onClick={() => document.getElementById('atendents')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Atendentes</Text>
+              <Text onClick={() => navigate('/atendents/list')} className="cursor-pointer hover:underline" as="h1">Atendentes</Text>
               <Text onClick={() => document.getElementById('specialties')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Especialidades</Text>
               <Text onClick={() => document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Minutos</Text>
               <Text onClick={() => document.getElementById('howItWorks')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Como Funciona</Text>
             </div>
           </>
-        ) : ''}
+        )}
 
         {!isLogged() ? (
           <LoginButtons />

@@ -39,6 +39,22 @@ export function useAtendentsController() {
         profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
 
       },
+      {
+        id: '1',
+        name: 'Aloisio Numerologo',
+        rating: 3,
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+        profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
+
+      },
+      {
+        id: '1',
+        name: 'Aloisio Numerologo',
+        rating: 3,
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+        profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
+
+      },
     ])
     // const { data, isLoading } = useQuery({
     //   queryKey: ['search-atendents'],

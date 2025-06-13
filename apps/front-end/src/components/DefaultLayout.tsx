@@ -2,7 +2,6 @@ import { Box } from "@app/ui"
 import { Suspense } from "react"
 import { Outlet } from "react-router-dom"
 import { Header } from "./Header"
-import { ParticlesComponent } from "./Particles"
 import useStore from "../state"
 import { FloatingChat } from "./Timeline/Mobile/FloatingChat"
 import { useGetMessages } from "../hooks/messages/useGetMessages"
@@ -16,12 +15,13 @@ export default function DefaultLayout() {
       <Box className={` leftbar-game-icon vertical font-extrabold full main-section antialiased relative font-nunito text-sm font-normal`}>
         <Box className="relative">
           <Box className="navbar-sticky main-container text-white-dark min-h-screen">
-            <Box style={{ backgroundImage: isMobile ? 'url("/stars2.png")' : '' }} className="main-content flex flex-col min-h-screen">
-              {!isMobile && <div className="backdrop-blur-[2px] absolute inset-0 bg-[#000000bd]"></div>}
+            <Box style={{ backgroundImage: isMobile ? 'url("/stars2.png")' : 'url("https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/bg-3WECX7L.jpg")' }} className="main-content flex flex-col min-h-screen">
+              <div style={{ backgroundImage: 'linear-gradient(180deg, #08072BA8 30%, #0A051C 100%)' }} className="absolute inset-0 bg-transparent"></div>
+
               <Header />
               <SidebarComponent />
               <Suspense>
-                {!isMobile && (<ParticlesComponent />)}
+                {/* {!isMobile && (<ParticlesComponent />)} */}
 
                 <Box className="hidden shadow-3xl shadow-4xl teste-default bg-success bg-warning bg-danger text-warning  text-success text-danger text-primary" />
                 <Box data-overlap="false" id="page-container" className="animate__fadeIn animate__animated page-container scrollable">

@@ -83,6 +83,7 @@ export {
 export { HSeparator } from "./atoms/HSeparator";
 export { VSeparator } from "./atoms/VSeparator";
 import './css/index.css'
+export { IconQuote } from "./Icons/IconQuote";
 export { IconHeart } from "./Icons/IconHeart";
 export { IconCard } from "./Icons/IconCard";
 export { IconMute } from "./Icons/IconMute";
