@@ -4,68 +4,68 @@ import useStore from "../../state";
 import { MobileHomePage } from "./MobileHome";
 
 export function HomePage() {
-  const signos = [
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    },
-    {
-      name: 'Aries',
-      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
-      date: 'Março 21 - Abril 19'
-    }
-  ]
+  // const signos = [
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   },
+  //   {
+  //     name: 'Aries',
+  //     img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/sign1-QM4ZKX2-e1632812862141.png',
+  //     date: 'Março 21 - Abril 19'
+  //   }
+  // ]
   const feedbacks = [
     {
       senderProfileImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/woman-MQU5ZC6-150x150.jpg',
@@ -164,7 +164,7 @@ export function HomePage() {
             <img className="w-[400px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/image4-4B8RTPH-e1632889056835.png" />
           </div>
           <div className="border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-[100px]" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
-            <div className="mb-10 flex flex-row items-center justify-center gap-5">
+            <div className="mb-[100px] flex flex-row items-center justify-center gap-5">
               <img className="w-[400px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/41-e1632812760720.png" />
               <div className="flex flex-col max-w-[500px]">
                 <h1 className="text-white mb-5 text-6xl  font-smythe">Nós Podemos Te Ajudar A Entender O Seu Futuro Com Astrologia</h1>
@@ -225,8 +225,23 @@ export function HomePage() {
                 <Button className="btn-outline-primary">Seja um atendente</Button>
               </div>
             </div>
+            <div className="flex items-center gap-4 mt-[100px] mb-20">
+              <div className="flex-1 border-t border-gray-300"></div>
+              <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Como Funciona</h1>
+              <div className="flex-1 border-t border-gray-300"></div>
+            </div>
+            <div className="flex flex-row gap-5 max-w-[1130px] mr-auto ml-auto">
+              {[...Array(4)].map((_, index) => (
+                <div className="hover:bg-primary/20 cursor-pointer border border-dark p-4 flex flex-col items-center">
+                  <span className="bg-primary text-3xl font-smythe w-[50px] text-white font-bold relative top-[-35px]">0{index + 1}</span>
+                  <IconSearch className="relative top-[-15px] text-white" width={'24'} height={'24'} />
+                  <h1 className="relative top-[-15px] text-white text-3xl font-smythe">Escolha o tipo de serviço</h1>
+                  <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit tellusoi luctus nec ullamcorper mattis pulvinar dapibus leonec.</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex items-center gap-4 mt-[100px] max-w-[1700px] mr-auto ml-auto  mb-5">
+          {/* <div className="flex items-center gap-4 mt-[100px] max-w-[1700px] mr-auto ml-auto  mb-5">
             <div className="flex-1 border-t border-gray-300"></div>
             <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Se encontre pelo seu Signo</h1>
             <div className="flex-1 border-t border-gray-300"></div>
@@ -241,8 +256,8 @@ export function HomePage() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-[50px]" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+          </div> */}
+          <div className="p-[50px]" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
             <div className="flex items-center gap-4 mb-5">
               <div className="flex-1 border-t border-gray-300"></div>
               <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Depoimento de usuários</h1>

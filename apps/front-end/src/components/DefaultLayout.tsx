@@ -1,4 +1,4 @@
-import { Box } from "@app/ui"
+import { Box, HSeparator, IconMail, IconOldPhone } from "@app/ui"
 import { Suspense } from "react"
 import { Outlet } from "react-router-dom"
 import { Header } from "./Header"
@@ -27,13 +27,26 @@ export default function DefaultLayout() {
                 <Box data-overlap="false" id="page-container" className="animate__fadeIn animate__animated page-container scrollable">
                   <Outlet />
                   <FloatingChat messages={messages} />
-                  <footer className="text-white py-6 px-4 mt-auto" style={{ backgroundColor: '#26123c' }}>
-                    <div className="max-w-6xl mx-auto text-center space-y-2">
-                      <p className="text-lg font-semibold">Nome do Site</p>
-                      <p className="text-sm">© 2025 Nome do Site. Todos os direitos reservados.</p>
-                      <p className="text-sm">Contato: contato@seudominio.com</p>
-                      <p className="text-sm">Redes Sociais</p>
+                  <footer className="py-6 px-4 mt-auto bg-[#0A051C]">
+                    <HSeparator className="mb-5" />
+                    <div className={`${isMobile ? 'flex-col' : 'flex-row '} max-w-6xl gap-5 flex ml-auto justify-between mr-auto`}>
+                      <div className="flex flex-col text-left gap-5 max-w-[350px]">
+                        <h1 className={`font-smythe text-white text-6xl`}>Astrologia Online</h1>
+                        <span className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit tellusoi luctus nec ullamcorper mattis pulvinar dapibus leonec.</span>
+                      </div>
+                      <div className="flex flex-col text-left gap-2">
+                        <h1 className="font-smythe text-white text-4xl">Contato</h1>
+                        <span className="flex flex-row gap-2"><IconOldPhone />(31)9 9999-9999</span>
+                        <span className="flex flex-row gap-2"><IconMail />emailexample@example.com</span>
+                      </div>
+                      <div className="flex flex-col text-left ">
+                        <h1 className="font-smythe text-white text-4xl">Links Rápidos</h1>
+                        <li>Home</li>
+                        <li>Serviços</li>
+                        <li>Atendentes</li>
+                      </div>
                     </div>
+                    <span className="text-left"></span>
                   </footer>
                 </Box>
               </Suspense>
