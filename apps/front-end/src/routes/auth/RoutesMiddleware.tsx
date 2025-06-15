@@ -8,13 +8,13 @@ export function RoutesMiddleware({ children }: { children: JSX.Element }) {
   const { setClientInfos } = useStore()
   const { user, isLoading } = useGetUser()
   const navigate = useNavigate()
-  const token = localStorage.getItem('accessToken')
+  // const token = localStorage.getItem('accessToken')
 
-  const publicRoutes = [
-    '/',
-    'atendents/list',
-    'atendents/profile'
-  ]
+  // const publicRoutes = [
+  //   '/',
+  //   'atendents/list',
+  //   'atendents/profile'
+  // ]
 
   const protectedRoutes = [
     'profile',
@@ -25,6 +25,7 @@ export function RoutesMiddleware({ children }: { children: JSX.Element }) {
     if (!isLoading) {
       loadUser()
     }
+    checkAuth()
   }, [location, user, isLoading])
 
   async function loadUser() {

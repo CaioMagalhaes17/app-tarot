@@ -8,7 +8,6 @@ import { AtendentProfilePage } from "../pages/Atendents/Profile"
 import { VerifyEmailMagicLink } from "../pages/Login/VerifyEmailMagicLink"
 import { RoutesMiddleware } from "./auth/RoutesMiddleware"
 import { ClientProfilePage } from "../pages/Profile/client"
-import { TimelinePage } from "../pages/Timeline"
 import { HomePage } from "../pages/Home"
 
 

@@ -15,7 +15,7 @@ export default function DefaultLayout() {
       <Box className={` leftbar-game-icon vertical font-extrabold full main-section antialiased relative font-nunito text-sm font-normal`}>
         <Box className="relative">
           <Box className="navbar-sticky main-container text-white-dark min-h-screen">
-            <Box style={{ backgroundImage: isMobile ? 'url("/stars2.png")' : 'url("https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/bg-3WECX7L.jpg")' }} className="main-content flex flex-col min-h-screen">
+            <Box style={{ backgroundImage: isMobile ? 'url("https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/bg-3WECX7L.jpg")' : 'url("https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/bg-3WECX7L.jpg")' }} className="main-content flex flex-col min-h-screen">
               <div style={{ backgroundImage: 'linear-gradient(180deg, #08072BA8 30%, #0A051C 100%)' }} className="absolute inset-0 bg-transparent"></div>
 
               <Header />
