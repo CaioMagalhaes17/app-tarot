@@ -1,4 +1,4 @@
-import { Button, HSeparator, IconQuote } from "@app/ui";
+import { Button, IconQuote, IconSearch, IconSend } from "@app/ui";
 import { Star } from "lucide-react";
 
 export function MobileHomePage() {
@@ -112,6 +112,38 @@ export function MobileHomePage() {
       desc: 'Baralho do Trabalho'
     },
   ]
+  const services = [
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service1.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service4.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service5.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service6.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service3.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service2.png'
+    }
+  ]
   return (
     <>
       <div className="flex min-h-screen flex-col items-center p-6 justify-center gap-10">
@@ -139,15 +171,36 @@ export function MobileHomePage() {
               <li>JOGO DE BUZIOS</li>
               <li>CARTOMANCIA</li>
             </div>
-            <div className="flex flex-row gap-5 mt-10 justify-center">
-              <Button className="btn-primary">Encontrar Serviços</Button>
-              <Button className="btn-outline-primary">Procurar Por Especialidades</Button>
-            </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center gal-5 mt-[100px]">
-          <h1 className="text-white text-5xl font-smythe">Nossos Atendentes</h1>
-          <HSeparator className="mt-5 mb-10 w-[350px]" />
+        <div className="flex items-center gap-4 mt-10">
+          <div className="flex-1 border-t border-gray-300"></div>
+          <span className="text-white font-smythe text-4xl whitespace-nowrap ">
+            Serviços mais solicitados
+          </span>
+          <div className="flex-1 border-t border-white"></div>
+        </div>
+        <div className="flex mr-auto ml-auto flex-wrap gap-5 mt-5">
+          {services.map((item) => (
+            <div className="hover:bg-primary/20 cursor-pointer flex flex-col items-center p-6 border max-w-[350px] border-dark">
+              <img className="w-[75px]" src={item.img} />
+              <h1 className="text-white font-smythe text-2xl">{item.name}</h1>
+              <span>{item.desc}</span>
+            </div>
+          ))}
+          <div className="flex flex-row gap-5 mt-10 w-full justify-center">
+            <Button className="btn-primary"><IconSend /><span className="ml-2">Solicitar Trabalho</span></Button>
+            <Button className="btn-outline-primary"><IconSearch className="mr-2" />Procurar Por Especialidades</Button>
+          </div>
+        </div>
+        <div className="flex items-center gap-4 mt-10 mt-[100px] mb-5">
+          <div className="flex-1 border-t border-gray-300"></div>
+          <span className="text-white font-smythe text-4xl whitespace-nowrap ">
+            Nossos Atendentes
+          </span>
+          <div className="flex-1 border-t border-white"></div>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-5 ">
           <div className="flex flex-wrap gap-10 items-center justify-center">
             {atendents.map((item) => (
               <div className="flex flex-col">
@@ -163,9 +216,14 @@ export function MobileHomePage() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center gap-5 mt-[30px] mb-[100px] p-3">
-        <h1 className="text-white text-5xl font-smythe">Se encontre pelo seu Signo</h1>
-        <HSeparator className="mt-1 mb-5 w-[150px]" />
+      <div className="flex items-center gap-4 mt-10  p-2">
+        <div className="flex-1 border-t border-gray-300"></div>
+        <span className="text-white font-smythe text-4xl whitespace-nowrap ">
+          Se encontre pelo seu Signo
+        </span>
+        <div className="flex-1 border-t border-white"></div>
+      </div>
+      <div className="flex flex-col items-center justify-center gap-5 mb-[50px] p-3">
         <div className="flex flex-wrap gap-10  justify-center">
           {signos.map((item) => (
             <div className="border border-dark flex flex-col p-4">
@@ -176,10 +234,15 @@ export function MobileHomePage() {
           ))}
         </div>
       </div>
-      <div className="border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-[50px]" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+      <div className="border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+        <div className="flex items-center gap-4 mb-5 ">
+          <div className="flex-1 border-t border-gray-300"></div>
+          <span className="text-white font-smythe text-4xl whitespace-nowrap ">
+            Depoimento de usuários
+          </span>
+          <div className="flex-1 border-t border-white"></div>
+        </div>
         <div className="flex flex-col items-center justify-center gap-5 w-full">
-          <h1 className="text-white text-5xl font-smythe">Depoimento de usuários</h1>
-          <HSeparator className="mt-1 mb-5 w-[150px]" />
           <div className="flex flex-wrap gap-10">
             {feedbacks.map((item) => (
               <div className="border border-dark flex items-center flex-col p-4">

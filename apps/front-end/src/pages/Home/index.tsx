@@ -1,4 +1,4 @@
-import { Button, HSeparator, IconQuote } from "@app/ui";
+import { Button, IconQuote, IconSearch, IconSend } from "@app/ui";
 import { Star } from "lucide-react";
 import useStore from "../../state";
 import { MobileHomePage } from "./MobileHome";
@@ -114,6 +114,38 @@ export function HomePage() {
       desc: 'Baralho do Trabalho'
     },
   ]
+  const services = [
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service1.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service4.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service5.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service6.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service3.png'
+    },
+    {
+      name: 'Análise de Horoscópo',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna',
+      img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service2.png'
+    }
+  ]
   const { isMobile } = useStore()
   return (
     <>
@@ -132,7 +164,7 @@ export function HomePage() {
             <img className="w-[400px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/image4-4B8RTPH-e1632889056835.png" />
           </div>
           <div className="border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-[100px]" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
-            <div className="flex flex-row items-center justify-center gap-5">
+            <div className="mb-10 flex flex-row items-center justify-center gap-5">
               <img className="w-[400px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/41-e1632812760720.png" />
               <div className="flex flex-col max-w-[500px]">
                 <h1 className="text-white mb-5 text-6xl  font-smythe">Nós Podemos Te Ajudar A Entender O Seu Futuro Com Astrologia</h1>
@@ -149,15 +181,36 @@ export function HomePage() {
                     <li>CARTOMANCIA</li>
                   </div>
                 </div>
-                <div className="flex flex-row gap-5 mt-10 justify-center">
-                  <Button className="btn-primary">Encontrar Serviços</Button>
-                  <Button className="btn-outline-primary">Procurar Por Especialidades</Button>
-                </div>
+
               </div>
             </div>
-            <div className="flex flex-col items-center justify-center gal-5 mt-[200px]">
-              <h1 className="text-white text-7xl font-smythe">Nossos Atendentes</h1>
-              <HSeparator className="mt-5 mb-10 w-[350px]" />
+            <div className="flex items-center gap-4">
+              <div className="flex-1 border-t border-gray-300"></div>
+              <span className="text-white font-smythe text-6xl whitespace-nowrap px-2">
+                Serviços mais solicitados
+              </span>
+              <div className="flex-1 border-t border-gray-300"></div>
+            </div>
+            <div className="flex max-w-[1130px] mr-auto ml-auto flex-wrap gap-5 mt-5">
+              {services.map((item) => (
+                <div className="hover:bg-primary/20 cursor-pointer flex flex-col items-center p-6 border max-w-[350px] border-dark">
+                  <img className="w-[75px]" src={item.img} />
+                  <h1 className="text-white font-smythe text-2xl">{item.name}</h1>
+                  <span>{item.desc}</span>
+                </div>
+              ))}
+              <div className="flex flex-row gap-5 mt-10 w-full justify-center">
+                <Button className="btn-primary"><IconSend /><span className="ml-2">Solicitar Trabalho</span></Button>
+                <Button className="btn-outline-primary"><IconSearch className="mr-2" />Procurar Por Especialidades</Button>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 mt-[100px] mb-5">
+              <div className="flex-1 border-t border-gray-300"></div>
+              <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Nossos Atendentes</h1>
+              <div className="flex-1 border-t border-gray-300"></div>
+            </div>
+            <div className="flex flex-col items-center justify-center gal-5 ">
               <div className="flex flex-wrap gap-10 max-w-[1200px]">
                 {atendents.map((item) => (
                   <div className="flex flex-col">
@@ -173,10 +226,13 @@ export function HomePage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center gap-5 mt-[100px] mb-[100px]">
-            <h1 className="text-white text-7xl font-smythe">Se encontre pelo seu Signo</h1>
-            <HSeparator className="mt-1 mb-5 w-[350px]" />
-            <div className="flex flex-wrap gap-10 max-w-[1100px] justify-center">
+          <div className="flex items-center gap-4 mt-[100px] max-w-[1700px] mr-auto ml-auto  mb-5">
+            <div className="flex-1 border-t border-gray-300"></div>
+            <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Se encontre pelo seu Signo</h1>
+            <div className="flex-1 border-t border-gray-300"></div>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-5 ">
+            <div className="flex flex-wrap gap-10 max-w-[1100px] mb-[100px] justify-center">
               {signos.map((item) => (
                 <div className="border border-dark flex flex-col p-10">
                   <img className="w-[120px]" src={item.img} />
@@ -187,9 +243,12 @@ export function HomePage() {
             </div>
           </div>
           <div className="border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-[50px]" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+            <div className="flex items-center gap-4 mb-5">
+              <div className="flex-1 border-t border-gray-300"></div>
+              <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Depoimento de usuários</h1>
+              <div className="flex-1 border-t border-gray-300"></div>
+            </div>
             <div className="flex flex-col items-center justify-center gap-5 w-full">
-              <h1 className="text-white text-7xl font-smythe">Depoimento de usuários</h1>
-              <HSeparator className="mt-1 mb-5 w-[350px]" />
               <div className="flex flex-row gap-10">
                 {feedbacks.map((item) => (
                   <div className="border border-dark flex items-center flex-col p-10">
