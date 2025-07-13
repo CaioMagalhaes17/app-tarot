@@ -1,5 +1,6 @@
-import { Button, IconQuote, IconSearch, IconSend } from "@app/ui";
+import { Button, IconQuote, IconSearch, IconSend, Panel } from "@app/ui";
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function MobileHomePage() {
   // const signos = [
@@ -144,9 +145,11 @@ export function MobileHomePage() {
       img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service2.png'
     }
   ]
+  const navigate = useNavigate()
+
   return (
     <>
-      <div className="flex min-h-screen flex-col items-center p-6 justify-center gap-10">
+      <Panel className="long-animate__animated long-animate__fadeIn flex min-h-screen flex-col items-center p-6 justify-center gap-10">
         <div className="flex flex-col gap-3">
           <h1 className="text-white text-6xl font-smythe">Sua Estrela Determina A Jornada Da Sua Vida</h1>
           <span className="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit tellusoi luctus nec ullamcorper mattis pulvinar dapibus leonec.</span>
@@ -156,8 +159,8 @@ export function MobileHomePage() {
           </div>
         </div>
         <img className="w-[400px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/image4-4B8RTPH-e1632889056835.png" />
-      </div>
-      <div className="border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+      </Panel>
+      <Panel className="long-animate__animated long-animate__fadeIn border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
         <div className="flex flex-col items-center justify-center gap-5">
           <img className="w-[300px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/41-e1632812760720.png" />
           <div className="flex flex-col max-w-[500px]">
@@ -230,7 +233,10 @@ export function MobileHomePage() {
             </div>
           ))}
         </div>
-      </div>
+        <div className="flex justify-center mt-10">
+          <Button onClick={() => navigate('/minutes')} className="btn-lg btn-primary">Ver Planos</Button>
+        </div>
+      </Panel>
       {/* <div className="flex items-center gap-4 mt-10  p-2">
         <div className="flex-1 border-t border-gray-300"></div>
         <span className="text-white font-smythe text-4xl whitespace-nowrap ">

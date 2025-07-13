@@ -1,7 +1,6 @@
-import { Button, HSeparator, IconChat, IconMoon, Text } from "@app/ui";
+import { Button, HSeparator, IconChat, IconMoon, IconQuote, Text } from "@app/ui";
 import { ArrowDown, ArrowUp, Star } from "lucide-react";
 import { useState } from "react";
-import { FeedbackRow } from "../FeedbackRow";
 import { useNavigate } from "react-router-dom";
 
 export function MobileAtendentProfileComponent({ profileImg, name, rating }: { profileImg: string, name: string, rating: number }) {
@@ -26,48 +25,52 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
 
   const services = [
     {
-      name: 'Consulta por e-mail',
+      name: 'Consulta por Chat',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      serviceImg: 'https://www.iquilibrio.com/layout/produtos/90857_consulta-por-e-mail.jpg',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service5.png',
       price: 'R$50,00'
     },
     {
-      name: 'Consulta por e-mail',
+      name: 'Mapa Astral',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      serviceImg: 'https://www.iquilibrio.com/layout/produtos/90857_consulta-por-e-mail.jpg',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service3.png',
       price: 'R$50,00'
     },
     {
-      name: 'Consulta por e-mail',
+      name: 'Horoscopo do amor',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      serviceImg: 'https://www.iquilibrio.com/layout/produtos/90857_consulta-por-e-mail.jpg',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service6.png',
       price: 'R$50,00'
     },
     {
-      name: 'Consulta por e-mail',
+      name: 'Horoscopo do dia',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      serviceImg: 'https://www.iquilibrio.com/layout/produtos/90857_consulta-por-e-mail.jpg',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service1.png',
       price: 'R$50,00'
     },
 
   ]
 
+
   const [showAllAbout, setShowAllAbout] = useState<boolean>(false)
 
   const feedbacks = [
     {
+      senderProfileImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/woman-MQU5ZC6-150x150.jpg',
       senderName: 'Caio magahlães defaira',
       date: '24/05/2024',
       rating: 4,
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
     },
     {
+      senderProfileImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/woman-MQU5ZC6-150x150.jpg',
       senderName: 'Caio magahlães defaira',
       date: '24/05/2024',
       rating: 4,
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
     },
     {
+      senderProfileImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/woman-MQU5ZC6-150x150.jpg',
       senderName: 'Caio magahlães defaira',
       date: '24/05/2024',
       rating: 4,
@@ -79,12 +82,13 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
     <>
       <div className="flex min-h-screen justify-center">
         <div className="flex flex-col font-bold min-w-[70%]">
-          <div className="bg-[#1d1232] p-4  border-[#6028dc1a] border-[4px]  rounded-xl">
+          <div className="p-4 ">
             <div className="flex max-w-[1100px] ml-auto mr-auto relative flex-row  font-bold gap-5">
               <img width={'130px'} src={profileImg} className="h-[130px] rounded-3xl sombra" />
               <div className="flex flex-col max-w-[550px]">
-                <Text className="text-4xl text-dark dark:text-white" as="h1">{name}</Text>
-                <Text className="text-green text-lg mb-2" as="h1">Online</Text>
+                <Text className="text-5xl font-smythe text-dark dark:text-white" as="h1">{name}</Text>
+                <Text className="px-2 rounded-xl bg-green w-fit text-white text-lg mb-2" as="h1">Online</Text>
+
                 <div className="flex flex-row ">
                   {[...Array(5)].map((_, index) => (
                     <Star
@@ -104,57 +108,56 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
               ))}
             </div>
             <div className="flex flex-col items-center gap-5 mt-5">
+              <Button onClick={() => navigate('/chat')} className="btn-primary flex flex-row gap-2 w-full "><IconChat /> Chamar no Chat</Button>
               <Button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn-purple flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
               <Button onClick={() => document.getElementById('feedbacks')?.scrollIntoView({ behavior: 'smooth' })} className="btn-warning  w-full  flex flex-row gap-2"><Star />Avaliações</Button>
-              <div className="flex items-center flex-col w-full">
-                <Button onClick={() => navigate('/chat')} className="btn-primary flex flex-row gap-2 w-full "><IconChat /> Chamar no Chat</Button>
-                <Text as="span">R$3,50/minuto</Text>
-              </div>
             </div>
           </div>
-          <div className="bg-[#1d1232] p-4 border-[#6028dc1a] border-[4px] rounded-xl mt-5">
+          <div className="p-4 mt-5">
             <div className="max-w-[1100px] flex flex-col ml-auto mr-auto font-bold">
+
+              <div className="flex items-center gap-4 mb-5">
+                <div className="flex-1 border-t border-gray-300"></div>
+                <h1 className="text-white text-5xl whitespace-nowrap px-2 font-smythe">Sobre o consultor</h1>
+                <div className="flex-1 border-t border-gray-300"></div>
+              </div>
+
+              <div className="text-left text-lg font-normal">
+                <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
+              </div>
+              {showAllAbout && (
+                <>
+                  <div className="text-left text-lg font-normal">
+                    <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
+                  </div>
+                  <div className="text-left text-lg font-normal">
+                    <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
+                  </div>
+                </>
+              )}
               <div onClick={() => setShowAllAbout(!showAllAbout)} className="cursor-pointer ml-auto flex-row flex items-center gap-2 ">
                 {!showAllAbout ? <ArrowDown /> : <ArrowUp />}
                 Mostrar tudo
               </div>
-              <Text as="h1" className="text-3xl text-white">Sobre</Text>
-              <HSeparator className="mt-1 mb-2" />
-              <div className="text-left text-lg font-normal">
-                <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
-              </div>
-              {showAllAbout && (
-                <>
-                  <Text as="h1" className="text-3xl text-white mt-5">Especialidades</Text>
-                  <HSeparator className="mt-1 mb-2" />
-
-                  <div className="text-left text-lg font-normal">
-                    <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
-                  </div>
-                  <Text as="h1" className="text-3xl text-white mt-5">Especialidades</Text>
-                  <HSeparator className="mt-1 mb-2" />
-
-                  <div className="text-left text-lg font-normal">
-                    <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
-                  </div>
-                </>
-              )}
             </div>
           </div>
 
-          <div id="services" className="bg-[#1d1232] border-[#6028dc1a] border-[4px] p-4 rounded-xl mt-5">
-            <div className="max-w-[1100px] flex flex-col ml-auto mr-auto font-bold">
-              <Text as="h1" className="text-white text-3xl">Serviços</Text>
-              <HSeparator className="mt-1 mb-5" />
+          <div id="services" className="p-4 mt-5">
+            <div className="flex flex-col ml-auto mr-auto font-bold">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="flex-1 border-t border-gray-300"></div>
+                <h1 className="text-white text-5xl whitespace-nowrap px-2 font-smythe">Serviços</h1>
+                <div className="flex-1 border-t border-gray-300"></div>
+              </div>
               <div className="flex flex-wrap gap-10 ">
                 {services.map((item) => (
                   <>
                     <div className="flex flex-col w-[150px]">
-                      <img src={item.serviceImg} className="rounded-xl" />
-                      <Text className="text-white text-xl mt-2" as="h1">{item.name}</Text>
+                      <img src={item.serviceImg} className="rounded-xl h-[150px]" />
+                      <Text className="text-white font-smythe text-2xl mt-2" as="h1">{item.name}</Text>
                       <Text className="mt-2 mb-2" as="span">{item.description}</Text>
                       <Text className="text-success text-lg mt-2 mb-5" as="span">{item.price}</Text>
-                      <Button className="btn-green ">Comprar</Button>
+                      <Button className="btn-primary">Consultar</Button>
                     </div>
                   </>
                 ))}
@@ -162,15 +165,34 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
             </div>
           </div>
 
-          <div id="feedbacks" className="bg-[#1d1232] border-[#6028dc1a] border-[4px] p-4 rounded-xl mt-5 mb-20">
-            <div className="max-w-[1100px] flex flex-col ml-auto mr-auto font-bold">
-              <Text as="h1" className="text-white text-3xl">Avaliações</Text>
-              <HSeparator className="mt-1 mb-5" />
-              {feedbacks.map((item) => (
-                <>
-                  <FeedbackRow feedback={item} />
-                </>
-              ))}
+          <div id="feedbacks" className="p-4 rounded-xl mt-5 mb-20">
+            <div className="flex flex-col ml-auto mr-auto font-bold">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="flex-1 border-t border-gray-300"></div>
+                <h1 className="text-white text-4xl whitespace-nowrap px-2 font-smythe">Depoimento de usuários</h1>
+                <div className="flex-1 border-t border-gray-300"></div>
+              </div>
+              <div className="flex flex-col items-center justify-center gap-5 w-full">
+                <div className="flex flex-col gap-10">
+                  {feedbacks.map((item) => (
+                    <div className="border border-dark flex items-center flex-col p-10">
+                      <img className="w-20 rounded-full" src={item.senderProfileImg} />
+                      <span className="text-white text-lg">{item.senderName}</span>
+                      <div className="flex flex-row mb-2">
+                        {[...Array(5)].map((_, index) => (
+                          <Star
+                            key={index}
+                            className={index < item.rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
+                            size={12}
+                          />
+                        ))}
+                      </div>
+                      <IconQuote width="34" height="34" />
+                      <span>{item.description}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

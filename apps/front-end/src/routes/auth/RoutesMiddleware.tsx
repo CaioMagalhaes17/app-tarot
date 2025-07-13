@@ -21,7 +21,6 @@ export function RoutesMiddleware({ children }: { children: JSX.Element }) {
     'chat'
   ]
   useEffect(() => {
-    console.log("dasdas")
     if (!isLoading) {
       loadUser()
     }
@@ -36,7 +35,7 @@ export function RoutesMiddleware({ children }: { children: JSX.Element }) {
 
   function checkAuth() {
     if (protectedRoutes.find((item) => location.pathname.includes(item))) {
-      navigate('/login')
+      //navigate('/login')
     }
   }
 

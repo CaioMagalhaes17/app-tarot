@@ -9,6 +9,7 @@ import { VerifyEmailMagicLink } from "../pages/Login/VerifyEmailMagicLink"
 import { RoutesMiddleware } from "./auth/RoutesMiddleware"
 import { ClientProfilePage } from "../pages/Profile/client"
 import { HomePage } from "../pages/Home"
+import { MinutesPage } from "../pages/Minutes"
 
 
 export const routes: RouteObject[] = [
@@ -19,10 +20,11 @@ export const routes: RouteObject[] = [
         <DefaultLayout />
       </RoutesMiddleware>
     ),
+
     children: [
       {
         path: '/',
-        element: <HomePage />
+        element: <HomePage />,
       },
       {
         path: '/chat',
@@ -39,6 +41,11 @@ export const routes: RouteObject[] = [
       {
         path: '/profile',
         element: <ClientProfilePage />
+      },
+      {
+        path: '/minutes',
+        element: <MinutesPage />,
+
       }
 
     ]
