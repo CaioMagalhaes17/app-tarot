@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useGetUser } from "../../hooks/user/useGetUser";
 import useStore from "../../state";
 
@@ -7,7 +7,6 @@ export function RoutesMiddleware({ children }: { children: JSX.Element }) {
   const location = useLocation()
   const { setClientInfos } = useStore()
   const { user, isLoading } = useGetUser()
-  const navigate = useNavigate()
   // const token = localStorage.getItem('accessToken')
 
   // const publicRoutes = [
