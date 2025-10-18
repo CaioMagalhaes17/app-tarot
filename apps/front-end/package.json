@@ -34,6 +34,7 @@
     "react-jsx-parser": "^2.4.0",
     "react-router-dom": "^7.2.0",
     "react-text-mask": "^5.5.0",
+    "react-timer-hook": "^4.0.5",
     "react-tsparticles": "^2.12.2",
     "socket.io-client": "^4.8.1",
     "sweetalert2": "^11.19.1",

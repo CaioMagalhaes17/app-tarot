@@ -223,7 +223,7 @@ export function HomePage() {
                 ))}
               </div>
               <div className="flex flex-row gap-5 mt-10">
-                <Button className="btn-primary btn-xl">Ver todos</Button>
+                <Button onClick={() => navigate('/atendents/list')} className="btn-primary btn-xl">Ver todos</Button>
                 <Button className="btn-outline-primary btn-xl">Seja um atendente</Button>
               </div>
             </div>

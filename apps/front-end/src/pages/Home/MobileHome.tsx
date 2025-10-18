@@ -192,7 +192,7 @@ export function MobileHomePage() {
             </div>
           ))}
           <div className="flex flex-row gap-5 mt-10 w-full justify-center">
-            <Button className="btn-primary"><IconSend /><span className="ml-2">Solicitar Trabalho</span></Button>
+            <Button onClick={() => navigate('/atendents/list')} className="btn-primary"><IconSend /><span className="ml-2">Solicitar Trabalho</span></Button>
             <Button className="btn-outline-primary"><IconSearch className="mr-2" />Procurar Por Especialidades</Button>
           </div>
         </div>
@@ -214,7 +214,7 @@ export function MobileHomePage() {
             ))}
           </div>
           <div className="flex flex-row gap-5 mt-10">
-            <Button className="btn-primary">Ver todos</Button>
+            <Button onClick={() => navigate('/atendents/list')} className="btn-primary">Ver todos</Button>
             <Button className="btn-outline-primary">Seja um atendente</Button>
           </div>
         </div>

@@ -1,9 +1,13 @@
 import { HSeparator, Panel, Text } from "@app/ui";
 import { Login } from "../../../../components/Login/Login";
 import { useScheduleController } from "./useScheduleController";
+import { ChooseService } from "./components/ChooseService";
+import { Payment } from "./components/Payment";
+import { useState } from "react";
 
 export function SchedulePage() {
   const { step, isMobile, setSearchParams } = useScheduleController()
+  const [service, setService] = useState({ img: '', name: '', price: 0 })
   console.log(step)
   return (
     <>
@@ -16,13 +20,23 @@ export function SchedulePage() {
             </span>
             <div className="flex-1 border-t border-gray-300"></div>
           </div>
-          <div className={`flex flex-row items-center gap-3 ${isMobile ? 'mb-10 p-2' : 'mb-5'}`}>
+          <div className={`flex flex-row items-center gap-3 p-2 mb-3`}>
             <img width={`${isMobile ? '50px' : '100px'}`} className="rounded-full" src="https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg" />
             <div className="flex flex-col items-start">
-              <Text as="p" className={`${!isMobile ? 'text-xl' : 'text-lg'} font-bold`}>Nome do Consultor</Text>
+              <Text as="p" className={`${!isMobile ? 'text-xl' : 'text-lg'} font-bold text-white`}>Nome do Consultor</Text>
               <span className="text-success font-bold" >Online</span>
             </div>
           </div>
+          {service.name !== '' && (
+            <div className={`flex flex-row items-center gap-3 ${isMobile ? 'mb-5 p-2' : 'mb-5'}`}>
+              <img width={`${isMobile ? '50px' : '100px'}`} className="rounded-full" src={service.img} />
+              <div className="flex flex-col items-start">
+                <Text as="p" className={`${!isMobile ? 'text-xl' : 'text-lg'} font-bold text-white`}>{service.name}</Text>
+                <span className="text-success font-bold" >R${service.price},00</span>
+              </div>
+            </div>
+          )}
+
           <div className={`flex flex-row ${isMobile ? 'justify-between gap-2 p-2' : 'justify-center'}  w-full items-center`}>
             <div onClick={() => setSearchParams({ step: '1' })} className="flex flex-col items-center gap-2 cursor-pointer">
               <span className="bg-primary rounded-xl text-2xl font-smythe w-[50px] text-white font-bold">1</span>
@@ -43,6 +57,7 @@ export function SchedulePage() {
               <Text className={`${step === '3' && 'text-primary'} font-bold ${isMobile ? '' : 'text-xl'}`} as="p">Pagamento</Text>
             </div>
           </div>
+          <HSeparator className="" />
           {
             step === '1' || !step ? (
               <Login />
@@ -51,7 +66,13 @@ export function SchedulePage() {
 
           {
             step === '2' && (
-              <Login />
+              <ChooseService service={service} setService={setService} />
+            )
+          }
+
+          {
+            step === '3' && (
+              <Payment />
             )
           }
         </div>

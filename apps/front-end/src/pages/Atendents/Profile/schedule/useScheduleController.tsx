@@ -6,13 +6,12 @@ import Swal from "sweetalert2"
 export function useScheduleController() {
   const userStore = useStore()
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const step = searchParams.get('step')
+  const isLogged = userStore.clientInfos.name !== "";
+  console.log(userStore.clientInfos.name)
   useEffect(() => {
-    const isLogged = userStore.clientInfos.name !== "";
 
-    if (isLogged) {
-      setSearchParams({ step: "2" });
-    } else {
+    if (!isLogged) {
       Swal.fire({
         toast: true,
         position: "top",        // mostra no topo da tela
@@ -26,7 +25,7 @@ export function useScheduleController() {
     }
   }, [setSearchParams]);
 
-  const step = searchParams.get('step')
+
   return {
     step,
     isMobile: userStore.isMobile,

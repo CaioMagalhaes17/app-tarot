@@ -1,5 +1,5 @@
-import { Box, HSeparator, IconMail, IconOldPhone } from "@app/ui"
-import { Suspense } from "react"
+import { Box, HSeparator, IconHelpCircle, IconMail, IconOldPhone } from "@app/ui"
+import { Suspense, useState } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { Header } from "./Header"
 import useStore from "../state"
@@ -14,6 +14,7 @@ export default function DefaultLayout() {
   const { isMobile } = useStore()
   const { messages } = useGetMessages()
   const { pathname } = useLocation()
+  const [showFooter, setShowFooter] = useState(false)
   console.log(pathname)
   return (
     <>
@@ -40,24 +41,31 @@ export default function DefaultLayout() {
                   <FloatingChat messages={messages} />
                   <HSeparator className="" />
                   <footer className="py-6 px-4 mt-auto bg-[#0A051C]">
-                    <div className={`${isMobile ? 'flex-col' : 'flex-row '} max-w-6xl gap-5 flex ml-auto justify-between mr-auto`}>
-                      <div className="flex flex-col text-left gap-5 max-w-[350px]">
-                        <h1 className={`font-smythe text-white text-6xl`}>Astrologia Online</h1>
-                        <span className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit tellusoi luctus nec ullamcorper mattis pulvinar dapibus leonec.</span>
-                      </div>
-                      <div className="flex flex-col text-left gap-2">
-                        <h1 className="font-smythe text-white text-4xl">Contato</h1>
-                        <span className="flex flex-row gap-2"><IconOldPhone />(31)9 9999-9999</span>
-                        <span className="flex flex-row gap-2"><IconMail />emailexample@example.com</span>
-                      </div>
-                      <div className="flex flex-col text-left ">
-                        <h1 className="font-smythe text-white text-4xl">Links Rápidos</h1>
-                        <li>Home</li>
-                        <li>Serviços</li>
-                        <li>Atendentes</li>
-                      </div>
-                    </div>
-                    <span className="text-left"></span>
+                    <button onClick={() => setShowFooter(!showFooter)}>
+                      <IconHelpCircle />
+                    </button>
+                    {showFooter && (
+                      <>
+                        <div className={`${isMobile ? 'flex-col' : 'flex-row '} max-w-6xl gap-5 flex ml-auto justify-between mr-auto`}>
+                          <div className="flex flex-col text-left gap-5 max-w-[350px]">
+                            <h1 className={`font-smythe text-white text-6xl`}>Astrologia Online</h1>
+                            <span className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit tellusoi luctus nec ullamcorper mattis pulvinar dapibus leonec.</span>
+                          </div>
+                          <div className="flex flex-col text-left gap-2">
+                            <h1 className="font-smythe text-white text-4xl">Contato</h1>
+                            <span className="flex flex-row gap-2"><IconOldPhone />(31)9 9999-9999</span>
+                            <span className="flex flex-row gap-2"><IconMail />emailexample@example.com</span>
+                          </div>
+                          <div className="flex flex-col text-left ">
+                            <h1 className="font-smythe text-white text-4xl">Links Rápidos</h1>
+                            <li>Home</li>
+                            <li>Serviços</li>
+                            <li>Atendentes</li>
+                          </div>
+                        </div>
+                        <span className="text-left"></span>
+                      </>
+                    )}
                   </footer>
                 </Box>
               </Suspense>
