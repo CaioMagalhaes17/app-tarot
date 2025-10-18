@@ -6,8 +6,8 @@ export function useHeaderController() {
   const navigate = useNavigate()
 
   function isLogged(): boolean {
+    console.log(clientInfos)
     if (clientInfos.name) {
-      console.log("uiodsanoidasnsioa")
       return true
     }
     return false

@@ -8,21 +8,24 @@ const Breadcrumbs = () => {
   const { isMobile } = useStore()
 
   return (
-    <nav className={`text-white ${isMobile ? 'text-xl' : 'text-4xl'} mt-5 font-smythe`}>
-      <ol className="flex space-x-2 ">
+    <nav className={`text-white ${isMobile ? 'text-xl' : 'text-2xl'} mt-5 font-smythe`}>
+      <ol className="flex">
         <li >
           <Link to="/">Início</Link>
         </li>
         {pathnames.map((value, index) => {
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
           const isLast = index === pathnames.length - 1;
+          const isPathId = apenasNumeros(value)
           return (
             <li key={to} className="flex items-center ">
               <span className="mx-2">/</span>
               {isLast ? (
                 <span className="font-semibold">{decodeURIComponent(convertPathName(value))}</span>
               ) : (
-                <Link to={to}>{decodeURIComponent(convertPathName(value))}</Link>
+                isPathId ?
+                  <Link to={to}>{decodeURIComponent(value)}</Link> :
+                  <Link to={to}>{decodeURIComponent(convertPathName(value))}</Link>
               )}
             </li>
           );
@@ -33,3 +36,7 @@ const Breadcrumbs = () => {
 };
 
 export default Breadcrumbs;
+
+function apenasNumeros(str: string) {
+  return /^[0-9]+$/.test(str);
+}

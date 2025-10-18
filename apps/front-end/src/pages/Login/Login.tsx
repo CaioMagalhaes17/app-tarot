@@ -42,7 +42,7 @@ export function LoginPage() {
                   <div className="w-full border-black/60 border mt-2" />
 
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-white">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-white ">
                   <div className={`flex mb-4 gap-5 ${isMobile ? 'flex-col' : 'flex-row'}`}>
                     <label className="flex items-center text-white">
                       <input type="radio" onClick={() => setUseEmail(true)} className="mr-2" checked={useEmail} />
@@ -55,7 +55,7 @@ export function LoginPage() {
                   </div>
 
                   {useEmail ? (<div>
-                    <label className="text-white" htmlFor="Name">Email</label>
+                    <label className="text-left text-white" htmlFor="Name">Email</label>
                     <div className="relative text-white-dark">
                       <Input id="Name" type="text" placeholder="Digite seu email" {...register('login', { required: true })} className="form-input !ps-10 placeholder:text-white-dark" />
                       <span className="absolute start-4 top-1/2 -translate-y-1/2">

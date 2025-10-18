@@ -40,13 +40,13 @@ export function MobileAtendentsListComponent({ atendents }: { atendents: Atenden
                           />
                         ))}
                       </div>
-                      <Text className="border-green border text-lg text-green rounded-xl px-2" as="span">Online</Text>
+                      <Text className="border-success border text-lg text-success rounded-xl px-2" as="span">Online</Text>
 
                     </div>
                     <div className="flex flex-col items-start justify-center">
                       <Text className="text-white text-5xl font-smythe" as="h1">{item.name}</Text>
                       <span className="text-lg text-left">🔮 Médium e Paranormal</span>
-                      <span className="mt-5 text-lg text-green">R$ 3,99/min</span>
+                      <span className="mt-5 text-lg text-success">R$ 3,99/min</span>
                     </div>
                   </div>
 

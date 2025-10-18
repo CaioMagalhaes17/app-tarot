@@ -108,7 +108,7 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
               ))}
             </div>
             <div className="flex flex-col items-center gap-5 mt-5">
-              <Button onClick={() => navigate('/chat')} className="btn-primary flex flex-row gap-2 w-full "><IconChat /> Chamar no Chat</Button>
+              <Button onClick={() => navigate('schedule')} className="btn-primary flex flex-row gap-2 w-full "><IconChat /> Agendar consulta</Button>
               <Button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn-purple flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
               <Button onClick={() => document.getElementById('feedbacks')?.scrollIntoView({ behavior: 'smooth' })} className="btn-warning  w-full  flex flex-row gap-2"><Star />Avaliações</Button>
             </div>

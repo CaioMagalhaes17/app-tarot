@@ -8,6 +8,8 @@ export function getDesktopGradientValues(path: string) {
       return ['20%', '50%']
     case '/atendents/profile/123':
       return ['0%', '35%']
+    case '/atendents/profile/123/schedule':
+      return ['0%', '35%']
     default:
       return ['30%', '100%']
   }
@@ -23,6 +25,8 @@ export function getMobileGradientValues(path: string) {
       return ['10%', '100%']
     case '/atendents/profile/123':
       return ['10%', '50%']
+    case '/atendents/profile/123/schedule':
+      return ['0%', '50%']
     default:
       return ['30%', '100%']
   }

@@ -1,8 +1,10 @@
 import { Button, IconChat, IconMoon, IconQuote, Panel, Text } from "@app/ui";
 import { ArrowDown, ArrowUp, Star } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function AtendentProfileComponent({ profileImg, name, rating }: { profileImg: string, name: string, rating: number }) {
+  const navigate = useNavigate()
   const tags = [
     {
       name: 'Tarot Baralho'
@@ -103,7 +105,7 @@ export function AtendentProfileComponent({ profileImg, name, rating }: { profile
               </div>
               <div className="ml-auto" />
               <div className="flex flex-col items-center gap-5">
-                <Button className="btn-primary btn-xl flex flex-row gap-2 w-full w-full"><IconChat /> Consulta por Chat</Button>
+                <Button onClick={() => navigate('schedule')} className="btn-primary btn-xl flex flex-row gap-2 w-full w-full"><IconChat /> Consulta por Chat</Button>
                 <Button className="btn-purple btn-xl flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
                 <Button className="btn-warning btn-xl  w-full  flex flex-row gap-2"><Star />Avaliações</Button>
               </div>

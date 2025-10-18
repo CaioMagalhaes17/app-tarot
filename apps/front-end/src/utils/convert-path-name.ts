@@ -10,8 +10,10 @@ export function convertPathName(path: string) {
       return 'Lista'
     case 'profile':
       return 'Perfil'
+    case 'schedule':
+      return 'Agendamento'
     default:
-      return ''
+      return path
   }
 
 }

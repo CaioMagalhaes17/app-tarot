@@ -31,7 +31,7 @@ export default function DefaultLayout() {
                 <Box className="hidden shadow-3xl shadow-4xl teste-default bg-success bg-warning bg-danger text-warning  text-success text-danger text-primary" />
                 <Box data-overlap="false" id="page-container" className="animate__fadeIn animate__animated page-container scrollable">
                   {pathname !== '/' && (
-                    <div className="mr-auto ml-auto max-w-[1600px] p-3 h-[120px]">
+                    <div className="mr-auto ml-auto max-w-[1600px] p-3 h-[80px]">
                       <Breadcrumbs />
                     </div>
                   )}

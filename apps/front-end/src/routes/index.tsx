@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from "react-router-dom"
+import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom"
 import DefaultLayout from "../components/DefaultLayout"
 import { LoginPage } from "../pages/Login/Login"
 import SignUpPage from "../pages/Login/Signup"
@@ -10,6 +10,7 @@ import { RoutesMiddleware } from "./auth/RoutesMiddleware"
 import { ClientProfilePage } from "../pages/Profile/client"
 import { HomePage } from "../pages/Home"
 import { MinutesPage } from "../pages/Minutes"
+import { SchedulePage } from "../pages/Atendents/Profile/schedule"
 
 
 export const routes: RouteObject[] = [
@@ -26,6 +27,7 @@ export const routes: RouteObject[] = [
         path: '/',
         element: <HomePage />,
       },
+
       {
         path: '/chat',
         element: <ChatPage />
@@ -36,7 +38,20 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/atendents/profile/:id',
-        element: <AtendentProfilePage />
+        element: <AtendentProfilePage />,
+
+      },
+      {
+        path: '/atendents',
+        element: <Navigate to="/atendents/list" replace />
+      },
+      {
+        path: '/atendents/profile',
+        element: <Navigate to="/atendents/list" replace />
+      },
+      {
+        path: '/atendents/profile/:id/schedule',
+        element: <SchedulePage />
       },
       {
         path: '/profile',
@@ -45,9 +60,7 @@ export const routes: RouteObject[] = [
       {
         path: '/minutes',
         element: <MinutesPage />,
-
-      }
-
+      },
     ]
 
   },
@@ -62,8 +75,7 @@ export const routes: RouteObject[] = [
   {
     path: '/auth/magic-link/:token',
     element: <VerifyEmailMagicLink />
-  }
-
+  },
 ]
 
 export const appRoute = createBrowserRouter(routes)
