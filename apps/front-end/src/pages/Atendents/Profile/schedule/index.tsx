@@ -66,11 +66,11 @@ export function SchedulePage() {
 
           <div className={`flex flex-row ${isMobile ? 'justify-between gap-2 p-2' : 'justify-center'}  w-full mt-5 items-center`}>
             {
-              steps.map((step, index) => (
+              steps.map((item, index) => (
                 <>
                   <div onClick={() => setSearchParams({ step: String(index + 1) })} className="flex flex-col items-center gap-2 cursor-pointer">
                     <span className={`bg-primary rounded-xl ${isMobile ? 'text-3xl' : 'text-5xl'} font-smythe w-[50px] text-white font-bold`}>{index + 1}</span>
-                    <Text className={`${(step === String(index + 1) || !step) && 'text-primary'} font-bold ${isMobile ? '' : 'text-xl'}`} as="p">{step}</Text>
+                    <Text className={`${(step === String(index + 1) || step === '0') && 'text-primary'} font-bold ${isMobile ? '' : 'text-xl'}`} as="p">{item}</Text>
                   </div>
                   {!isMobile && (
                     <HSeparator className={`${index === 2 && 'hidden'} border-b !border-b-[#ffffff] mr-10 ml-10 w-10 mt-[none] mb-[none]`} />

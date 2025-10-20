@@ -21,7 +21,8 @@ export function useHeaderController() {
       login: '',
       name: '',
       permission: '',
-      profileImg: ''
+      profileImg: '',
+      isLoading: true
     })
     localStorage.removeItem('accessToken')
     window.location.reload()

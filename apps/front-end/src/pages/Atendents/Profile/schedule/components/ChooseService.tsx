@@ -1,6 +1,6 @@
-import { Button, IconDollarSignCircle, Text } from "@app/ui"
+import { Button, Text } from "@app/ui"
 
-export function ChooseService({ service, setService, isMobile }: {
+export function ChooseService({ service, setService }: {
   service: {
     img: string;
     name: string;
@@ -43,12 +43,12 @@ export function ChooseService({ service, setService, isMobile }: {
   return (
     <>
       <div className="p-2 flex flex-col justify-center items-center">
-        <div className="flex flex-wrap gap-10 justify-center items-center mt-10">
+        <div className="flex flex-wrap gap-20 justify-center items-center mt-10">
           {services.map((item) => (
             <>
-              <div className="flex flex-col w-[250px]">
-                <img src={item.img} className="rounded-xl h-[250px]" />
-                <Text className="text-white font-smythe text-4xl mt-2" as="h1">{item.name}</Text>
+              <div className="flex flex-col w-[180px] h-[520px]">
+                <img src={item.img} className="rounded-xl h-[170px]" />
+                <Text className="text-white font-smythe text-3xl mt-2" as="h1">{item.name}</Text>
                 <Text className="mt-2 mb-2 text-lg" as="span">{item.description}</Text>
                 <Text className="text-success text-lg mt-2 mb-5" as="span">R${item.price},00</Text>
                 <Button onClick={() => setService(item)} className={`${service.name !== item.name ? 'btn-outline-primary' : 'btn-primary'} `}>Escolher</Button>
@@ -56,7 +56,9 @@ export function ChooseService({ service, setService, isMobile }: {
             </>
           ))}
         </div>
-        <Button className="btn-primary mt-10"><IconDollarSignCircle className="mr-2" />Avançar -{'>'}</Button>
+        <div className="w-full flex justify-end" >
+          <Button className="btn-primary mt-10">Avançar</Button>
+        </div>
       </div>
     </>
   )

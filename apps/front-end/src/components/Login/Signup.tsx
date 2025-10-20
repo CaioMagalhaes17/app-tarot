@@ -10,6 +10,7 @@ import { sendVerifyLink } from "../../api/sendVerifyLink";
 
 export default function SignUpPage() {
   const [searchParams, setSearchParams] = useSearchParams()
+  console.log(searchParams)
   const [useEmail, setUseEmail] = useState<boolean>(false)
   const [emailSent, setEmailSent] = useState(false)
   const { register, handleSubmit, formState: { errors }, setError, getValues } = useForm()
