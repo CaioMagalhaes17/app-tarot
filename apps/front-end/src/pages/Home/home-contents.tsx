@@ -74,7 +74,7 @@ export const services = [
 export const steps = [
   {
     name: 'Escolha o atendente profissional',
-    description: '',
+    description: 'Escolha o Atendente que mais combina com seu momento, entre em contato e receba sua orientação espiritual personalizada com descrição e acolhimento.',
     icon: <IconSearch className="relative top-[-15px] text-white" width={'24'} height={'24'} />
   },
   {

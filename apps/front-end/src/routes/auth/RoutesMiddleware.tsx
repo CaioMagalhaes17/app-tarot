@@ -15,6 +15,12 @@ export function RoutesMiddleware({ children }: { children: JSX.Element }) {
   //   'atendents/profile'
   // ]
 
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    document.getElementById('breadcrumb')?.scrollIntoView({ behavior: 'smooth' })
+  }, [pathname]);
+
   const protectedRoutes = [
     'profile',
     'chat'

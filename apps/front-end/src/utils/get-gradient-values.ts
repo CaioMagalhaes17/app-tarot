@@ -22,7 +22,7 @@ export function getMobileGradientValues(path: string) {
     case '/minutes':
       return ['30%', '100%']
     case '/atendents/list':
-      return ['10%', '100%']
+      return ['30%', '70%']
     case '/atendents/profile/123':
       return ['10%', '50%']
     case '/atendents/profile/123/schedule':

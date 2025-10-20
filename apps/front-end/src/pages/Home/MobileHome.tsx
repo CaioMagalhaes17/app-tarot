@@ -100,7 +100,7 @@ export function MobileHomePage() {
           ))}
         </div>
         <div className="flex justify-center mt-10">
-          <Button onClick={() => navigate('/minutes')} className="btn-lg btn-primary gap-3"><IconSearch /> Procurar Atendentes</Button>
+          <Button onClick={() => navigate('/atendents/list')} className="btn-lg btn-primary gap-3"><IconSearch /> Procurar Atendentes</Button>
         </div>
       </Panel >
 

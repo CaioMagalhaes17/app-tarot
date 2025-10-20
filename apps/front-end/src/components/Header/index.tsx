@@ -5,7 +5,6 @@ import { UserButtons } from "./UserButtons";
 
 export function Header() {
   const { isMobile, isLogged, navigate, setCloseSidebar, closeSidebar } = useHeaderController()
-  console.log(isLogged())
   return (
     <UIHeader>
       <div className="h-[80px] backdrop-blur-lg border-b border-b-[#323b45] shadow-md relative flex w-full items-center px-5 py-2.5 ">
