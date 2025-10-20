@@ -3,8 +3,6 @@ import { Suspense, useState } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { Header } from "./Header"
 import useStore from "../state"
-import { FloatingChat } from "./Timeline/Mobile/FloatingChat"
-import { useGetMessages } from "../hooks/messages/useGetMessages"
 import { SidebarComponent } from "./Sidebar"
 import Breadcrumbs from "./BreadCrumb"
 import { getBackgroundImg } from "../utils/get-bg-image"
@@ -12,7 +10,6 @@ import { getDesktopGradientValues, getMobileGradientValues } from "../utils/get-
 
 export default function DefaultLayout() {
   const { isMobile } = useStore()
-  const { messages } = useGetMessages()
   const { pathname } = useLocation()
   const [showFooter, setShowFooter] = useState(false)
   console.log(pathname)
