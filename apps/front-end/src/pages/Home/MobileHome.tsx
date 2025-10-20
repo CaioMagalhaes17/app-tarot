@@ -16,7 +16,7 @@ export function MobileHomePage() {
           <h1 className="text-white text-5xl font-smythe">A Jornada Da Sua Vida</h1>
           <img className="w-[400px] mt-[60px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/image4-4B8RTPH-e1632889056835.png" />
           <div className="flex flex-row justify-center gap-5 mt-[80px]">
-            <Button className="btn-lg btn-primary gap-2"><IconShinningStar /> Começar</Button>
+            <Button onClick={() => navigate('atendents/list')} className="btn-lg btn-primary gap-2"><IconShinningStar /> Começar</Button>
             <Button className="btn-lg btn-outline-primary gap-2"><IconThreeDots /> Saiba mais</Button>
           </div>
         </div>

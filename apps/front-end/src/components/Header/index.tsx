@@ -15,8 +15,7 @@ export function Header() {
           <>
             <div className="font-bold text-white text-lg flex flex-row gap-10 mr-[100px]">
               <Text onClick={() => navigate('/atendents/list')} className="cursor-pointer hover:underline" as="h1">Atendentes</Text>
-              <Text onClick={() => document.getElementById('specialties')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Especialidades</Text>
-              <Text onClick={() => navigate('/minutes')} className="cursor-pointer hover:underline" as="h1">Minutos</Text>
+              <Text onClick={() => document.getElementById('specialties')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Serviços</Text>
               <Text onClick={() => document.getElementById('howItWorks')?.scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer hover:underline" as="h1">Como Funciona</Text>
             </div>
           </>

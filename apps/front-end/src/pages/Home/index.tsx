@@ -19,8 +19,8 @@ export function HomePage() {
               <h1 className="text-white text-8xl  font-smythe">A Jornada Da Sua Vida</h1>
               <span className="text-2xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit tellusoi luctus nec ullamcorper mattis pulvinar dapibus leonec.</span>
               <div className="flex mt-5 flex-row justify-center gap-5">
-                <Button className="btn-xl btn-primary gap-3"><IconShinningStar /> Começar</Button>
-                <Button className="btn-xl btn-outline-primary gap-3"><IconThreeDots /> Saiba Mais</Button>
+                <Button onClick={() => navigate('atendents/list')} className="btn-xl btn-primary gap-3"><IconShinningStar /> Começar</Button>
+                <Button onClick={() => document.getElementById('steps')?.scrollIntoView({ behavior: 'smooth' })} className="btn-xl btn-outline-primary gap-3"><IconThreeDots /> Saiba Mais</Button>
               </div>
             </div>
             <img className="w-[400px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/image4-4B8RTPH-e1632889056835.png" />
@@ -100,7 +100,7 @@ export function HomePage() {
               </div>
               <div className="flex flex-row gap-5 max-w-[1130px] mr-auto ml-auto">
                 {steps.map((item, index) => (
-                  <div className="hover:bg-primary/20 cursor-pointer border border-dark p-4 flex flex-col h-[250px] w-[300px] items-center">
+                  <div className="hover:bg-primary/20 cursor-pointer border border-dark p-4 flex flex-col h-[300px] w-[300px] items-center">
                     <span className="bg-primary text-3xl font-smythe w-[50px] text-white font-bold relative top-[-35px]">0{index + 1}</span>
                     {item.icon}
                     <h1 className="relative top-[-15px] text-white text-3xl font-smythe">{item.name}</h1>
@@ -109,7 +109,7 @@ export function HomePage() {
                 ))}
               </div>
               <div className="flex justify-center mt-10">
-                <Button onClick={() => navigate('/minutes')} className="btn-xl btn-primary">Ver Planos</Button>
+                <Button onClick={() => navigate('/minutes')} className="btn-xl btn-primary">Começar</Button>
               </div>
             </div>
 

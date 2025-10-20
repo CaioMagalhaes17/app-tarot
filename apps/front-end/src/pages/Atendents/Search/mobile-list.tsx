@@ -1,13 +1,14 @@
-import { Button, IconChat, Panel, Text } from "@app/ui";
+import { Button, HSeparator, IconChat, Input, Panel, Text } from "@app/ui";
 import { Star } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { AtendentType } from "../../../../@types/atendent.type";
+import { SetURLSearchParams, useNavigate } from "react-router-dom";
+import { AtendentType } from "../../../@types/atendent.type";
+import { Pagination } from "./pagination";
 
-export function MobileAtendentsListComponent({ atendents }: { atendents: AtendentType[] }) {
+export function MobileAtendentsListComponent({ atendents, setSearchParams, page }: { page: number, setSearchParams: SetURLSearchParams, atendents: AtendentType[] }) {
   const navigate = useNavigate()
   return (
     <>
-      <Panel className="mb-10  min-h-screen max-w-[1400px] ml-auto mr-auto">
+      <Panel className="mb-10  min-h-screen p-2 ml-auto mr-auto">
 
         <div className="flex items-center gap-4 mb-5">
           <div className="flex-1 border-t border-gray-300"></div>
@@ -16,21 +17,26 @@ export function MobileAtendentsListComponent({ atendents }: { atendents: Atenden
           </span>
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
-        <div className="flex flex-col gap-5 justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
 
           <div className="max-w-[700px]">
-            <span className="text-lg">
+            <span>
               Escolha o Atendente que mais combina com seu momento, entre em contato e receba sua orientação espiritual personalizada com descrição e acolhimento.
             </span>
           </div>
 
+          <Panel className="w-full p-4">
+            <Input type="text" className="mt-5" placeholder="Pesquisar por Atendentes, Serviços, Modalidades..." />
+            <HSeparator />
+          </Panel>
+
           <Panel className="h-full w-full rounded-xl flex flex-col p-4  font-bold ">
             <div className="font-bold flex mb-10 flex-wrap items-center justify-center font-bold gap-10">
               {atendents.map((item) => (
-                <div className="flex bg-[#0b0021d9] p-6 flex-col items-center cursor-pointer rounded-xl w-[420px] h-[420px] p-2">
+                <div style={{ backgroundImage: 'linear-gradient(360deg, #000000 0%, #1315356b 60%)' }} className="flex p-6 flex-col items-center cursor-pointer rounded-xl w-[420px] h-[420px] p-2">
                   <div className="flex flex-row gap-2">
-                    <div className="flex flex-col items-center gap-2">
-                      <img src={item.profileImg} width={'150px'} className="rounded-full mt-5" />
+                    <div className="flex flex-col items-center gap-2 flex-shrink-0">
+                      <img src={item.profileImg} width={'80px'} className="rounded-full mt-5 object-cover" />
                       <div className="flex flex-row ">
                         {[...Array(item.rating)].map((_, index) => (
                           <Star
@@ -44,7 +50,7 @@ export function MobileAtendentsListComponent({ atendents }: { atendents: Atenden
 
                     </div>
                     <div className="flex flex-col gap-2 items-start justify-center">
-                      <Text className="text-white text-5xl font-smythe" as="h1">{item.name}</Text>
+                      <Text className="text-white text-3xl font-smythe" as="h1">{item.name}</Text>
                       <span className=" text-left">🔮 Médium e Paranormal</span>
                       <span className="mt-5 text-lg text-success">R$ 3,99/min</span>
                     </div>
@@ -62,6 +68,7 @@ export function MobileAtendentsListComponent({ atendents }: { atendents: Atenden
 
           </Panel>
         </div>
+        <Pagination pages={5} currentPage={page} setSearchParams={setSearchParams} />
       </Panel>
     </>
 
