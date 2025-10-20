@@ -83,6 +83,9 @@ export {
 export { HSeparator } from "./atoms/HSeparator";
 export { VSeparator } from "./atoms/VSeparator";
 import './css/index.css'
+export { IconShinningStar } from "./Icons/IconShinningStar";
+export { IconStar } from "./Icons/IconStar";
+export { IconCalendar } from "./Icons/IconCalendar";
 export { IconArrowDown } from "./Icons/IconArrowDown";
 export { IconPin } from "./Icons/IconPin";
 export { IconQuote } from "./Icons/IconQuote";
@@ -97,4 +100,3 @@ export { IconMoon } from "./Icons/IconMoon";
 export { IconSun } from "./Icons/IconSun";
 export { IconShoppingBag } from "./Icons/IconShoppingBag";
 export { IconSettings } from "./Icons/IconSettings";
-

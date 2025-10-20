@@ -22,9 +22,9 @@ export default function DefaultLayout() {
         <Box className="relative">
           <Box className="navbar-sticky main-container text-white-dark min-h-screen">
             <Box style={{ backgroundImage: `url(${getBackgroundImg(pathname)})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} className="main-content flex flex-col min-h-screen">
+              <Header />
               <div style={{ backgroundImage: `linear-gradient(180deg, #08072BA8 ${isMobile ? getMobileGradientValues(pathname)[0] : getDesktopGradientValues(pathname)[0]}, #0A051C ${isMobile ? getMobileGradientValues(pathname)[1] : getDesktopGradientValues(pathname)[1]})` }} className="absolute inset-0 bg-transparent"></div>
 
-              <Header />
               <SidebarComponent />
               <Suspense>
                 {/* {!isMobile && (<ParticlesComponent />)} */}
@@ -38,7 +38,7 @@ export default function DefaultLayout() {
                   )}
 
                   <Outlet />
-                  <FloatingChat messages={messages} />
+                  {/* <FloatingChat messages={messages} /> */}
                   <HSeparator className="" />
                   <footer className="py-6 px-4 mt-auto bg-[#0A051C]">
                     <button onClick={() => setShowFooter(!showFooter)}>
