@@ -21,7 +21,7 @@ export function MobileHomePage() {
           </div>
         </div>
       </Panel>
-      <Panel className="long-animate__animated long-animate__fadeIn border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+      <Panel className="long-animate__animated long-animate__fadeIn p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
         <div className="flex flex-col items-center justify-center gap-5">
           <img className="w-[300px]" src="https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/41-e1632812760720.png" />
           <div className="flex flex-col max-w-[500px]">
@@ -39,7 +39,7 @@ export function MobileHomePage() {
           </div>
         </div>
       </Panel>
-      <Panel className="long-animate__animated long-animate__fadeIn border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+      <Panel className="long-animate__animated long-animate__fadeIn  p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
         <div className="flex items-center gap-4 mb-10">
           <div className="flex-1 border-t border-gray-300"></div>
           <h1 className="text-white text-5xl whitespace-nowrap px-2 font-smythe">Serviços</h1>
@@ -58,7 +58,7 @@ export function MobileHomePage() {
           </div>
         </div>
       </Panel>
-      <Panel className="long-animate__animated long-animate__fadeIn border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+      <Panel className="long-animate__animated long-animate__fadeIn p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
         <div className="flex items-center gap-4 mb-10">
           <div className="flex-1 border-t border-gray-300"></div>
           <span className="text-white font-smythe text-5xl whitespace-nowrap ">
@@ -83,7 +83,7 @@ export function MobileHomePage() {
           </div>
         </div>
       </Panel>
-      <Panel id="steps" className="long-animate__animated long-animate__fadeIn border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+      <Panel id="steps" className="long-animate__animated long-animate__fadeIn p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
         <div className="flex items-center gap-4 mb-20">
           <div className="flex-1 border-t border-gray-300"></div>
           <h1 className="text-white text-5xl whitespace-nowrap px-2 font-smythe">Como Funciona</h1>
@@ -104,7 +104,7 @@ export function MobileHomePage() {
         </div>
       </Panel >
 
-      <div className="border-t-[#6028dc1a] border-t-[4px] border-b-[#6028dc1a] border-b-[4px] p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
+      <div className="p-6" style={{ backgroundImage: 'linear-gradient(360deg, #0A051C 0%, #08072B 60%)' }} >
         <div className="flex items-center gap-4 mb-20">
           <div className="flex-1 border-t border-gray-300"></div>
           <h1 className="text-white text-5xl whitespace-nowrap px-2 font-smythe">Feedbacks</h1>
