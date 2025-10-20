@@ -34,7 +34,7 @@ export function RoutesMiddleware({ children }: { children: JSX.Element }) {
 
   async function loadUser() {
     if (user) {
-      setClientInfos(user)
+      setClientInfos({ isLoading: false, ...user })
     }
   }
 

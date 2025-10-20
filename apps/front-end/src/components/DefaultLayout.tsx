@@ -23,7 +23,6 @@ export default function DefaultLayout() {
 
               <SidebarComponent />
               <Suspense>
-                {/* {!isMobile && (<ParticlesComponent />)} */}
 
                 <Box className="hidden shadow-3xl shadow-4xl teste-default bg-success bg-warning bg-danger text-warning  text-success text-danger text-primary" />
                 <Box data-overlap="false" id="page-container" className="animate__fadeIn animate__animated page-container scrollable">

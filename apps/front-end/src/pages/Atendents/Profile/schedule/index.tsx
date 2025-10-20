@@ -1,30 +1,57 @@
-import { HSeparator, Panel, Text } from "@app/ui";
+import { Button, HSeparator, Panel, Text } from "@app/ui";
 import { Login } from "../../../../components/Login/Login";
 import { useScheduleController } from "./useScheduleController";
 import { ChooseService } from "./components/ChooseService";
 import { Payment } from "./components/Payment";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { userImg } from "../../../../constants/images";
+import Swal from "sweetalert2";
+import { Star } from "lucide-react";
 
 export function SchedulePage() {
-  const { step, isMobile, setSearchParams } = useScheduleController()
+  const { step, isMobile, setSearchParams, isLogged, clientInfos } = useScheduleController()
   const [service, setService] = useState({ img: '', name: '', price: 0 })
-  console.log(step)
+  const location = useLocation()
+  const steps = [
+    'Cadastro/Login',
+    'Escolher O Serviço',
+    'Pagamento',
+  ]
+  function handleLogout() {
+    Swal.fire({
+      title: 'Deseja sair?',
+      icon: 'info',
+      confirmButtonText: 'Sair',
+      showCancelButton: true,
+      cancelButtonColor: '#dc3545',
+      cancelButtonText: 'Cancelar'
+    })
+  }
   return (
     <>
-      <Panel className="flex min-h-screen justify-center">
-        <div className="flex flex-col w-full max-w-[1500px]">
+      <Panel className="flex min-h-screen justify-center mt-5">
+        <div className="flex flex-col w-full max-w-[1000px] p-2">
           <div className="flex items-center gap-4 mb-5">
             <div className="flex-1 border-t border-gray-300"></div>
-            <span className={`text-white font-smythe ${isMobile ? 'text-4xl' : 'text-7xl'} whitespace-nowrap px-2`}>
+            <span className={`text-white font-smythe ${isMobile ? 'text-5xl' : 'text-8xl'} whitespace-nowrap px-2`}>
               Agendar Consulta
             </span>
             <div className="flex-1 border-t border-gray-300"></div>
           </div>
-          <div className={`flex flex-row items-center gap-3 p-2 mb-3`}>
+          <div className={`flex flex-row items-center gap-3 ${isMobile ? '' : 'mt-5'} p-2 mb-3`}>
             <img width={`${isMobile ? '50px' : '100px'}`} className="rounded-full" src="https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg" />
             <div className="flex flex-col items-start">
-              <Text as="p" className={`${!isMobile ? 'text-xl' : 'text-lg'} font-bold text-white`}>Nome do Consultor</Text>
-              <span className="text-success font-bold" >Online</span>
+              <Text as="p" className={`${!isMobile ? 'text-5xl' : 'text-lg'} font-bold text-white font-smythe`}>Nome do Consultor</Text>
+              <div className="flex flex-row mb-2">
+                {[...Array(5)].map((_, index) => (
+                  <Star
+                    key={index}
+                    className={index < 3 ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
+                    size={20}
+                  />
+                ))}
+              </div>
             </div>
           </div>
           {service.name !== '' && (
@@ -37,36 +64,48 @@ export function SchedulePage() {
             </div>
           )}
 
-          <div className={`flex flex-row ${isMobile ? 'justify-between gap-2 p-2' : 'justify-center'}  w-full items-center`}>
-            <div onClick={() => setSearchParams({ step: '1' })} className="flex flex-col items-center gap-2 cursor-pointer">
-              <span className="bg-primary rounded-xl text-2xl font-smythe w-[50px] text-white font-bold">1</span>
-              <Text className={`${step === '1' && 'text-primary'} font-bold ${isMobile ? '' : 'text-xl'}`} as="p">Cadastro/login</Text>
-            </div>
-            {!isMobile && (
-              <HSeparator className={`border-b-2 mr-10 ml-10 w-10 mt-[none] mb-[none]`} />
-            )}
-            <div onClick={() => setSearchParams({ step: '2' })} className="flex flex-col items-center gap-2 cursor-pointer">
-              <span className="bg-primary rounded-xl text-2xl font-smythe w-[50px] text-white font-bold">2</span>
-              <Text className={`${step === '2' && 'text-primary'} font-bold ${isMobile ? '' : 'text-xl'}`} as="p">Escolher Serviço</Text>
-            </div>
-            {!isMobile && (
-              <HSeparator className={`border-b-2 mr-10 ml-10 w-10 mt-[none] mb-[none]`} />
-            )}
-            <div onClick={() => setSearchParams({ step: '3' })} className="flex flex-col items-center gap-2 cursor-pointer">
-              <span className="bg-primary rounded-xl text-2xl font-smythe w-[50px] text-white font-bold">3</span>
-              <Text className={`${step === '3' && 'text-primary'} font-bold ${isMobile ? '' : 'text-xl'}`} as="p">Pagamento</Text>
-            </div>
+          <div className={`flex flex-row ${isMobile ? 'justify-between gap-2 p-2' : 'justify-center'}  w-full mt-5 items-center`}>
+            {
+              steps.map((step, index) => (
+                <>
+                  <div onClick={() => setSearchParams({ step: String(index + 1) })} className="flex flex-col items-center gap-2 cursor-pointer">
+                    <span className={`bg-primary rounded-xl ${isMobile ? 'text-3xl' : 'text-5xl'} font-smythe w-[50px] text-white font-bold`}>{index + 1}</span>
+                    <Text className={`${(step === String(index + 1) || !step) && 'text-primary'} font-bold ${isMobile ? '' : 'text-xl'}`} as="p">{step}</Text>
+                  </div>
+                  {!isMobile && (
+                    <HSeparator className={`${index === 2 && 'hidden'} border-b !border-b-[#ffffff] mr-10 ml-10 w-10 mt-[none] mb-[none]`} />
+                  )}
+                </>
+              ))
+            }
           </div>
           <HSeparator className="" />
           {
             step === '1' || !step ? (
-              <Login />
+              <>
+                {isLogged ? (
+                  <>
+                    <div className="flex flex-col w-full justify-center items-center mt-10">
+                      <img width="100" height="100" src={clientInfos.profileImg || userImg} className="rounded-full sombra" />
+                      <div className="flex mt-3 flex-row gap-5 text-center">
+                        <Text className={`text-white font-bold ${isMobile ? 'text-2xl' : 'text-3xl'}`} as="h1">{clientInfos.name}</Text>
+                      </div>
+                      <div className="flex flex-row gap-5 mt-10">
+                        <Button onClick={handleLogout} className="btn-danger">Sair</Button>
+                        <Button onClick={() => setSearchParams({ step: '2' })} className="btn-primary">Avançar</Button>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <Login redirectUrl={location.pathname + '?step=2'} />
+                )}
+              </>
             ) : ''
           }
 
           {
             step === '2' && (
-              <ChooseService service={service} setService={setService} />
+              <ChooseService isMobile={isMobile} service={service} setService={setService} />
             )
           }
 

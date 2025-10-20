@@ -87,11 +87,7 @@ body.swal2-toast-shown .swal2-container.toast {
   border-radius: 6px;
 }
 
-.dark .swal2-popup .swal2-styled.swal2-cancel {
-  background-color: #3b3f5c;
-  color: #e0e6ed;
-  border-color: #3b3f5c;
-}
+
 
 .swal2-popup .swal2-styled.swal2-confirm:focus {
   box-shadow: none !important;

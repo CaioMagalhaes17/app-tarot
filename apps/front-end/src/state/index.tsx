@@ -8,7 +8,8 @@ type ClientInfos = {
   createdAt: string
   isAtendent: boolean,
   isVerified: boolean,
-  permission: string
+  permission: string,
+  isLoading: boolean
 }
 
 type StateManager = {
@@ -18,8 +19,6 @@ type StateManager = {
   isMobile: boolean
   setIsAtendent: (isMobile: boolean) => void
   isAtendent: boolean
-  initParticles: boolean
-  setInitParticles: (initParticles: boolean) => void
   closeSidebar: boolean
   setCloseSidebar: (closeSidebar: boolean) => void
 }
@@ -41,6 +40,7 @@ const useStore = create<StateManager>((set) => {
       isAtendent: false,
       isVerified: false,
       permission: '',
+      isLoading: true
     },
     isAtendent: false,
     setIsAtendent: (isAtendent: boolean) => {
@@ -59,12 +59,6 @@ const useStore = create<StateManager>((set) => {
         isMobile
       })
     },
-    initParticles: false,
-    setInitParticles: (initParticles: boolean) => {
-      set({
-        initParticles
-      })
-    }
   }
 })
 

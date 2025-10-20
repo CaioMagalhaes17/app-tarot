@@ -8,9 +8,8 @@ export function useScheduleController() {
   const [searchParams, setSearchParams] = useSearchParams()
   const step = searchParams.get('step')
   const isLogged = userStore.clientInfos.name !== "";
-  console.log(userStore.clientInfos.name)
   useEffect(() => {
-
+    if (userStore.clientInfos.isLoading) return
     if (!isLogged) {
       Swal.fire({
         toast: true,
@@ -23,12 +22,14 @@ export function useScheduleController() {
 
       setSearchParams({ step: "1" });
     }
-  }, [setSearchParams]);
+  }, [searchParams, isLogged, userStore.clientInfos.isLoading]);
 
 
   return {
     step,
     isMobile: userStore.isMobile,
-    setSearchParams
+    setSearchParams,
+    isLogged,
+    clientInfos: userStore.clientInfos
   }
 }

@@ -10,11 +10,12 @@ interface LoginForm {
   password: string;
 }
 
-export function useLoginController() {
-  const [searchParams] = useSearchParams({
+export function useLoginController({ redirectUrl }: { redirectUrl?: string }) {
+  const [searchParams, setSearchParams] = useSearchParams({
     redirect: '',
+    isLogin: ''
   })
-  const [useEmail, setUseEmail] = useState<boolean>(true)
+  const [useEmail, setUseEmail] = useState<boolean>(false)
   const { register, formState: { errors }, handleSubmit } = useForm()
   const { mutateAsync } = useMutation({
     mutationFn: (data: LoginForm) => login(data),
@@ -26,9 +27,9 @@ export function useLoginController() {
     const response = await mutateAsync(data as LoginForm);
     localStorage.setItem('accessToken', response.token)
     localStorage.setItem('isAtendent', 'false')
-    window.location.replace('/')
+    window.location.replace(redirectUrl || '/')
   };
   const { isMobile } = useStore()
 
-  return { isMobile, onSubmit, register, errors, handleSubmit, useEmail, setUseEmail, searchParams }
+  return { isMobile, onSubmit, register, errors, handleSubmit, useEmail, setUseEmail, searchParams, setSearchParams }
 }
