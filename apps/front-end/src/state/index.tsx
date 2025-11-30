@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { ServiceType } from '../@types/service'
 
 type ClientInfos = {
   id: string,
@@ -21,7 +22,13 @@ type StateManager = {
   isAtendent: boolean
   closeSidebar: boolean
   setCloseSidebar: (closeSidebar: boolean) => void
+  service: ServiceType
+  setService: (service: ServiceType) => void
+  dateTime: DateTimeType
+  setDateTime: (dateTime: DateTimeType) => void
 }
+
+type DateTimeType = { time: string, date?: Date }
 
 const useStore = create<StateManager>((set) => {
   return {
@@ -29,6 +36,25 @@ const useStore = create<StateManager>((set) => {
     setCloseSidebar: (closeSidebar: boolean) => {
       set({
         closeSidebar
+      })
+    },
+    dateTime: {
+      date: new Date,
+      time: '',
+    },
+    setDateTime: (dateTime) => {
+      set({
+        dateTime
+      })
+    },
+    service: {
+      img: '',
+      name: '',
+      price: 0
+    },
+    setService: (service: ServiceType) => {
+      set({
+        service
       })
     },
     clientInfos: {

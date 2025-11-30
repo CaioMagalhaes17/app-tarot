@@ -1,70 +1,63 @@
-import { Button, Input, Text } from "@app/ui";
-import { usePaymentController } from "../usePaymentController";
-import ReactInputMask from "react-input-mask";
+import { HSeparator, IconCalendar, IconCard, IconPix, Text } from "@app/ui";
+import { useScheduleController } from "../useScheduleController";
+import dayjs from "dayjs";
 
 export function Payment() {
-  const { qrCode, setCpf, handleGenerateQrcode, cpf, clientInfos, paymentType, setPaymentType, pixMinutes, pixSeconds } = usePaymentController()
+  const { service, isMobile, dateTime } = useScheduleController()
   return (
     <>
-      <div className="p-2 mt-5">
-        <div className="bg-[#2f224736] border border-[#323b45] rounded-xl flex flex-col p-4">
-          <Text className="text-3xl text-white font-extrabold" as='h1'>Formas de Pagamento</Text>
-          <div className="flex flex-col mt-5 gap-5">
-            <label className="flex items-center text-white">
-              <input onClick={() => setPaymentType('card')} checked={paymentType === 'card'} className="mr-2" type="radio" />
-              <span className="text-lg">Cartão de Crédito</span>
-            </label>
-            <label className="flex items-center text-white">
-              <input onClick={() => setPaymentType('pix')} checked={paymentType === 'pix'} className="mr-2" type="radio" />
-              <span className="text-lg" >Pix</span>
-            </label>
+      <div className="p-2 mt-2">
+        <Text className="text-3xl text-center text-white font-extrabold" as='h1'>Pagamento</Text>
+        <div className="bg-[#2f224736] mt-5 border border-[#323b45] rounded-xl flex flex-col ">
+          <div className="bg-primary px-3 " style={{ borderTopLeftRadius: '0.75rem', borderTopRightRadius: '0.75rem' }}>
+            <Text className="text-xl text-white font-bold" as='h1'>Resumo</Text>
           </div>
+          <div className="p-2">
+            {service.name !== '' && (
+              <div className={`flex flex-row mt-3 items-center gap-3 ${isMobile ? 'mb-5 p-2' : 'mb-5'}`}>
+                <img width={`${isMobile ? '50px' : '100px'}`} className="rounded-full" src={service.img} />
+                <div className="flex flex-col items-start">
+                  <Text as="p" className={`${!isMobile ? 'text-xl' : 'text-lg'} font-bold text-white`}>{service.name}</Text>
+                  <span className="text-success text-xl font-bold" >R${service.price},00</span>
+                </div>
+              </div>
+            )}
+            {
+              dateTime.time && dateTime.date ? (
+                <div className={`flex flex-row items-center gap-3 ${isMobile ? 'mb-5 p-2' : 'mb-5'}`}>
+                  <IconCalendar width={`${isMobile ? '50px' : '100px'}`} height={`${isMobile ? '50px' : '100px'}`} className="text-gray" />
+                  <div className="flex flex-col items-start">
+                    <Text as="p" className={`${!isMobile ? 'text-xl' : 'text-lg'} font-bold text-white`}>{dayjs(dateTime.date).format('DD/MM/YYYY')}</Text>
+                    <span className="text-success font-bold" >{dateTime.time}</span>
+                  </div>
+                </div>
+              ) : ''
+            }
+          </div>
+
         </div>
 
 
-        <div className="bg-[#2f224736] border border-[#323b45] rounded-xl flex flex-col p-4 mt-5">
-          <Text className="text-3xl text-white font-extrabold" as='h1'>Pagamento por PIX</Text>
-
-          {qrCode !== '' ? (
-            <div className="flex items-center justify-center mt-2 flex-col">
-              <img width={'200px'} src="https://hexdocs.pm/qr_code/docs/qrcode.svg" />
-              <div className="text-left mt-5">
-                <Text className="text-xl " as='p'>Código válido por:
-                  <span className="ml-2 font-extrabold">
-                    {String(pixMinutes).padStart(2, "0")}:
-                    {String(pixSeconds).padStart(2, "0")}
-                  </span>
-                </Text>
-              </div>
+        <div className="bg-[#2f224736] border border-[#323b45] rounded-xl flex flex-col mt-7">
+          <div className="bg-primary px-3 mb-2" style={{ borderTopLeftRadius: '0.75rem', borderTopRightRadius: '0.75rem' }}>
+            <Text className="text-xl text-white font-bold" as='h1'>Formas de Pagamento</Text>
+          </div>
+          <div className="flex flex-col p-1">
+            <div className="flex flex-row text-white font-extrabold text-2xl gap-5 p-3 items-center justify-center">
+              <IconCard width="30" height="30" />
+              <Text as='h1'>Cartão de Crédito</Text>
             </div>
-          ) : (
-            <>
-              <div className="mt-3">
-                <label className="text-left text-white">Nome</label>
-                <Input defaultValue={clientInfos.name} type="text" placeholder="Digite seu nome completo" />
-              </div>
+            Você será redirecionado para a plataforma de pagamento
+          </div>
 
-              <div className="mt-3 flex flex-col">
-                <label className="text-left text-white">CPF</label>
-                <ReactInputMask
-                  mask="999.999.999-99"
-                  id="cpf"
-                  value={cpf}
-                  onChange={(e) => setCpf(e.target.value)}
-                >
-                  {(inputProps) => (
-                    <Input
-                      {...inputProps}
-                      type="text"
-                      className="border rounded px-2 py-1"
-                      placeholder="000.000.000-00"
-                    />
-                  )}
-                </ReactInputMask>
-                <Button onClick={() => handleGenerateQrcode()} className="mt-3 btn-primary">Gerar QR Code</Button>
-              </div>
-            </>
-          )}
+          <HSeparator className="mb-5 mt-1" />
+          <div className="flex flex-col p-1">
+            <div className="flex flex-row text-white font-extrabold text-2xl gap-5 p-3 items-center justify-center">
+              <IconPix width="30" height="30" />
+              <Text as='h1'>PIX</Text>
+            </div>
+            Você será redirecionado para a plataforma de pagamento
+          </div>
         </div>
 
 

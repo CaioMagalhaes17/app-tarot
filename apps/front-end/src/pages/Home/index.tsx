@@ -109,7 +109,7 @@ export function HomePage() {
                 ))}
               </div>
               <div className="flex justify-center mt-10">
-                <Button onClick={() => navigate('/minutes')} className="btn-xl btn-primary">Começar</Button>
+                <Button onClick={() => navigate('/atendents/list')} className="btn-xl btn-primary">Começar</Button>
               </div>
             </div>
 

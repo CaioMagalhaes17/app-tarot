@@ -1,21 +1,23 @@
-import { Button, HSeparator, Panel, Text } from "@app/ui";
+import { Button, HSeparator, IconCalendar, Panel, Text } from "@app/ui";
 import { Login } from "../../../../components/Login/Login";
 import { useScheduleController } from "./useScheduleController";
 import { ChooseService } from "./components/ChooseService";
 import { Payment } from "./components/Payment";
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { userImg } from "../../../../constants/images";
 import Swal from "sweetalert2";
 import { Star } from "lucide-react";
+import { ChooseDate } from "./components/ChooseDate";
+import dayjs from 'dayjs'
 
 export function SchedulePage() {
-  const { step, isMobile, setSearchParams, isLogged, clientInfos } = useScheduleController()
-  const [service, setService] = useState({ img: '', name: '', price: 0 })
+  const { dateTime, step, isMobile, setSearchParams, isLogged, clientInfos, service } = useScheduleController()
+
   const location = useLocation()
   const steps = [
     'Cadastro/Login',
-    'Escolher O Serviço',
+    'Serviço',
+    'Agendamento',
     'Pagamento',
   ]
   function handleLogout() {
@@ -64,6 +66,18 @@ export function SchedulePage() {
             </div>
           )}
 
+          {
+            dateTime.time && dateTime.date ? (
+              <div className={`flex flex-row items-center gap-3 ${isMobile ? 'mb-5 p-2' : 'mb-5'}`}>
+                <IconCalendar width={`${isMobile ? '50px' : '100px'}`} height={`${isMobile ? '50px' : '100px'}`} className="text-gray" />
+                <div className="flex flex-col items-start">
+                  <Text as="p" className={`${!isMobile ? 'text-xl' : 'text-lg'} font-bold text-white`}>{dayjs(dateTime.date).format('DD/MM/YYYY')}</Text>
+                  <span className="text-success font-bold" >{dateTime.time}</span>
+                </div>
+              </div>
+            ) : ''
+          }
+
           <div className={`flex flex-row ${isMobile ? 'justify-between gap-2 p-2' : 'justify-center'}  w-full mt-5 items-center`}>
             {
               steps.map((item, index) => (
@@ -73,7 +87,7 @@ export function SchedulePage() {
                     <Text className={`${(step === String(index + 1) || step === '0') && 'text-primary'} font-bold ${isMobile ? '' : 'text-xl'}`} as="p">{item}</Text>
                   </div>
                   {!isMobile && (
-                    <HSeparator className={`${index === 2 && 'hidden'} border-b !border-b-[#ffffff] mr-10 ml-10 w-10 mt-[none] mb-[none]`} />
+                    <HSeparator className={`${index === 3 && 'hidden'} border-b !border-b-[#ffffff] mr-10 ml-10 w-10 mt-[none] mb-[none]`} />
                   )}
                 </>
               ))
@@ -105,17 +119,22 @@ export function SchedulePage() {
 
           {
             step === '2' && (
-              <ChooseService isMobile={isMobile} service={service} setService={setService} />
+              <ChooseService />
             )
           }
 
           {
             step === '3' && (
+              <ChooseDate />
+            )
+          }
+
+          {
+            step === '4' && (
               <Payment />
             )
           }
         </div>
-
       </Panel>
     </>
   )

@@ -59,7 +59,7 @@ export function MobileAtendentsListComponent({ atendents, setSearchParams, page 
                   <Text as="span" className="mt-5 text-white-dark">{item.bio}</Text>
 
                   <div className="flex flex-row mt-auto gap-5 w-full p-2">
-                    <Button onClick={() => navigate('/atendents/profile/123')} className="btn-outline-primary w-full"><IconChat /><span className="ml-2">Consulta</span></Button>
+                    <Button onClick={() => navigate('/atendents/profile/123')} className="btn-outline-primary w-full"><IconChat /><span className="ml-2">Perfil</span></Button>
                   </div>
                 </div>
               ))}

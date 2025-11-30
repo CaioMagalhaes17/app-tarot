@@ -1,4 +1,4 @@
-import { Button, HSeparator, IconChat, Input, Panel, Text } from "@app/ui";
+import { Button, HSeparator, IconChat, IconUser, Input, Panel, Text } from "@app/ui";
 import { Star } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -77,7 +77,7 @@ export function AtendentsSearchPage() {
                       <Text as="span" className="mt-5 text-white-dark">{item.bio}</Text>
 
                       <div className="flex flex-row mt-auto gap-5 w-full p-2">
-                        <Button onClick={() => navigate('/atendents/profile/123')} className="btn-outline-primary w-full"><IconChat /><span className="ml-2">Consulta</span></Button>
+                        <Button onClick={() => navigate('/atendents/profile/123')} className="btn-outline-primary w-full"><IconUser /><span className="ml-2">Perfil</span></Button>
                       </div>
                     </div>
                   ))}

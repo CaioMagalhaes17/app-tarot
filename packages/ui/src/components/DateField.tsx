@@ -25,8 +25,11 @@ export function DateField({
         mode: options?.mode || 'single',
         locale: Portuguese,
         dateFormat: 'd/m/Y',
-        position: 'auto left',
+        position: options?.position || 'auto left',
         minDate: minDate,
+        disable: options?.disable,
+        inline: options?.inline
+
       }}
       className={cn(dateFieldProps({ className }))}
       {...rest}
