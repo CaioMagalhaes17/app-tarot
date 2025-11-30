@@ -47,7 +47,7 @@ export function MobileHomePage() {
         </div>
         <div className="flex mr-auto ml-auto flex-wrap gap-5 mt-5">
           {services.map((item) => (
-            <div className="hover:bg-primary/20 cursor-pointer flex flex-col items-center p-6 border max-w-[350px] border-dark">
+            <div onClick={() => navigate('/atendents/list?service=' + item.name)} className="hover:bg-primary/20 cursor-pointer flex flex-col items-center p-6 border max-w-[350px] border-dark">
               <img className="w-[75px]" src={item.img} />
               <h1 className="text-white font-smythe text-2xl">{item.name}</h1>
               <span>{item.desc}</span>

@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
 import useStore from "../../state";
 
 export function useHeaderController() {
   const { isMobile, clientInfos, setClientInfos, setCloseSidebar, closeSidebar } = useStore()
   const navigate = useNavigate()
+  const navigation = useNavigation()
 
   function isLogged(): boolean {
     if (clientInfos.name) {
@@ -28,5 +29,5 @@ export function useHeaderController() {
     window.location.reload()
   }
 
-  return { isMobile, clientInfos, setClientInfos, isLogged, navigate, handleLogout, setCloseSidebar, closeSidebar }
+  return { isMobile, clientInfos, setClientInfos, isLogged, navigate, handleLogout, setCloseSidebar, closeSidebar, navigation }
 }

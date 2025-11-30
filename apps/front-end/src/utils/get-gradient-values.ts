@@ -6,6 +6,8 @@ export function getDesktopGradientValues(path: string) {
       return ['30%', '100%']
     case '/atendents/list':
       return ['20%', '50%']
+    case '/chat':
+      return ['0%', '90%']
     case '/atendents/profile/123':
       return ['0%', '35%']
     case '/atendents/profile/123/schedule':

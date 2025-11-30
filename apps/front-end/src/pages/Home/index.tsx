@@ -56,7 +56,7 @@ export function HomePage() {
               </div>
               <div className="flex max-w-[1130px] mr-auto ml-auto flex-wrap gap-5  items-center justify-center">
                 {services.map((item) => (
-                  <div className="hover:bg-primary/20 cursor-pointer gap-2 flex flex-col items-center p-6 border h-[300px] max-w-[450px] border-dark">
+                  <div onClick={() => navigate('/atendents/list?service=' + item.name)} className="hover:bg-primary/20 cursor-pointer gap-2 flex flex-col items-center p-6 border h-[300px] max-w-[450px] border-dark">
                     <img className="w-[120px]" src={item.img} />
                     <h1 className="text-white font-smythe text-4xl">{item.name}</h1>
                     <span className="text-lg">{item.desc}</span>

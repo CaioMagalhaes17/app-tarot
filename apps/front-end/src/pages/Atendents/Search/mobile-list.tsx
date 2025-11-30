@@ -1,11 +1,41 @@
 import { Button, HSeparator, IconChat, Input, Panel, Text } from "@app/ui";
-import { Star } from "lucide-react";
+import { ArrowDown, ArrowUp, Star } from "lucide-react";
 import { SetURLSearchParams, useNavigate } from "react-router-dom";
 import { AtendentType } from "../../../@types/atendent.type";
 import { Pagination } from "./pagination";
+import { useState } from "react";
 
-export function MobileAtendentsListComponent({ atendents, setSearchParams, page }: { page: number, setSearchParams: SetURLSearchParams, atendents: AtendentType[] }) {
+export function MobileAtendentsListComponent({ atendents, setSearchParams, page, searchParams }: { searchParams: URLSearchParams, page: number, setSearchParams: SetURLSearchParams, atendents: AtendentType[] }) {
   const navigate = useNavigate()
+  const services = [
+    {
+      name: 'Consulta por Chat',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service5.png',
+      price: 'R$50,00'
+    },
+    {
+      name: 'Mapa Astral',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service3.png',
+      price: 'R$50,00'
+    },
+    {
+      name: 'Horoscopo do amor',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service6.png',
+      price: 'R$50,00'
+    },
+    {
+      name: 'Horoscopo do dia',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service1.png',
+      price: 'R$50,00'
+    },
+
+  ]
+
+  const [showService, setShowService] = useState<boolean>(false)
   return (
     <>
       <Panel className="mb-10  min-h-screen p-2 ml-auto mr-auto">
@@ -18,22 +48,35 @@ export function MobileAtendentsListComponent({ atendents, setSearchParams, page 
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
         <div className="flex flex-col justify-center items-center">
-
-          <div className="max-w-[700px]">
-            <span>
-              Escolha o Atendente que mais combina com seu momento, entre em contato e receba sua orientação espiritual personalizada com descrição e acolhimento.
-            </span>
+          <div className="w-full p-4">
+            <div onClick={() => setShowService(!showService)} className="cursor-pointer ml-auto flex-row flex items-center gap-2 justify-between">
+              <Text as="h1" className="font-smythe text-3xl text-left text-white">Serviços</Text>
+              {!showService ? <ArrowDown /> : <ArrowUp />}
+            </div>
           </div>
+          {showService && (
+            <div className="flex flex-wrap gap-10 ml-10 mb-10 mt-5">
+              {services.map((item) => (
+                <>
+                  <div className="flex flex-col h-[260px] w-[130px]">
+                    <img src={item.serviceImg} className="rounded-xl h-[150px]" />
+                    <Text className="text-white font-smythe text-2xl mt-2" as="h1">{item.name}</Text>
+                    <Button onClick={() => setSearchParams({ service: item.name })} className={`mt-auto ${searchParams.get('service') === item.name ? 'btn-primary' : 'btn-outline-primary'}`}>{searchParams.get('service') === item.name ? 'Escolhido' : 'Escolher'}</Button>
+                  </div>
+                </>
+              ))}
+            </div>
+          )}
 
           <Panel className="w-full p-4">
-            <Input type="text" className="mt-5" placeholder="Pesquisar por Atendentes, Serviços, Modalidades..." />
+            <Input type="text" className="mt-5" placeholder="Pesquisar por Atendentes..." />
             <HSeparator />
           </Panel>
 
           <Panel className="h-full w-full rounded-xl flex flex-col p-4  font-bold ">
             <div className="font-bold flex mb-10 flex-wrap items-center justify-center font-bold gap-10">
               {atendents.map((item) => (
-                <div style={{ backgroundImage: 'linear-gradient(360deg, #000000 0%, #1315356b 60%)' }} className="flex p-6 flex-col items-center cursor-pointer rounded-xl w-[420px] h-[420px] p-2">
+                <div style={{ backgroundImage: 'linear-gradient(360deg, #22164696 0%, #12133e5e 60%)' }} className="border border-dark flex p-6 flex-col items-center cursor-pointer rounded-xl w-[420px] h-[420px] p-2">
                   <div className="flex flex-row gap-2">
                     <div className="flex flex-col items-center gap-2 flex-shrink-0">
                       <img src={item.profileImg} width={'80px'} className="rounded-full mt-5 object-cover" />
@@ -69,7 +112,7 @@ export function MobileAtendentsListComponent({ atendents, setSearchParams, page 
           </Panel>
         </div>
         <Pagination pages={5} currentPage={page} setSearchParams={setSearchParams} />
-      </Panel>
+      </Panel >
     </>
 
   )

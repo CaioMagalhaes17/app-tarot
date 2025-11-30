@@ -52,7 +52,7 @@ export const services = [
   {
     name: 'Consulta de Tarot Online',
     desc: 'Leitura completa das cartas para responder perguntas sobre amor, carreira, saúde e futuro. Pode ser feita ao vivo ou via relatório.',
-    img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service1.png'
+    img: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service1.png',
   },
   {
     name: 'Tirada Rápida (3 cartas)',

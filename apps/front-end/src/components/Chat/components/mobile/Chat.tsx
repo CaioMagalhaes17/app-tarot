@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 export function MobileChatMessage({ contact, messages, setSelectedContact }: { setSelectedContact: React.Dispatch<React.SetStateAction<ContactType | undefined>>, contact: ContactType, messages: MessageType[] }) {
   return (
     <>
-      <Panel className="bg-black h-full max-w-[1050px] rounded-xl flex flex-col p-4 font-bold ">
+      <Panel className="border border-dark bg-[#131426b3] h-full max-w-[1050px] rounded-xl flex flex-col p-4 font-bold ">
         <div className="flex flex-row items-center">
           <button onClick={() => setSelectedContact(undefined)}>
             <IconArrowBackward className="mr-2" />

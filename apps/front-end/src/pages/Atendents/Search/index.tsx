@@ -1,4 +1,4 @@
-import { Button, HSeparator, IconChat, IconUser, Input, Panel, Text } from "@app/ui";
+import { Button, HSeparator, IconUser, Input, Panel, Text } from "@app/ui";
 import { Star } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -14,16 +14,45 @@ export function AtendentsSearchPage() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams({
     page: '',
+    service: '',
   })
 
   useEffect(() => {
     //await getAtendents({page: searchParams.get('page')})
 
   }, [searchParams])
+
+  const services = [
+    {
+      name: 'Consulta por Chat',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service5.png',
+      price: 'R$50,00'
+    },
+    {
+      name: 'Mapa Astral',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service3.png',
+      price: 'R$50,00'
+    },
+    {
+      name: 'Horoscopo do amor',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service6.png',
+      price: 'R$50,00'
+    },
+    {
+      name: 'Horoscopo do dia',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service1.png',
+      price: 'R$50,00'
+    },
+
+  ]
   return (
     <>
       {isMobile ? (
-        <MobileAtendentsListComponent page={Number(searchParams.get('page')) || 1} atendents={atendents} setSearchParams={setSearchParams} />
+        <MobileAtendentsListComponent searchParams={searchParams} page={Number(searchParams.get('page')) || 1} atendents={atendents} setSearchParams={setSearchParams} />
       ) : (
         <>
           <Panel className="mb-10  min-h-screen max-w-[1400px] ml-auto mr-auto">
@@ -41,15 +70,27 @@ export function AtendentsSearchPage() {
                   Escolha o Atendente que mais combina com seu momento, entre em contato e receba sua orientação espiritual personalizada com descrição e acolhimento.
                 </span>
               </div>
+              <Panel className="flex flex-col ml-auto mr-auto  mt-10 w-full">
+                <div className="flex flex-row gap-20 justify-center">
+                  {services.map((item) => (
+                    <>
+                      <div className="flex flex-col w-[180px] gap-5">
+                        <img src={item.serviceImg} className="rounded-xl h-[180px]" />
+                        <Text className="text-white font-smythe text-3xl mt-2" as="h1">{item.name}</Text>
+                        <Button onClick={() => setSearchParams({ service: item.name })} className={`${searchParams.get('service') === item.name ? 'btn-primary' : 'btn-outline-primary'}`}>{searchParams.get('service') === item.name ? 'Escolhido' : 'Escolher'}</Button>
+                      </div>
+                    </>
+                  ))}
+                </div>
+              </Panel>
               <Panel className="w-full">
-                <Input type="text" className="mt-5" placeholder="Pesquisar por Atendentes, Serviços, Modalidades..." />
+                <Input type="text" className="mt-5" placeholder="Pesquisar por Atendentes..." />
                 <HSeparator />
               </Panel>
               <Panel className="h-full w-full rounded-xl flex flex-col p-4 mt-5 font-bold ">
                 <div className="font-bold flex mb-10 flex-wrap items-center justify-center font-bold gap-10">
                   {atendents.map((item) => (
-
-                    <div style={{ backgroundImage: 'linear-gradient(360deg, #000000 0%, #1315356b 60%)' }} className="flex flex-col items-center cursor-pointer rounded-xl w-[420px] h-[420px] p-4">
+                    <div style={{ backgroundImage: 'linear-gradient(360deg, #22164696 0%, #12133e5e 60%)' }} className="border border-dark flex flex-col items-center cursor-pointer rounded-xl w-[420px] h-[420px] p-4">
                       <div className="flex flex-row gap-2">
                         <div className="flex flex-col items-center gap-2 flex-shrink-0">
                           <img
