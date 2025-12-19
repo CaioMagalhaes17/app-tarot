@@ -3,6 +3,7 @@ import { Button, Panel, Text } from "@app/ui";
 import { useGetAllServices } from "../../../hooks/services/useGetAllServices";
 import { useGetAtendentServices } from "../../../hooks/atendents/useGetAtendentServices";
 import { chooseServices, ChooseServicePayload } from "../../../api/atendents/chooseServices";
+import { updateAtendentService, UpdateServicePayload } from "../../../api/atendents/updateService";
 import Swal from "sweetalert2";
 import useStore from "../../../state";
 
@@ -13,6 +14,7 @@ type SelectedService = {
   price: number;
   description: string;
   isSelected: boolean;
+  atendentServiceId?: string; // ID do AtendentService se já existe
 }
 
 export function AtendentServicesPage() {
@@ -32,7 +34,8 @@ export function AtendentServicesPage() {
           serviceImg: service.serviceImg,
           price: myService?.price || 0,
           description: myService?.description || '',
-          isSelected: !!myService
+          isSelected: !!myService,
+          atendentServiceId: myService?.id // Salva o ID do AtendentService se já existe
         }
       })
       setSelectedServices(initial)
@@ -64,15 +67,9 @@ export function AtendentServicesPage() {
   }
 
   const handleSave = async () => {
-    const servicesToSave: ChooseServicePayload[] = selectedServices
-      .filter(service => service.isSelected)
-      .map(service => ({
-        id: service.serviceId,
-        customDescription: service.description,
-        price: service.price
-      }))
+    const selectedServicesList = selectedServices.filter(service => service.isSelected)
 
-    if (servicesToSave.length === 0) {
+    if (selectedServicesList.length === 0) {
       Swal.fire({
         title: 'Selecione pelo menos um serviço',
         icon: 'warning'
@@ -81,7 +78,7 @@ export function AtendentServicesPage() {
     }
 
     // Valida preços
-    const invalidPrice = servicesToSave.find(s => s.price <= 0)
+    const invalidPrice = selectedServicesList.find(s => s.price <= 0)
     if (invalidPrice) {
       Swal.fire({
         title: 'Todos os serviços devem ter um preço maior que zero',
@@ -90,13 +87,50 @@ export function AtendentServicesPage() {
       return
     }
 
+    // Separa serviços novos dos existentes
+    const newServices: ChooseServicePayload[] = []
+    const existingServices: Array<{ id: string; payload: UpdateServicePayload }> = []
+
+    selectedServicesList.forEach(service => {
+      if (service.atendentServiceId) {
+        // Serviço já existe, deve atualizar
+        existingServices.push({
+          id: service.atendentServiceId,
+          payload: {
+            description: service.description,
+            price: service.price
+          }
+        })
+      } else {
+        // Serviço novo, deve criar
+        newServices.push({
+          id: service.serviceId,
+          customDescription: service.description,
+          price: service.price
+        })
+      }
+    })
+
     try {
-      await chooseServices(servicesToSave)
+      // Atualiza serviços existentes
+      const updatePromises = existingServices.map(({ id, payload }) =>
+        updateAtendentService(id, payload)
+      )
+      await Promise.all(updatePromises)
+
+      // Cria novos serviços (se houver)
+      if (newServices.length > 0) {
+        await chooseServices(newServices)
+      }
+
       Swal.fire({
         title: 'Serviços salvos com sucesso!',
         icon: 'success'
       })
-    } catch (error) {
+      
+      // Recarrega os serviços para atualizar os IDs
+      window.location.reload()
+    } catch {
       Swal.fire({
         title: 'Erro ao salvar serviços',
         icon: 'error'
