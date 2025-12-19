@@ -4,62 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function MobileAtendentProfileComponent({ profileImg, name, rating }: { profileImg: string, name: string, rating: number }) {
-
-
-  const services = [
-    {
-      name: 'Consulta por Chat',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service5.png',
-      price: 'R$50,00'
-    },
-    {
-      name: 'Mapa Astral',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service3.png',
-      price: 'R$50,00'
-    },
-    {
-      name: 'Horoscopo do amor',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service6.png',
-      price: 'R$50,00'
-    },
-    {
-      name: 'Horoscopo do dia',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      serviceImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/service1.png',
-      price: 'R$50,00'
-    },
-
-  ]
-
-
   const [showAllAbout, setShowAllAbout] = useState<boolean>(false)
-
-  const feedbacks = [
-    {
-      senderProfileImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/woman-MQU5ZC6-150x150.jpg',
-      senderName: 'Caio magahlães defaira',
-      date: '24/05/2024',
-      rating: 4,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
-    },
-    {
-      senderProfileImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/woman-MQU5ZC6-150x150.jpg',
-      senderName: 'Caio magahlães defaira',
-      date: '24/05/2024',
-      rating: 4,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
-    },
-    {
-      senderProfileImg: 'https://templatekit.jegtheme.com/pandoora/wp-content/uploads/sites/171/2021/09/woman-MQU5ZC6-150x150.jpg',
-      senderName: 'Caio magahlães defaira',
-      date: '24/05/2024',
-      rating: 4,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
-    },
-  ]
   const navigate = useNavigate()
   return (
     <>
