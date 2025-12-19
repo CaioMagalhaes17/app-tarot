@@ -7,7 +7,6 @@ import { useScheduleController } from "../useScheduleController";
 
 export function ChooseDate() {
   const { dateTime, setDateTime, avaliableHours, setSearchParams, isMobile, isLoadingAvailability } = useScheduleController()
-
   return (
     <>
       <div className="mt-5 flex flex-col items-center gap-10">
@@ -50,8 +49,8 @@ export function ChooseDate() {
                 {dateTime.date ? 'Nenhum horário disponível para esta data' : 'Selecione uma data para ver os horários disponíveis'}
               </Text>
             ) : (
-              <select 
-                onChange={(val: React.ChangeEvent<HTMLSelectElement>) => setDateTime({ date: dateTime.date, time: val.target.value })} 
+              <select
+                onChange={(val: React.ChangeEvent<HTMLSelectElement>) => setDateTime({ date: dateTime.date, time: val.target.value })}
                 className="bg-black w-full text-white"
                 value={dateTime.time || ''}
               >
@@ -65,8 +64,8 @@ export function ChooseDate() {
         </div>
       </div>
       <div className="w-full flex justify-end mt-5" >
-        <Button 
-          onClick={() => setSearchParams({ step: '4' })} 
+        <Button
+          onClick={() => setSearchParams({ step: '4' })}
           className="btn-primary mt-10"
           disabled={!dateTime.date || !dateTime.time || isLoadingAvailability}
         >
