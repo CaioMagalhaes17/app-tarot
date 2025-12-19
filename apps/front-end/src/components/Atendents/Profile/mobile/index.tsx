@@ -1,9 +1,9 @@
 import { Button, HSeparator, IconChat, IconMoon, IconQuote, Text } from "@app/ui";
-import { ArrowDown, ArrowUp, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AtendentService } from "../../../@types/atendent-service.type";
-import { FeedbackType } from "../../../@types/atendent.type";
+import { AtendentService } from "../../../../@types/atendent-service.type";
+import { FeedbackType } from "../../../../@types/atendent.type";
 
 type MobileAtendentProfileComponentProps = {
   profileImg: string;
@@ -16,9 +16,9 @@ type MobileAtendentProfileComponentProps = {
   isLoadingFeedbacks: boolean;
 }
 
-export function MobileAtendentProfileComponent({ 
-  profileImg, 
-  name, 
+export function MobileAtendentProfileComponent({
+  profileImg,
+  name,
   rating,
   bio,
   services,

@@ -2,8 +2,8 @@ import { Button, IconChat, IconMoon, IconQuote, Panel, Text } from "@app/ui";
 import { ArrowDown, ArrowUp, Star } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AtendentService } from "../../../@types/atendent-service.type";
-import { FeedbackType } from "../../../@types/atendent.type";
+import { AtendentService } from "../../../../@types/atendent-service.type";
+import { FeedbackType } from "../../../../@types/atendent.type";
 
 type AtendentProfileComponentProps = {
   profileImg: string;
@@ -16,10 +16,10 @@ type AtendentProfileComponentProps = {
   isLoadingFeedbacks: boolean;
 }
 
-export function AtendentProfileComponent({ 
-  profileImg, 
-  name, 
-  rating, 
+export function AtendentProfileComponent({
+  profileImg,
+  name,
+  rating,
   bio,
   services,
   feedbacks,
@@ -27,7 +27,7 @@ export function AtendentProfileComponent({
   isLoadingFeedbacks
 }: AtendentProfileComponentProps) {
   const navigate = useNavigate()
-
+  console.log(services)
   const [showAllAbout, setShowAllAbout] = useState<boolean>(false)
   return (
     <>
