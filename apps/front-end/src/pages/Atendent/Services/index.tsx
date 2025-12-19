@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Button, Panel, Text } from "@app/ui";
 import { useGetAllServices } from "../../../hooks/services/useGetAllServices";
 import { useGetAtendentServices } from "../../../hooks/atendents/useGetAtendentServices";
-import { useGetUser } from "../../../hooks/user/useGetUser";
 import { chooseServices, ChooseServicePayload } from "../../../api/atendents/chooseServices";
 import Swal from "sweetalert2";
 import useStore from "../../../state";
@@ -18,9 +17,8 @@ type SelectedService = {
 
 export function AtendentServicesPage() {
   const { services: allServices, isLoading: isLoadingAll } = useGetAllServices()
-  const { user } = useGetUser()
-  const { services: myServices, isLoading: isLoadingMy } = useGetAtendentServices(user?.id)
-  const { isMobile } = useStore()
+  const { atendent, isMobile } = useStore()
+  const { services: myServices, isLoading: isLoadingMy } = useGetAtendentServices(atendent?.id)
   const [selectedServices, setSelectedServices] = useState<SelectedService[]>([])
 
   // Inicializa os serviços selecionados quando os dados carregam

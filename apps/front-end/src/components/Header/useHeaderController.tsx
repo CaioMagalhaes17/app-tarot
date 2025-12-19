@@ -2,7 +2,7 @@ import { useNavigate, useNavigation } from "react-router-dom";
 import useStore from "../../state";
 
 export function useHeaderController() {
-  const { isMobile, clientInfos, setClientInfos, setCloseSidebar, closeSidebar } = useStore()
+  const { isMobile, clientInfos, setClientInfos, setAtendent, setCloseSidebar, closeSidebar } = useStore()
   const navigate = useNavigate()
   const navigation = useNavigation()
 
@@ -25,6 +25,7 @@ export function useHeaderController() {
       profileImg: '',
       isLoading: true
     })
+    setAtendent(null)
     localStorage.removeItem('accessToken')
     window.location.reload()
   }

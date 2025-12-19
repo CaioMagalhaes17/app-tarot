@@ -5,7 +5,7 @@ import useStore from "../../state";
 
 export function RoutesMiddleware({ children }: { children: JSX.Element }) {
   const location = useLocation()
-  const { setClientInfos } = useStore()
+  const { setClientInfos, setAtendent } = useStore()
   const { user, isLoading } = useGetUser()
   // const token = localStorage.getItem('accessToken')
 
@@ -35,6 +35,11 @@ export function RoutesMiddleware({ children }: { children: JSX.Element }) {
   async function loadUser() {
     if (user) {
       setClientInfos({ isLoading: false, ...user })
+      if (user.atendent) {
+        setAtendent(user.atendent)
+      } else {
+        setAtendent(null)
+      }
     }
   }
 

@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { ServiceType } from '../@types/service'
+import { AtendentType } from '../@types/atendent.type'
 
 type ClientInfos = {
   id: string,
@@ -16,6 +17,8 @@ type ClientInfos = {
 type StateManager = {
   clientInfos: ClientInfos
   setClientInfos: (clientInfos: ClientInfos) => void
+  atendent: AtendentType | null
+  setAtendent: (atendent: AtendentType | null) => void
   setIsMobile: (isMobile: boolean) => void
   isMobile: boolean
   setIsAtendent: (isMobile: boolean) => void
@@ -33,6 +36,12 @@ type DateTimeType = { time: string, date?: Date }
 const useStore = create<StateManager>((set) => {
   return {
     closeSidebar: true,
+    atendent: null,
+    setAtendent: (atendent: AtendentType | null) => {
+      set({
+        atendent
+      })
+    },
     setCloseSidebar: (closeSidebar: boolean) => {
       set({
         closeSidebar
