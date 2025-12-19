@@ -1,14 +1,17 @@
 import { Button, HSeparator, IconChat, IconMoon, IconQuote, Text } from "@app/ui";
-import { Star } from "lucide-react";
+import { Clock, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { AtendentService } from "../../../../@types/atendent-service.type";
 import { FeedbackType } from "../../../../@types/atendent.type";
+import { Schedule } from "../../../../@types/schedule.type";
+import { ScheduleViewModal } from "../ScheduleViewModal";
 
 type MobileAtendentProfileComponentProps = {
   profileImg: string;
   name: string;
   rating: number;
   bio: string;
+  schedule?: Schedule;
   services: AtendentService[];
   feedbacks: FeedbackType[];
   isLoadingServices: boolean;
@@ -20,6 +23,7 @@ export function MobileAtendentProfileComponent({
   name,
   rating,
   bio,
+  schedule,
   services,
   feedbacks,
   isLoadingServices,
@@ -54,6 +58,14 @@ export function MobileAtendentProfileComponent({
               <Button onClick={() => navigate('schedule')} className="btn-primary flex flex-row gap-2 w-full "><IconChat /> Agendar consulta</Button>
               <Button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn-purple flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
               <Button onClick={() => document.getElementById('feedbacks')?.scrollIntoView({ behavior: 'smooth' })} className="btn-warning  w-full  flex flex-row gap-2"><Star />Avaliações</Button>
+              <ScheduleViewModal 
+                schedule={schedule}
+                trigger={
+                  <Button className="btn-outline-primary flex w-full flex-row gap-2">
+                    <Clock size={20} /> Horários de Atendimento
+                  </Button>
+                }
+              />
             </div>
           </div>
           <div className="p-4 mt-5">

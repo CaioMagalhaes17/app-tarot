@@ -1,15 +1,18 @@
 import { Button, IconChat, IconMoon, IconQuote, Panel, Text } from "@app/ui";
-import { ArrowDown, ArrowUp, Star } from "lucide-react";
+import { ArrowDown, ArrowUp, Clock, Star } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AtendentService } from "../../../../@types/atendent-service.type";
 import { FeedbackType } from "../../../../@types/atendent.type";
+import { Schedule } from "../../../../@types/schedule.type";
+import { ScheduleViewModal } from "../ScheduleViewModal";
 
 type AtendentProfileComponentProps = {
   profileImg: string;
   name: string;
   rating: number;
   bio: string;
+  schedule?: Schedule;
   services: AtendentService[];
   feedbacks: FeedbackType[];
   isLoadingServices: boolean;
@@ -21,6 +24,7 @@ export function AtendentProfileComponent({
   name,
   rating,
   bio,
+  schedule,
   services,
   feedbacks,
   isLoadingServices,
@@ -55,6 +59,14 @@ export function AtendentProfileComponent({
                 <Button onClick={() => navigate('schedule')} className="btn-primary btn-xl flex flex-row gap-2 w-full"><IconChat /> Consulta por Chat</Button>
                 <Button className="btn-purple btn-xl flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
                 <Button className="btn-warning btn-xl  w-full  flex flex-row gap-2"><Star />Avaliações</Button>
+                <ScheduleViewModal 
+                  schedule={schedule}
+                  trigger={
+                    <Button className="btn-outline-primary btn-xl flex w-full flex-row gap-2">
+                      <Clock size={20} /> Horários de Atendimento
+                    </Button>
+                  }
+                />
               </div>
             </div>
             <div className="max-w-[1300px] flex flex-col ml-auto mr-auto font-bold mb-20">

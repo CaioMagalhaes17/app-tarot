@@ -29,6 +29,7 @@ export function AtendentProfilePage() {
           profileImg={atendent.user.profileImg}
           rating={atendent.rating}
           bio={atendent.bio}
+          schedule={atendent.schedule}
           services={services || []}
           feedbacks={feedbacks || []}
           isLoadingServices={isLoadingServices}
@@ -40,6 +41,7 @@ export function AtendentProfilePage() {
           profileImg={atendent.user.profileImg}
           rating={atendent.rating}
           bio={atendent.bio}
+          schedule={atendent.schedule}
           services={services || []}
           feedbacks={feedbacks || []}
           isLoadingServices={isLoadingServices}
