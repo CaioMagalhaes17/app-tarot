@@ -1,5 +1,5 @@
 import { Button, IconQuote, IconPencil, Panel, Text, Input } from "@app/ui";
-import { Star } from "lucide-react";
+import { Clock, Star } from "lucide-react";
 import { useState } from "react";
 import { AtendentService } from "../../../../@types/atendent-service.type";
 import { FeedbackType, AtendentType } from "../../../../@types/atendent.type";
@@ -7,6 +7,7 @@ import { updateAtendent } from "../../../../api/atendents/update";
 import Swal from "sweetalert2";
 import useStore from "../../../../state";
 import { ScheduleEditor } from "../ScheduleEditor";
+import { ScheduleViewModal } from "../ScheduleViewModal";
 import { Schedule } from "../../../../@types/schedule.type";
 
 type AtendentProfileEditComponentProps = {
@@ -121,12 +122,22 @@ export function AtendentProfileEditComponent({
                     </Button>
                   </>
                 ) : (
-                  <Button
-                    onClick={() => setIsEditing(true)}
-                    className="btn-primary btn-xl flex flex-row gap-2 w-full"
-                  >
-                    <IconPencil /> Editar Perfil
-                  </Button>
+                  <>
+                    <Button
+                      onClick={() => setIsEditing(true)}
+                      className="btn-primary btn-xl flex flex-row gap-2 w-full"
+                    >
+                      <IconPencil /> Editar Perfil
+                    </Button>
+                    <ScheduleViewModal
+                      schedule={atendent.schedule}
+                      trigger={
+                        <Button className="btn-outline-primary btn-xl flex w-full flex-row gap-2">
+                          <Clock size={20} /> Ver Horários de Atendimento
+                        </Button>
+                      }
+                    />
+                  </>
                 )}
               </div>
             </div>

@@ -40,8 +40,30 @@ export function useScheduleController() {
       return []
     }
 
-    // Transforma os slots em array de horários de início
-    return selectedDay.availableSlots.map((slot: AvailableSlot) => slot.start)
+    // Filtra slots para mostrar apenas intervalos de 1 hora
+    // Considera apenas horários que começam em horas cheias (ex: 09:00, 10:00, não 09:30)
+    const oneHourSlots = selectedDay.availableSlots
+      .filter((slot: AvailableSlot) => {
+        // Verifica se o horário começa em hora cheia (minutos = 00)
+        const [hours, minutes] = slot.start.split(':').map(Number)
+        if (minutes !== 0) {
+          return false
+        }
+
+        // Calcula a duração do slot em minutos
+        const start = dayjs(`2000-01-01 ${slot.start}`, 'YYYY-MM-DD HH:mm')
+        const end = dayjs(`2000-01-01 ${slot.end}`, 'YYYY-MM-DD HH:mm')
+        const durationMinutes = end.diff(start, 'minute')
+        
+        // Filtra apenas slots com pelo menos 60 minutos (1 hora)
+        return durationMinutes >= 60
+      })
+      .map((slot: AvailableSlot) => slot.start)
+      // Remove duplicatas (caso haja múltiplos slots começando no mesmo horário)
+      .filter((hour: string, index: number, self: string[]) => self.indexOf(hour) === index)
+      .sort()
+
+    return oneHourSlots
   }, [availability, userStore.dateTime.date])
 
   useEffect(() => {
