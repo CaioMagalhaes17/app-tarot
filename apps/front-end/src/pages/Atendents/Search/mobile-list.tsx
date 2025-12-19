@@ -4,7 +4,7 @@ import { SetURLSearchParams, useNavigate } from "react-router-dom";
 import { AtendentType } from "../../../@types/atendent.type";
 import { Pagination } from "./pagination";
 
-export function MobileAtendentsListComponent({ atendents, setSearchParams, page }: { page: number, setSearchParams: SetURLSearchParams, atendents: AtendentType[] }) {
+export function MobileAtendentsListComponent({ atendents, setSearchParams, page, pages }: { pages: number, page: number, setSearchParams: SetURLSearchParams, atendents?: AtendentType[] }) {
   const navigate = useNavigate()
   return (
     <>
@@ -25,11 +25,11 @@ export function MobileAtendentsListComponent({ atendents, setSearchParams, page 
 
           <Panel className="h-full w-full rounded-xl flex flex-col p-4  font-bold ">
             <div className="font-bold flex mb-10 flex-wrap items-center justify-center font-bold gap-10">
-              {atendents.map((item) => (
+              {atendents && atendents.map((item) => (
                 <div style={{ backgroundImage: 'linear-gradient(360deg, #22164696 0%, #12133e5e 60%)' }} className="border border-dark flex p-6 flex-col items-center cursor-pointer rounded-xl w-[420px] h-[420px] p-2">
                   <div className="flex flex-row gap-2">
                     <div className="flex flex-col items-center gap-2 flex-shrink-0">
-                      <img src={item.profileImg} width={'80px'} className="rounded-full mt-5 object-cover" />
+                      <img src={item.user.profileImg} width={'80px'} className="rounded-full mt-5 object-cover" />
                       <div className="flex flex-row ">
                         {[...Array(item.rating)].map((_, index) => (
                           <Star
@@ -61,7 +61,9 @@ export function MobileAtendentsListComponent({ atendents, setSearchParams, page 
 
           </Panel>
         </div>
-        <Pagination pages={5} currentPage={page} setSearchParams={setSearchParams} />
+        {pages && (
+          <Pagination pages={pages} currentPage={page} setSearchParams={setSearchParams} />
+        )}
       </Panel >
     </>
 

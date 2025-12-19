@@ -18,14 +18,13 @@ export function AtendentsSearchPage() {
     limit: 6,
     page: Number(searchParams.get('page')) || 1
   }, searchParams)
-
   const navigate = useNavigate()
   return (
 
 
     <>
       {isMobile ? (
-        <MobileAtendentsListComponent page={Number(searchParams.get('page')) || 1} atendents={atendents} setSearchParams={setSearchParams} />
+        <MobileAtendentsListComponent pages={pagination.pages} page={Number(searchParams.get('page')) || 1} atendents={atendents} setSearchParams={setSearchParams} />
       ) : (
         <>
           <Panel className="mb-10  min-h-screen max-w-[1400px] ml-auto mr-auto">
@@ -80,7 +79,7 @@ export function AtendentsSearchPage() {
                           <Text as="span" className="mt-5 text-white-dark">{item.bio}</Text>
 
                           <div className="flex flex-row mt-auto gap-5 w-full p-2">
-                            <Button onClick={() => navigate('/atendents/profile/123')} className="btn-outline-primary w-full"><IconUser /><span className="ml-2">Perfil</span></Button>
+                            <Button onClick={() => navigate('/atendents/profile/' + item.id)} className="btn-outline-primary w-full"><IconUser /><span className="ml-2">Perfil</span></Button>
                           </div>
                         </div>
                       ))}
@@ -89,7 +88,9 @@ export function AtendentsSearchPage() {
                 </div>
               </Panel>
             </div>
-            <Pagination pages={5} currentPage={Number(searchParams.get('page')) || 1} setSearchParams={setSearchParams} />
+            {pagination && (
+              <Pagination pages={pagination.pages} currentPage={Number(searchParams.get('page')) || 1} setSearchParams={setSearchParams} />
+            )}
           </Panel>
         </>
       )}

@@ -8,7 +8,7 @@ export function AtendentProfilePage() {
   const { isMobile } = useStore()
   const { id } = useParams<{ id: string }>()
   const { atendent, isLoading } = useGetAtendentById(id)
-
+  console.log(atendent)
   if (isLoading) {
     return <div>Carregando...</div>
   }
@@ -20,16 +20,16 @@ export function AtendentProfilePage() {
   return (
     <>
       {isMobile ? (
-        <MobileAtendentProfileComponent 
-          name={atendent.name} 
-          profileImg={atendent.user.profileImg} 
-          rating={atendent.rating} 
+        <MobileAtendentProfileComponent
+          name={atendent.name}
+          profileImg={atendent.user.profileImg}
+          rating={atendent.rating}
         />
       ) : (
-        <AtendentProfileComponent 
-          name={atendent.name} 
-          profileImg={atendent.user.profileImg} 
-          rating={atendent.rating} 
+        <AtendentProfileComponent
+          name={atendent.name}
+          profileImg={atendent.user.profileImg}
+          rating={atendent.rating}
         />
       )}
     </>
