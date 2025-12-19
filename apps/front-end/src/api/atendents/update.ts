@@ -8,11 +8,10 @@ export type UpdateAtendentPayload = {
 }
 
 export async function updateAtendent(
-  id: string,
   payload: UpdateAtendentPayload
 ): Promise<AtendentType | undefined> {
   try {
-    const response = await Api().put(`/atendent/${id}`, payload)
+    const response = await Api().put(`/atendent/`, payload)
     return response.data
   } catch (error) {
     if (error instanceof AxiosError) {

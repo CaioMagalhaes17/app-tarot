@@ -13,6 +13,7 @@ type MobileAtendentProfileEditComponentProps = {
   feedbacks: FeedbackType[];
   isLoadingServices: boolean;
   isLoadingFeedbacks: boolean;
+  profileImg: string
 }
 
 export function MobileAtendentProfileEditComponent({
@@ -20,7 +21,8 @@ export function MobileAtendentProfileEditComponent({
   services,
   feedbacks,
   isLoadingServices,
-  isLoadingFeedbacks
+  isLoadingFeedbacks,
+  profileImg
 }: MobileAtendentProfileEditComponentProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(atendent.name)
@@ -39,7 +41,7 @@ export function MobileAtendentProfileEditComponent({
 
     setIsSaving(true)
     try {
-      const updated = await updateAtendent(atendent.id, { name, bio })
+      const updated = await updateAtendent({ name, bio })
       if (updated) {
         setAtendent(updated)
         setIsEditing(false)
@@ -49,6 +51,7 @@ export function MobileAtendentProfileEditComponent({
         })
       }
     } catch (error) {
+      console.error(error)
       Swal.fire({
         title: 'Erro ao atualizar perfil',
         icon: 'error'
@@ -70,7 +73,7 @@ export function MobileAtendentProfileEditComponent({
         <div className="flex flex-col font-bold min-w-[70%]">
           <div className="p-4 ">
             <div className="flex max-w-[1100px] ml-auto mr-auto relative flex-row  font-bold gap-5">
-              <img width={'130px'} src={atendent.user.profileImg} className="h-[130px] rounded-3xl sombra" />
+              <img width={'130px'} src={profileImg} className="h-[130px] rounded-3xl sombra" />
               <div className="flex flex-col max-w-[550px]">
                 {isEditing ? (
                   <Input
@@ -100,15 +103,15 @@ export function MobileAtendentProfileEditComponent({
             <div className="flex flex-col items-center gap-5 mt-5">
               {isEditing ? (
                 <>
-                  <Button 
-                    onClick={handleSave} 
+                  <Button
+                    onClick={handleSave}
                     className="btn-primary w-full"
                     disabled={isSaving}
                   >
                     {isSaving ? 'Salvando...' : 'Salvar'}
                   </Button>
-                  <Button 
-                    onClick={handleCancel} 
+                  <Button
+                    onClick={handleCancel}
                     className="btn-danger w-full"
                     disabled={isSaving}
                   >
@@ -116,8 +119,8 @@ export function MobileAtendentProfileEditComponent({
                   </Button>
                 </>
               ) : (
-                <Button 
-                  onClick={() => setIsEditing(true)} 
+                <Button
+                  onClick={() => setIsEditing(true)}
                   className="btn-primary flex flex-row gap-2 w-full"
                 >
                   <IconPencil /> Editar Perfil

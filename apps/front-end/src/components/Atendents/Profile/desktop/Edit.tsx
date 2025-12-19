@@ -1,4 +1,4 @@
-import { Button, IconChat, IconMoon, IconQuote, IconPencil, Panel, Text, Input } from "@app/ui";
+import { Button, IconQuote, IconPencil, Panel, Text, Input } from "@app/ui";
 import { Star } from "lucide-react";
 import { useState } from "react";
 import { AtendentService } from "../../../../@types/atendent-service.type";
@@ -13,6 +13,7 @@ type AtendentProfileEditComponentProps = {
   feedbacks: FeedbackType[];
   isLoadingServices: boolean;
   isLoadingFeedbacks: boolean;
+  profileImg: string
 }
 
 export function AtendentProfileEditComponent({
@@ -20,7 +21,8 @@ export function AtendentProfileEditComponent({
   services,
   feedbacks,
   isLoadingServices,
-  isLoadingFeedbacks
+  isLoadingFeedbacks,
+  profileImg
 }: AtendentProfileEditComponentProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(atendent.name)
@@ -39,7 +41,7 @@ export function AtendentProfileEditComponent({
 
     setIsSaving(true)
     try {
-      const updated = await updateAtendent(atendent.id, { name, bio })
+      const updated = await updateAtendent({ name, bio })
       if (updated) {
         setAtendent(updated)
         setIsEditing(false)
@@ -49,6 +51,7 @@ export function AtendentProfileEditComponent({
         })
       }
     } catch (error) {
+      console.error(error)
       Swal.fire({
         title: 'Erro ao atualizar perfil',
         icon: 'error'
@@ -70,7 +73,7 @@ export function AtendentProfileEditComponent({
         <Panel className="flex flex-col font-bold ">
           <div className="p-4">
             <div className="mb-20 flex max-w-[1300px] ml-auto mr-auto relative flex-row items-center font-bold gap-5">
-              <img width={'230px'} src={atendent.user.profileImg} className="rounded-3xl sombra" />
+              <img width={'230px'} src={profileImg} className="rounded-3xl sombra" />
               <div className="flex flex-col max-w-[550px]">
                 {isEditing ? (
                   <Input
@@ -98,15 +101,15 @@ export function AtendentProfileEditComponent({
               <div className="flex flex-col items-center gap-5">
                 {isEditing ? (
                   <>
-                    <Button 
-                      onClick={handleSave} 
+                    <Button
+                      onClick={handleSave}
                       className="btn-primary btn-xl w-full"
                       disabled={isSaving}
                     >
                       {isSaving ? 'Salvando...' : 'Salvar'}
                     </Button>
-                    <Button 
-                      onClick={handleCancel} 
+                    <Button
+                      onClick={handleCancel}
                       className="btn-danger btn-xl w-full"
                       disabled={isSaving}
                     >
@@ -114,8 +117,8 @@ export function AtendentProfileEditComponent({
                     </Button>
                   </>
                 ) : (
-                  <Button 
-                    onClick={() => setIsEditing(true)} 
+                  <Button
+                    onClick={() => setIsEditing(true)}
                     className="btn-primary btn-xl flex flex-row gap-2 w-full"
                   >
                     <IconPencil /> Editar Perfil
