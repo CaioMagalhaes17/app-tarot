@@ -11,14 +11,11 @@ export function AtendentButtons() {
         {!isMobile && (
           <>
             <div className="font-bold text-white text-lg flex flex-row gap-10 mr-10">
-              <Text className="cursor-pointer hover:underline" as="h1">Dashboards</Text>
+              <Text onClick={() => navigate('/atendent/services')} className="cursor-pointer hover:underline" as="h1">Serviços</Text>
               <Text className="cursor-pointer hover:underline" as="h1">Atendimentos</Text>
             </div>
             <Button onClick={() => navigate('/atendent/messages')} className="btn-primary">
               <IconChat className="mr-2" /> Mensagens
-            </Button>
-            <Button onClick={() => navigate('/atendent/services')} className="btn-primary">
-              Serviços
             </Button>
           </>
         )}
