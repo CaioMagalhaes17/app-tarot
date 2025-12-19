@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Text } from "@app/ui";
 import { DayPicker } from "react-day-picker";
 import { ptBR } from "react-day-picker/locale";
@@ -5,7 +6,7 @@ import "react-day-picker/style.css";
 import { useScheduleController } from "../useScheduleController";
 
 export function ChooseDate() {
-  const { dateTime, setDateTime, avaliableHours, setSearchParams, isMobile } = useScheduleController()
+  const { dateTime, setDateTime, avaliableHours, setSearchParams, isMobile, isLoadingAvailability } = useScheduleController()
 
   return (
     <>
@@ -22,7 +23,7 @@ export function ChooseDate() {
               animate
               mode="single"
               selected={dateTime.date}
-              onSelect={(date) => setDateTime({ date, time: dateTime.time })}
+              onSelect={(date: Date | undefined) => setDateTime({ date, time: dateTime.time })}
               timeZone={'-03:00'}
               locale={ptBR}
 
@@ -42,18 +43,35 @@ export function ChooseDate() {
             <Text className="text-xl text-white font-bold" as='h1'>Escolha a hora</Text>
           </div>
           <div className="p-4 ">
-            <select onChange={(val) => setDateTime({ date: dateTime.date, time: val.target.value })} className="bg-black w-full">
-              {avaliableHours.map((h) => (
-                <>
-                  <option>{h}</option>
-                </>
-              ))}
-            </select>
+            {isLoadingAvailability ? (
+              <Text className="text-white" as="p">Carregando horários disponíveis...</Text>
+            ) : avaliableHours.length === 0 ? (
+              <Text className="text-white" as="p">
+                {dateTime.date ? 'Nenhum horário disponível para esta data' : 'Selecione uma data para ver os horários disponíveis'}
+              </Text>
+            ) : (
+              <select 
+                onChange={(val: React.ChangeEvent<HTMLSelectElement>) => setDateTime({ date: dateTime.date, time: val.target.value })} 
+                className="bg-black w-full text-white"
+                value={dateTime.time || ''}
+              >
+                <option value="">Selecione um horário</option>
+                {avaliableHours.map((h: string) => (
+                  <option key={h} value={h}>{h}</option>
+                ))}
+              </select>
+            )}
           </div>
         </div>
       </div>
       <div className="w-full flex justify-end mt-5" >
-        <Button onClick={() => setSearchParams({ step: '4' })} className="btn-primary mt-10">Avançar</Button>
+        <Button 
+          onClick={() => setSearchParams({ step: '4' })} 
+          className="btn-primary mt-10"
+          disabled={!dateTime.date || !dateTime.time || isLoadingAvailability}
+        >
+          Avançar
+        </Button>
       </div>
     </>
   )

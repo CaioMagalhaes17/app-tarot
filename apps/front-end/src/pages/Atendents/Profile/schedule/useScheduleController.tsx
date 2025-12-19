@@ -1,19 +1,49 @@
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams, useParams } from "react-router-dom"
 import useStore from "../../../../state"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import Swal from "sweetalert2"
+import { useGetAtendentAvailability } from "../../../../hooks/atendents/useGetAtendentAvailability"
+import dayjs from "dayjs"
+import { AvailabilityDay, AvailableSlot } from "../../../../@types/availability.type"
 
 export function useScheduleController() {
 
   const userStore = useStore()
   const [searchParams, setSearchParams] = useSearchParams()
+  const { id: atendentId } = useParams<{ id: string }>()
   const step = searchParams.get('step')
   const isLogged = userStore.clientInfos.name !== "";
-  const avaliableHours = [
-    '09:00',
-    '11:00',
-    '13:00'
-  ]
+  
+  // Define o range de datas (hoje até 30 dias à frente)
+  const startDate = dayjs().format('YYYY-MM-DD')
+  const endDate = dayjs().add(30, 'days').format('YYYY-MM-DD')
+  
+  // Busca disponibilidade do atendente
+  const { availability, isLoading: isLoadingAvailability } = useGetAtendentAvailability(
+    atendentId,
+    { startDate, endDate }
+  )
+
+  // Calcula os horários disponíveis baseado na data selecionada
+  const avaliableHours = useMemo(() => {
+    if (!availability || !userStore.dateTime.date) {
+      return []
+    }
+
+    // Formata a data selecionada para comparar
+    const selectedDate = dayjs(userStore.dateTime.date).format('YYYY-MM-DD')
+    
+    // Encontra o dia correspondente na disponibilidade
+    const selectedDay = availability.days.find((day: AvailabilityDay) => day.date === selectedDate)
+    
+    if (!selectedDay) {
+      return []
+    }
+
+    // Transforma os slots em array de horários de início
+    return selectedDay.availableSlots.map((slot: AvailableSlot) => slot.start)
+  }, [availability, userStore.dateTime.date])
+
   useEffect(() => {
     if (userStore.clientInfos.isLoading) return
     if (!isLogged) {
@@ -41,6 +71,8 @@ export function useScheduleController() {
     setService: userStore.setService,
     dateTime: userStore.dateTime,
     setDateTime: userStore.setDateTime,
-    avaliableHours
+    avaliableHours,
+    availability,
+    isLoadingAvailability
   }
 }
