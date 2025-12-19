@@ -4,7 +4,7 @@ import { Service } from "../../@types/atendent-service.type";
 
 export async function getAllServices(): Promise<Service[] | undefined> {
   try {
-    const response = await Api().get('/service')
+    const response = await Api().get('/services')
     return response.data
   } catch (error) {
     if (error instanceof AxiosError) {
