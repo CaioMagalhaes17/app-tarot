@@ -29,5 +29,5 @@ export function useHeaderController() {
     window.location.reload()
   }
 
-  return { isMobile, clientInfos, setClientInfos, isLogged, navigate, handleLogout, setCloseSidebar, closeSidebar, navigation }
+  return { isMobile, clientInfos, setClientInfos, isLogged, navigate, handleLogout, setCloseSidebar, closeSidebar, navigation, isAtendent: clientInfos.isAtendent }
 }

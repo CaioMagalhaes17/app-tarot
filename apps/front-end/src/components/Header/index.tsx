@@ -2,10 +2,12 @@ import { IconMenu, Text, Header as UIHeader } from "@app/ui";
 import { useHeaderController } from "./useHeaderController";
 import { LoginButtons } from "./LoginButtons";
 import { UserButtons } from "./UserButtons";
+import { AtendentButtons } from "./AtendentButtons";
 import { Link } from "react-router-dom";
 
 export function Header() {
-  const { isMobile, isLogged, navigate, setCloseSidebar, closeSidebar, navigation } = useHeaderController()
+  const { isMobile, isLogged, navigate, setCloseSidebar, closeSidebar, navigation, clientInfos } = useHeaderController()
+  const isAtendent = clientInfos.isAtendent
   function handleHeaderButtonsDirection(type: 'services' | 'atendents' | 'steps') {
     if (type === 'atendents') {
       navigate('/atendents/list')
@@ -38,7 +40,7 @@ export function Header() {
         <button onClick={() => setCloseSidebar(!closeSidebar)} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
         <Link to="/" className={`font-smythe text-white ${!isMobile ? 'text-5xl 10' : 'text-4xl'} cursor-pointer`}>Astrologia Online</Link>
         <div className="ml-auto" />
-        {!isMobile && (
+        {!isMobile && !isAtendent && (
           <>
             <div className="font-bold text-white text-lg flex flex-row gap-10 mr-[100px]">
               <Text onClick={() => handleHeaderButtonsDirection('atendents')} className="cursor-pointer hover:underline" as="h1">Atendentes</Text>
@@ -51,13 +53,15 @@ export function Header() {
         {!isLogged() ? (
           <LoginButtons />
         ) : (
-          (
-            <>
-              <div className="flex flex-row items-center gap-5">
+          <>
+            <div className="flex flex-row items-center gap-5">
+              {isAtendent ? (
+                <AtendentButtons />
+              ) : (
                 <UserButtons />
-              </div>
-            </>
-          )
+              )}
+            </div>
+          </>
         )}
       </div>
     </UIHeader>
