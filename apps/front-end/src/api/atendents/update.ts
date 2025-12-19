@@ -1,10 +1,12 @@
 import { AxiosError } from "axios"
 import { Api } from "../axios";
 import { AtendentType } from "../../@types/atendent.type";
+import { Schedule } from "../../@types/schedule.type";
 
 export type UpdateAtendentPayload = {
   name: string;
   bio: string;
+  schedule?: Schedule;
 }
 
 export async function updateAtendent(

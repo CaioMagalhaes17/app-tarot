@@ -1,4 +1,5 @@
 import { UserType } from "./user.type"
+import { Schedule } from "./schedule.type"
 
 export type AtendentType = {
   id: string,
@@ -6,6 +7,7 @@ export type AtendentType = {
   rating: number,
   bio: string,
   user: UserType
+  schedule?: Schedule
 }
 
 export type FeedbackType = {
