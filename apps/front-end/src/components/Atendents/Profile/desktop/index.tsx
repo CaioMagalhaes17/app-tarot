@@ -5,24 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export function AtendentProfileComponent({ profileImg, name, rating }: { profileImg: string, name: string, rating: number }) {
   const navigate = useNavigate()
-  const tags = [
-    {
-      name: 'Tarot Baralho'
-    },
-    {
-      name: 'Tarot Baralho'
-    },
-    {
-      name: 'Tarot Baralho'
-    },
-    {
-      name: 'Tarot Baralho'
-    },
-    {
-      name: 'Tarot Baralho'
-    },
 
-  ]
 
   const services = [
     {
@@ -95,11 +78,6 @@ export function AtendentProfileComponent({ profileImg, name, rating }: { profile
                       className={index < rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
                       size={16}
                     />
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-2 mt-5">
-                  {tags.map((item) => (
-                    <span className={`text-white text-lg border rounded-xl p-1`}>{item.name}</span>
                   ))}
                 </div>
               </div>

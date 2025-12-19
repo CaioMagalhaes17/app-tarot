@@ -4,24 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function MobileAtendentProfileComponent({ profileImg, name, rating }: { profileImg: string, name: string, rating: number }) {
-  const tags = [
-    {
-      name: 'Tarot Baralho'
-    },
-    {
-      name: 'Tarot Baralho'
-    },
-    {
-      name: 'Tarot Baralho'
-    },
-    {
-      name: 'Tarot Baralho'
-    },
-    {
-      name: 'Tarot Baralho'
-    },
 
-  ]
 
   const services = [
     {
@@ -102,11 +85,6 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
               </div>
             </div>
             <HSeparator className="mb-5" />
-            <div className="flex flex-wrap gap-2">
-              {tags.map((item) => (
-                <button className={`text-dark dark:text-white border rounded-xl p-1`}>{item.name}</button>
-              ))}
-            </div>
             <div className="flex flex-col items-center gap-5 mt-5">
               <Button onClick={() => navigate('schedule')} className="btn-primary flex flex-row gap-2 w-full "><IconChat /> Agendar consulta</Button>
               <Button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn-purple flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
