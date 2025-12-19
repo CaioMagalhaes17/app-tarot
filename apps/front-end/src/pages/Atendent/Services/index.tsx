@@ -14,6 +14,7 @@ type SelectedService = {
   price: number;
   description: string;
   isSelected: boolean;
+  isActive: boolean;
   atendentServiceId?: string; // ID do AtendentService se já existe
 }
 
@@ -35,6 +36,7 @@ export function AtendentServicesPage() {
           price: myService?.price || 0,
           description: myService?.description || '',
           isSelected: !!myService,
+          isActive: myService?.isActive ?? true, // Default true para novos serviços
           atendentServiceId: myService?.id // Salva o ID do AtendentService se já existe
         }
       })
@@ -62,6 +64,14 @@ export function AtendentServicesPage() {
     setSelectedServices(prev => prev.map(service => 
       service.serviceId === serviceId 
         ? { ...service, description }
+        : service
+    ))
+  }
+
+  const handleToggleActive = (serviceId: string) => {
+    setSelectedServices(prev => prev.map(service => 
+      service.serviceId === serviceId 
+        ? { ...service, isActive: !service.isActive }
         : service
     ))
   }
@@ -98,7 +108,8 @@ export function AtendentServicesPage() {
           id: service.atendentServiceId,
           payload: {
             description: service.description,
-            price: service.price
+            price: service.price,
+            isActive: service.isActive
           }
         })
       } else {
@@ -191,6 +202,23 @@ export function AtendentServicesPage() {
 
               {service.isSelected && (
                 <div className="space-y-4 mt-4">
+                  <div className="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
+                    <div>
+                      <Text className="text-white font-bold" as="label">Status do Serviço</Text>
+                      <Text className="text-gray-400 text-sm" as="p">
+                        {service.isActive ? 'Ativo - Visível para clientes' : 'Inativo - Oculto dos clientes'}
+                      </Text>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={service.isActive}
+                        onChange={() => handleToggleActive(service.serviceId)}
+                        className="sr-only peer"
+                      />
+                      <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                    </label>
+                  </div>
                   <div>
                     <Text className="text-white mb-2" as="label">Preço (R$)</Text>
                     <div className="flex items-center gap-2">
