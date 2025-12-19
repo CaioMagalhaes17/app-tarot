@@ -11,6 +11,7 @@ import { ClientProfilePage } from "../pages/Profile/client"
 import { HomePage } from "../pages/Home"
 import { MinutesPage } from "../pages/Minutes"
 import { SchedulePage } from "../pages/Atendents/Profile/schedule"
+import { AtendentServicesPage } from "../pages/Atendent/Services"
 
 
 export const routes: RouteObject[] = [
@@ -60,6 +61,10 @@ export const routes: RouteObject[] = [
       {
         path: '/minutes',
         element: <MinutesPage />,
+      },
+      {
+        path: '/atendent/services',
+        element: <AtendentServicesPage />,
       },
     ]
 
