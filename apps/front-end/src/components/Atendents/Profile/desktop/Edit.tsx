@@ -83,7 +83,7 @@ export function AtendentProfileEditComponent({
                   <Input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="text-7xl font-smythe text-white bg-black border border-gray-600 rounded-lg px-4 py-2"
+                    className="text-7xl text-white bg-black border border-gray-600 rounded-lg h-[40px] mb-5 !w-[300px]"
                     placeholder="Nome do atendente"
                   />
                 ) : (
