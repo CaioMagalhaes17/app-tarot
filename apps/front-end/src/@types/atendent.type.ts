@@ -10,6 +10,7 @@ export type AtendentType = {
 
 export type FeedbackType = {
   senderName: string,
+  senderProfileImg: string,
   date: string,
   rating: number,
   description: string

@@ -2,8 +2,30 @@ import { Button, HSeparator, IconChat, IconMoon, IconQuote, Text } from "@app/ui
 import { ArrowDown, ArrowUp, Star } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AtendentService } from "../../../@types/atendent-service.type";
+import { FeedbackType } from "../../../@types/atendent.type";
 
-export function MobileAtendentProfileComponent({ profileImg, name, rating }: { profileImg: string, name: string, rating: number }) {
+type MobileAtendentProfileComponentProps = {
+  profileImg: string;
+  name: string;
+  rating: number;
+  bio: string;
+  services: AtendentService[];
+  feedbacks: FeedbackType[];
+  isLoadingServices: boolean;
+  isLoadingFeedbacks: boolean;
+}
+
+export function MobileAtendentProfileComponent({ 
+  profileImg, 
+  name, 
+  rating,
+  bio,
+  services,
+  feedbacks,
+  isLoadingServices,
+  isLoadingFeedbacks
+}: MobileAtendentProfileComponentProps) {
   const [showAllAbout, setShowAllAbout] = useState<boolean>(false)
   const navigate = useNavigate()
   return (
@@ -46,21 +68,7 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
               </div>
 
               <div className="text-left text-lg font-normal">
-                <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
-              </div>
-              {showAllAbout && (
-                <>
-                  <div className="text-left text-lg font-normal">
-                    <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
-                  </div>
-                  <div className="text-left text-lg font-normal">
-                    <Text as="span">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</Text>
-                  </div>
-                </>
-              )}
-              <div onClick={() => setShowAllAbout(!showAllAbout)} className="cursor-pointer ml-auto flex-row flex items-center gap-2 ">
-                {!showAllAbout ? <ArrowDown /> : <ArrowUp />}
-                Mostrar tudo
+                <Text as="span">{bio}</Text>
               </div>
             </div>
           </div>
@@ -72,19 +80,23 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
                 <h1 className="text-white text-5xl whitespace-nowrap px-2 font-smythe">Serviços</h1>
                 <div className="flex-1 border-t border-gray-300"></div>
               </div>
-              <div className="flex flex-wrap gap-10 ">
-                {services.map((item) => (
-                  <>
-                    <div className="flex flex-col w-[150px]">
-                      <img src={item.serviceImg} className="rounded-xl h-[150px]" />
-                      <Text className="text-white font-smythe text-2xl mt-2" as="h1">{item.name}</Text>
+              {isLoadingServices ? (
+                <Text className="text-white text-center" as="p">Carregando serviços...</Text>
+              ) : services.length === 0 ? (
+                <Text className="text-white text-center" as="p">Nenhum serviço disponível</Text>
+              ) : (
+                <div className="flex flex-wrap gap-10 ">
+                  {services.filter(service => service.isActive).map((item) => (
+                    <div key={item.id} className="flex flex-col w-[150px]">
+                      <img src={item.service.serviceImg} className="rounded-xl h-[150px]" />
+                      <Text className="text-white font-smythe text-2xl mt-2" as="h1">{item.service.name}</Text>
                       <Text className="mt-2 mb-2" as="span">{item.description}</Text>
-                      <Text className="text-success text-lg mt-2 mb-5" as="span">{item.price}</Text>
+                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${item.price.toFixed(2).replace('.', ',')}</Text>
                       <Button className="btn-primary">Consultar</Button>
                     </div>
-                  </>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -95,27 +107,34 @@ export function MobileAtendentProfileComponent({ profileImg, name, rating }: { p
                 <h1 className="text-white text-4xl whitespace-nowrap px-2 font-smythe">Depoimento de usuários</h1>
                 <div className="flex-1 border-t border-gray-300"></div>
               </div>
-              <div className="flex flex-col items-center justify-center gap-5 w-full">
-                <div className="flex flex-col gap-10">
-                  {feedbacks.map((item) => (
-                    <div className="border border-dark flex items-center flex-col p-10">
-                      <img className="w-20 rounded-full" src={item.senderProfileImg} />
-                      <span className="text-white text-lg">{item.senderName}</span>
-                      <div className="flex flex-row mb-2">
-                        {[...Array(5)].map((_, index) => (
-                          <Star
-                            key={index}
-                            className={index < item.rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
-                            size={12}
-                          />
-                        ))}
+              {isLoadingFeedbacks ? (
+                <Text className="text-white text-center" as="p">Carregando feedbacks...</Text>
+              ) : feedbacks.length === 0 ? (
+                <Text className="text-white text-center" as="p">Nenhum feedback disponível</Text>
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-5 w-full">
+                  <div className="flex flex-col gap-10">
+                    {feedbacks.map((item, index) => (
+                      <div key={index} className="border border-dark flex items-center flex-col p-10">
+                        <img className="w-20 rounded-full" src={item.senderProfileImg} />
+                        <span className="text-white text-lg">{item.senderName}</span>
+                        <div className="flex flex-row mb-2">
+                          {[...Array(5)].map((_, index) => (
+                            <Star
+                              key={index}
+                              className={index < item.rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
+                              size={12}
+                            />
+                          ))}
+                        </div>
+                        <IconQuote width="34" height="34" />
+                        <span className="text-white">{item.description}</span>
+                        <span className="text-gray-400 text-sm mt-2">{item.date}</span>
                       </div>
-                      <IconQuote width="34" height="34" />
-                      <span>{item.description}</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
