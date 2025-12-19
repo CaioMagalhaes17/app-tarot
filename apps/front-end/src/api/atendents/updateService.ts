@@ -4,6 +4,7 @@ import { Api } from "../axios";
 export type UpdateServicePayload = {
   description: string;
   price: number;
+  isActive?: boolean;
 }
 
 export async function updateAtendentService(
