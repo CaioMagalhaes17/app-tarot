@@ -7,15 +7,13 @@ export function AtendentButtons() {
   const { clientInfos, handleLogout, isMobile, navigate } = useHeaderController()
   return (
     <>
-      <div className="flex flex-row gap-5">
+      <div className="flex flex-row gap-5 items-center">
         {!isMobile && (
           <>
-            <Button onClick={() => navigate('/atendent/dashboard')} className="btn-primary">
-              Dashboard
-            </Button>
-            <Button onClick={() => navigate('/atendent/appointments')} className="btn-primary">
-              Agendamentos
-            </Button>
+            <div className="font-bold text-white text-lg flex flex-row gap-10 mr-10">
+              <Text className="cursor-pointer hover:underline" as="h1">Dashboards</Text>
+              <Text className="cursor-pointer hover:underline" as="h1">Atendimentos</Text>
+            </div>
             <Button onClick={() => navigate('/atendent/messages')} className="btn-primary">
               <IconChat className="mr-2" /> Mensagens
             </Button>
