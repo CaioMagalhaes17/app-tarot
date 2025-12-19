@@ -17,6 +17,9 @@ export function AtendentButtons() {
             <Button onClick={() => navigate('/atendent/messages')} className="btn-primary">
               <IconChat className="mr-2" /> Mensagens
             </Button>
+            <Button onClick={() => navigate('/atendent/services')} className="btn-primary">
+              Serviços
+            </Button>
           </>
         )}
         <VSeparator className="!mr-0" />
