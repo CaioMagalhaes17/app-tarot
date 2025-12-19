@@ -12,6 +12,7 @@ import { HomePage } from "../pages/Home"
 import { MinutesPage } from "../pages/Minutes"
 import { SchedulePage } from "../pages/Atendents/Profile/schedule"
 import { AtendentServicesPage } from "../pages/Atendent/Services"
+import { AtendentProfileEditPage } from "../pages/Atendent/Profile"
 
 
 export const routes: RouteObject[] = [
@@ -65,6 +66,10 @@ export const routes: RouteObject[] = [
       {
         path: '/atendent/services',
         element: <AtendentServicesPage />,
+      },
+      {
+        path: '/atendent/profile',
+        element: <AtendentProfileEditPage />,
       },
     ]
 
