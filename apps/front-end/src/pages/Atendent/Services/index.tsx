@@ -6,6 +6,7 @@ import { chooseServices, ChooseServicePayload } from "../../../api/atendents/cho
 import { updateAtendentService, UpdateServicePayload } from "../../../api/atendents/updateService";
 import Swal from "sweetalert2";
 import useStore from "../../../state";
+import InputMask from "react-input-mask";
 
 type SelectedService = {
   serviceId: string;
@@ -52,12 +53,28 @@ export function AtendentServicesPage() {
     ))
   }
 
-  const handlePriceChange = (serviceId: string, price: number) => {
+  const handlePriceChange = (serviceId: string, value: string) => {
+    // Remove tudo que não é número
+    const numericValue = value.replace(/\D/g, '')
+    // Converte para número (centavos) e divide por 100 para ter o valor real
+    const price = numericValue ? parseFloat(numericValue) / 100 : 0
+    
     setSelectedServices(prev => prev.map(service => 
       service.serviceId === serviceId 
         ? { ...service, price }
         : service
     ))
+  }
+
+  const formatPrice = (price: number): string => {
+    if (!price || price === 0) return ''
+    // Multiplica por 100 para ter centavos
+    const cents = Math.round(price * 100).toString()
+    // Formata como XX,XX ou XXX,XX etc
+    if (cents.length <= 2) {
+      return `0,${cents.padStart(2, '0')}`
+    }
+    return `${cents.slice(0, -2)},${cents.slice(-2)}`
   }
 
   const handleDescriptionChange = (serviceId: string, description: string) => {
@@ -220,17 +237,15 @@ export function AtendentServicesPage() {
                     </label>
                   </div>
                   <div>
-                    <Text className="text-white mb-2" as="label">Preço (R$)</Text>
+                    <Text className="text-white mb-2" as="label">Preço</Text>
                     <div className="flex items-center gap-2">
                       <span className="text-white">R$</span>
-                      <input
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        value={service.price || ''}
-                        onChange={(e) => handlePriceChange(service.serviceId, parseFloat(e.target.value) || 0)}
+                      <InputMask
+                        mask="999999,99"
+                        value={formatPrice(service.price)}
+                        onChange={(e) => handlePriceChange(service.serviceId, e.target.value)}
                         className="flex-1 bg-black border border-gray-600 rounded-lg px-4 py-2 text-white"
-                        placeholder="0.00"
+                        placeholder="0,00"
                       />
                     </div>
                   </div>
