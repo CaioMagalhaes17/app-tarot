@@ -6,6 +6,8 @@ import { FeedbackType, AtendentType } from "../../../../@types/atendent.type";
 import { updateAtendent } from "../../../../api/atendents/update";
 import Swal from "sweetalert2";
 import useStore from "../../../../state";
+import { ScheduleEditor } from "../ScheduleEditor";
+import { Schedule } from "../../../../@types/schedule.type";
 
 type AtendentProfileEditComponentProps = {
   atendent: AtendentType;
@@ -25,6 +27,7 @@ export function AtendentProfileEditComponent({
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState(atendent.name)
   const [bio, setBio] = useState(atendent.bio)
+  const [schedule, setSchedule] = useState<Schedule>(atendent.schedule || {})
   const [isSaving, setIsSaving] = useState(false)
   const { setAtendent } = useStore()
 
@@ -39,7 +42,7 @@ export function AtendentProfileEditComponent({
 
     setIsSaving(true)
     try {
-      const updated = await updateAtendent(atendent.id, { name, bio })
+      const updated = await updateAtendent(atendent.id, { name, bio, schedule })
       if (updated) {
         setAtendent(updated)
         setIsEditing(false)
@@ -61,6 +64,7 @@ export function AtendentProfileEditComponent({
   const handleCancel = () => {
     setName(atendent.name)
     setBio(atendent.bio)
+    setSchedule(atendent.schedule || {})
     setIsEditing(false)
   }
 
@@ -144,6 +148,17 @@ export function AtendentProfileEditComponent({
                 </div>
               )}
             </div>
+
+            {isEditing && (
+              <Panel className="max-w-[1300px] flex flex-col ml-auto mr-auto font-bold mb-20">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="flex-1 border-t border-gray-300"></div>
+                  <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Horários de Atendimento</h1>
+                  <div className="flex-1 border-t border-gray-300"></div>
+                </div>
+                <ScheduleEditor schedule={schedule} onChange={setSchedule} />
+              </Panel>
+            )}
 
             <Panel className="max-w-[1300px] flex flex-col ml-auto mr-auto font-bold mb-20">
               <div className="flex items-center gap-4 mb-5">
