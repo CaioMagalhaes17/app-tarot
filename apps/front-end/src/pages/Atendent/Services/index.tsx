@@ -46,8 +46,8 @@ export function AtendentServicesPage() {
   }, [allServices, myServices])
 
   const handleToggleService = (serviceId: string) => {
-    setSelectedServices(prev => prev.map(service => 
-      service.serviceId === serviceId 
+    setSelectedServices(prev => prev.map(service =>
+      service.serviceId === serviceId
         ? { ...service, isSelected: !service.isSelected }
         : service
     ))
@@ -57,10 +57,10 @@ export function AtendentServicesPage() {
     // Remove tudo que não é número
     const numericValue = value.replace(/\D/g, '')
     // Converte para número (centavos) e divide por 100 para ter o valor real
-    const price = numericValue ? parseFloat(numericValue) / 100 : 0
-    
-    setSelectedServices(prev => prev.map(service => 
-      service.serviceId === serviceId 
+    const price = parseFloat(numericValue)
+
+    setSelectedServices(prev => prev.map(service =>
+      service.serviceId === serviceId
         ? { ...service, price }
         : service
     ))
@@ -78,16 +78,16 @@ export function AtendentServicesPage() {
   }
 
   const handleDescriptionChange = (serviceId: string, description: string) => {
-    setSelectedServices(prev => prev.map(service => 
-      service.serviceId === serviceId 
+    setSelectedServices(prev => prev.map(service =>
+      service.serviceId === serviceId
         ? { ...service, description }
         : service
     ))
   }
 
   const handleToggleActive = (serviceId: string) => {
-    setSelectedServices(prev => prev.map(service => 
-      service.serviceId === serviceId 
+    setSelectedServices(prev => prev.map(service =>
+      service.serviceId === serviceId
         ? { ...service, isActive: !service.isActive }
         : service
     ))
@@ -155,7 +155,7 @@ export function AtendentServicesPage() {
         title: 'Serviços salvos com sucesso!',
         icon: 'success'
       })
-      
+
       // Recarrega os serviços para atualizar os IDs
       window.location.reload()
     } catch {
@@ -179,7 +179,7 @@ export function AtendentServicesPage() {
       <div className={`flex flex-col w-full ${isMobile ? 'p-4' : 'max-w-[1200px] p-8'}`}>
         <div className="flex items-center gap-4 mb-8">
           <div className="flex-1 border-t border-gray-300"></div>
-          <Text className={`text-white font-smythe ${isMobile ? 'text-5xl' : 'text-7xl'} whitespace-nowrap px-2`}>
+          <Text as="h1" className={`text-white font-smythe ${isMobile ? 'text-5xl' : 'text-7xl'} whitespace-nowrap px-2`}>
             Meus Serviços
           </Text>
           <div className="flex-1 border-t border-gray-300"></div>
@@ -191,13 +191,13 @@ export function AtendentServicesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {selectedServices.map((service) => (
-            <div 
-              key={service.serviceId} 
+            <div
+              key={service.serviceId}
               className={`border rounded-xl p-4 ${service.isSelected ? 'border-primary bg-primary/10' : 'border-gray-600 bg-gray-800/50'}`}
             >
               <div className="flex items-start gap-4 mb-4">
-                <img 
-                  src={service.serviceImg} 
+                <img
+                  src={service.serviceImg}
                   alt={service.serviceName}
                   className="w-20 h-20 rounded-lg object-cover"
                 />
@@ -221,7 +221,7 @@ export function AtendentServicesPage() {
                 <div className="space-y-4 mt-4">
                   <div className="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
                     <div>
-                      <Text className="text-white font-bold" as="label">Status do Serviço</Text>
+                      <Text className="text-white font-bold" as="p">Status do Serviço</Text>
                       <Text className="text-gray-400 text-sm" as="p">
                         {service.isActive ? 'Ativo - Visível para clientes' : 'Inativo - Oculto dos clientes'}
                       </Text>
@@ -237,12 +237,12 @@ export function AtendentServicesPage() {
                     </label>
                   </div>
                   <div>
-                    <Text className="text-white mb-2" as="label">Preço</Text>
+                    <Text className="text-white mb-2" as="p">Preço</Text>
                     <div className="flex items-center gap-2">
                       <span className="text-white">R$</span>
                       <InputMask
-                        mask="999999,99"
-                        value={formatPrice(service.price)}
+                        mask="99,99"
+                        value={service.price}
                         onChange={(e) => handlePriceChange(service.serviceId, e.target.value)}
                         className="flex-1 bg-black border border-gray-600 rounded-lg px-4 py-2 text-white"
                         placeholder="0,00"
@@ -250,7 +250,7 @@ export function AtendentServicesPage() {
                     </div>
                   </div>
                   <div>
-                    <Text className="text-white mb-2" as="label">Descrição Personalizada</Text>
+                    <Text className="text-white mb-2" as="p">Descrição Personalizada</Text>
                     <textarea
                       value={service.description}
                       onChange={(e) => handleDescriptionChange(service.serviceId, e.target.value)}
@@ -265,7 +265,7 @@ export function AtendentServicesPage() {
         </div>
 
         <div className="flex justify-end gap-4">
-          <Button 
+          <Button
             onClick={handleSave}
             className="btn-primary btn-xl"
           >

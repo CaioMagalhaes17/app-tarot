@@ -1,6 +1,5 @@
 import { Button, HSeparator, IconChat, IconMoon, IconQuote, Text } from "@app/ui";
 import { Star } from "lucide-react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AtendentService } from "../../../../@types/atendent-service.type";
 import { FeedbackType } from "../../../../@types/atendent.type";
@@ -26,7 +25,6 @@ export function MobileAtendentProfileComponent({
   isLoadingServices,
   isLoadingFeedbacks
 }: MobileAtendentProfileComponentProps) {
-  const [showAllAbout, setShowAllAbout] = useState<boolean>(false)
   const navigate = useNavigate()
   return (
     <>
@@ -91,7 +89,7 @@ export function MobileAtendentProfileComponent({
                       <img src={item.service.serviceImg} className="rounded-xl h-[150px]" />
                       <Text className="text-white font-smythe text-2xl mt-2" as="h1">{item.service.name}</Text>
                       <Text className="mt-2 mb-2" as="span">{item.description}</Text>
-                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${item.price.toFixed(2).replace('.', ',')}</Text>
+                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${(item.price / 100).toFixed(2).replace('.', ',')}</Text>
                       <Button className="btn-primary">Consultar</Button>
                     </div>
                   ))}

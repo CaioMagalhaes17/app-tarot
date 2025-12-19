@@ -91,7 +91,7 @@ export function AtendentProfileComponent({
                       <img src={item.service.serviceImg} className="rounded-xl h-[180px]" />
                       <Text className="text-white font-smythe text-4xl mt-2" as="h1">{item.service.name}</Text>
                       <Text className="mt-2 mb-5" as="span">{item.description}</Text>
-                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${item.price.toFixed(2).replace('.', ',')}</Text>
+                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${(item.price / 100).toFixed(2).replace('.', ',')}</Text>
                       <Button onClick={() => navigate('schedule')} className="btn-outline-primary ">Consultar</Button>
                     </div>
                   ))}
