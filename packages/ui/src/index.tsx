@@ -101,3 +101,4 @@ export { IconMoon } from "./Icons/IconMoon";
 export { IconSun } from "./Icons/IconSun";
 export { IconShoppingBag } from "./Icons/IconShoppingBag";
 export { IconSettings } from "./Icons/IconSettings";
+export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "./components/Table"

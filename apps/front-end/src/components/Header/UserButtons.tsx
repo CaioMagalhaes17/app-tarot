@@ -1,4 +1,4 @@
-import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconChat, IconLogout, IconSettings, IconUser, Text, VSeparator } from "@app/ui";
+import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconChat, IconLogout, IconUser, Text, VSeparator } from "@app/ui";
 import { userImg } from "../../constants/images";
 import { useHeaderController } from "./useHeaderController";
 import { Link } from "react-router-dom";
@@ -28,12 +28,6 @@ export function UserButtons() {
               <Link to="/profile" className=" flex flex-row gap-2">
                 <IconUser />
                 Perfil
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-dark dark:text-white">
-              <Link to="/configurations" className=" flex flex-row gap-2">
-                <IconSettings />
-                Configurações
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="text-danger">

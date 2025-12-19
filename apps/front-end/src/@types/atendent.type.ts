@@ -1,9 +1,11 @@
+import { UserType } from "./user.type"
+
 export type AtendentType = {
   id: string,
   name: string,
   rating: number,
   bio: string,
-  profileImg: string,
+  user: UserType
 }
 
 export type FeedbackType = {

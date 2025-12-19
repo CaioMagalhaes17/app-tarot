@@ -1,9 +1,9 @@
-import { useAtendentsController } from "../useAtendentsController"
 import { MobileAtendentProfileComponent } from "../../../components/Atendents/Profile/mobile"
 import { AtendentProfileComponent } from "../../../components/Atendents/Profile/desktop"
+import useStore from "../../../state"
 
 export function AtendentProfilePage() {
-  const { isMobile } = useAtendentsController()
+  const { isMobile } = useStore()
   return (
     <>
       {isMobile ? (

@@ -1,67 +1,34 @@
-import { useState } from "react"
-import { AtendentType } from "../../@types/atendent.type"
+import { useEffect, useState } from "react";
+import { AtendentType } from "../../@types/atendent.type";
+import { getAtendents } from "../../api/atendents/search";
+import { useQuery } from "@tanstack/react-query";
 
-export function useSearchAtendents() {
-  const [atendents] = useState<AtendentType[]>([
-    {
-      id: '1',
-      name: 'Aloisio Numerologo',
-      rating: 3,
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
+export function useSearchAtendents(
+  pagination: { limit: number; page: number },
+  searchParams: URLSearchParams
+) {
+  const [atendents, setAtendents] = useState<AtendentType[]>()
 
-    },
-    {
-      id: '1',
-      name: 'Aloisio Numerologo',
-      rating: 3,
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
+  const { data, isLoading } = useQuery({
+    queryKey: [
+      'search-atendents',
+      pagination.page,
+      pagination.limit,
+      searchParams.toString()
+    ],
+    queryFn: () =>
+      getAtendents({
+        page: pagination.page,
+        limit: pagination.limit,
+        search: searchParams.get('search') || undefined,
+      }),
+  })
 
-    },
-    {
-      id: '1',
-      name: 'Aloisio Numerologo',
-      rating: 3,
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
+  useEffect(() => {
+    if (data && !isLoading) {
+      setAtendents(data.data)
+    }
+  }, [data, isLoading])
 
-    },
-    {
-      id: '1',
-      name: 'Aloisio Numerologo',
-      rating: 3,
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
-
-    },
-    {
-      id: '1',
-      name: 'Aloisio Numerologo',
-      rating: 3,
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
-
-    },
-    {
-      id: '1',
-      name: 'Aloisio Numerologo',
-      rating: 3,
-      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-      profileImg: 'https://static.cartasciganas.com/images/users/avatars/cropped_1340205481.jpeg',
-
-    },
-  ])
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ['search-atendents'],
-  //   queryFn: () => SearchAtendents()
-  // })
-
-  // useEffect(() => {
-  //   if (data && !isLoading) return setAtendents(atendents)
-  // }, [isLoading, data])
-
-
-  return { atendents }
-
+  return { atendents, pagination: data?.pagination, isLoading }
 }

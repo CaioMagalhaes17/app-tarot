@@ -151,7 +151,7 @@ export function AtendentProfileComponent({ profileImg, name, rating }: { profile
                       <Text className="text-white font-smythe text-4xl mt-2" as="h1">{item.name}</Text>
                       <Text className="mt-2 mb-5" as="span">{item.description}</Text>
                       <Text className="text-success text-lg mt-2 mb-5" as="span">{item.price}</Text>
-                      <Button className="btn-primary ">Consultar</Button>
+                      <Button onClick={() => navigate('schedule')} className="btn-outline-primary ">Consultar</Button>
                     </div>
                   </>
                 ))}

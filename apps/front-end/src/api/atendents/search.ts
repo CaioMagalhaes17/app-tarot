@@ -1,20 +1,19 @@
 import { AxiosError } from "axios"
-import Swal from "sweetalert2";
 import { Api } from "../axios";
 
-export async function SearchAtendents() {
+type AtendentsParams = {
+  limit: number;
+  page: number;
+  service?: string
+  search?: string
+}
+export async function getAtendents(params: AtendentsParams) {
   try {
-    const response = await Api().get('/user/login')
+    const response = await Api().get('/atendent', { params: params })
     return response.data
   } catch (error) {
     if (error instanceof AxiosError) {
-      if (error.status === 400 && error.response?.data.message.includes('inválidos.')) {
-        Swal.fire({
-          title: 'Login ou senha inválidos',
-          icon: 'error'
-        })
-      }
-
+      console.error('deu bosta')
     }
   }
 }
