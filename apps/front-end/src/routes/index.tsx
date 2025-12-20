@@ -52,6 +52,10 @@ export const routes: RouteObject[] = [
         element: <Navigate to="/atendents/list" replace />
       },
       {
+        path: '/atendent',
+        element: <Navigate to="/" replace />
+      },
+      {
         path: '/atendents/profile/:id/schedule',
         element: <SchedulePage />
       },

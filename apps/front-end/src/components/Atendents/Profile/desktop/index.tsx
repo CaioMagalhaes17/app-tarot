@@ -59,7 +59,7 @@ export function AtendentProfileComponent({
                 <Button onClick={() => navigate('schedule')} className="btn-primary btn-xl flex flex-row gap-2 w-full"><IconChat /> Consulta por Chat</Button>
                 <Button className="btn-purple btn-xl flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
                 <Button className="btn-warning btn-xl  w-full  flex flex-row gap-2"><Star />Avaliações</Button>
-                <ScheduleViewModal 
+                <ScheduleViewModal
                   schedule={schedule}
                   trigger={
                     <Button className="btn-outline-primary btn-xl flex w-full flex-row gap-2">
@@ -77,7 +77,7 @@ export function AtendentProfileComponent({
                 <div className="flex-1 border-t border-gray-300"></div>
               </div>
 
-              <div className="text-left text-lg font-normal">
+              <div className="text-left text-white text-3xl font-normal">
                 <Text as="span">{bio}</Text>
               </div>
               <div onClick={() => setShowAllAbout(!showAllAbout)} className="cursor-pointer ml-auto flex-row flex items-center gap-2 ">

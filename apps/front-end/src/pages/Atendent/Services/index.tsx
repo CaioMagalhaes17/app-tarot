@@ -56,25 +56,12 @@ export function AtendentServicesPage() {
   const handlePriceChange = (serviceId: string, value: string) => {
     // Remove tudo que não é número
     const numericValue = value.replace(/\D/g, '')
-    // Converte para número (centavos) e divide por 100 para ter o valor real
     const price = parseFloat(numericValue)
-
     setSelectedServices(prev => prev.map(service =>
       service.serviceId === serviceId
         ? { ...service, price }
         : service
     ))
-  }
-
-  const formatPrice = (price: number): string => {
-    if (!price || price === 0) return ''
-    // Multiplica por 100 para ter centavos
-    const cents = Math.round(price * 100).toString()
-    // Formata como XX,XX ou XXX,XX etc
-    if (cents.length <= 2) {
-      return `0,${cents.padStart(2, '0')}`
-    }
-    return `${cents.slice(0, -2)},${cents.slice(-2)}`
   }
 
   const handleDescriptionChange = (serviceId: string, description: string) => {
@@ -125,7 +112,7 @@ export function AtendentServicesPage() {
           id: service.atendentServiceId,
           payload: {
             description: service.description,
-            price: service.price,
+            price: Number((service.price / 100).toFixed(2)),
             isActive: service.isActive
           }
         })
@@ -241,7 +228,7 @@ export function AtendentServicesPage() {
                     <div className="flex items-center gap-2">
                       <span className="text-white">R$</span>
                       <InputMask
-                        mask="99,99"
+                        mask="99.99"
                         value={service.price}
                         onChange={(e) => handlePriceChange(service.serviceId, e.target.value)}
                         className="flex-1 bg-black border border-gray-600 rounded-lg px-4 py-2 text-white"

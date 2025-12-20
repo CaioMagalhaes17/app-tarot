@@ -58,7 +58,7 @@ export function MobileAtendentProfileComponent({
               <Button onClick={() => navigate('schedule')} className="btn-primary flex flex-row gap-2 w-full "><IconChat /> Agendar consulta</Button>
               <Button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn-purple flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
               <Button onClick={() => document.getElementById('feedbacks')?.scrollIntoView({ behavior: 'smooth' })} className="btn-warning  w-full  flex flex-row gap-2"><Star />Avaliações</Button>
-              <ScheduleViewModal 
+              <ScheduleViewModal
                 schedule={schedule}
                 trigger={
                   <Button className="btn-outline-primary flex w-full flex-row gap-2">
@@ -77,7 +77,7 @@ export function MobileAtendentProfileComponent({
                 <div className="flex-1 border-t border-gray-300"></div>
               </div>
 
-              <div className="text-left text-lg font-normal">
+              <div className="text-left text-white text-3xl font-normal">
                 <Text as="span">{bio}</Text>
               </div>
             </div>

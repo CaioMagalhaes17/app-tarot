@@ -1,5 +1,5 @@
 import { Button, HSeparator, IconQuote, IconPencil, Text, Input } from "@app/ui";
-import { Clock, Star } from "lucide-react";
+import { Clock, Hammer, Star } from "lucide-react";
 import { useState } from "react";
 import { AtendentService } from "../../../../@types/atendent-service.type";
 import { FeedbackType, AtendentType } from "../../../../@types/atendent.type";
@@ -9,6 +9,7 @@ import useStore from "../../../../state";
 import { ScheduleEditor } from "../ScheduleEditor";
 import { ScheduleViewModal } from "../ScheduleViewModal";
 import { Schedule } from "../../../../@types/schedule.type";
+import { useNavigate } from "react-router-dom";
 
 type MobileAtendentProfileEditComponentProps = {
   atendent: AtendentType;
@@ -71,7 +72,7 @@ export function MobileAtendentProfileEditComponent({
     setSchedule(atendent.schedule || {})
     setIsEditing(false)
   }
-
+  const navigate = useNavigate()
   return (
     <>
       <div className="flex min-h-screen justify-center">
@@ -139,6 +140,9 @@ export function MobileAtendentProfileEditComponent({
                       </Button>
                     }
                   />
+                  <Button onClick={() => navigate('/atendent/services')} className="btn-warning btn-xl flex w-full flex-row gap-2">
+                    <Hammer /> Alterar Serviços
+                  </Button>
                 </>
               )}
             </div>
@@ -160,7 +164,7 @@ export function MobileAtendentProfileEditComponent({
                   placeholder="Descreva sobre você..."
                 />
               ) : (
-                <div className="text-left text-lg font-normal">
+                <div className="text-left text-2xl text-white font-normal">
                   <Text as="span">{bio}</Text>
                 </div>
               )}
@@ -198,7 +202,7 @@ export function MobileAtendentProfileEditComponent({
                       <img src={item.service.serviceImg} className="rounded-xl h-[150px]" />
                       <Text className="text-white font-smythe text-2xl mt-2" as="h1">{item.service.name}</Text>
                       <Text className="mt-2 mb-2" as="span">{item.description}</Text>
-                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${item.price.toFixed(2).replace('.', ',')}</Text>
+                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${(item.price / 100).toFixed(2).replace('.', ',')}</Text>
                     </div>
                   ))}
                 </div>
