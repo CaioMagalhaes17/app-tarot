@@ -36,7 +36,7 @@ export function ScheduleEditor({ schedule, onChange }: ScheduleEditorProps) {
 
   const updateTimeSlot = (day: keyof Schedule, index: number, field: 'start' | 'end', value: string) => {
     const currentSlots = schedule[day] || []
-    const updatedSlots = currentSlots.map((slot, i) => 
+    const updatedSlots = currentSlots.map((slot, i) =>
       i === index ? { ...slot, [field]: value } : slot
     )
     onChange({
@@ -60,7 +60,7 @@ export function ScheduleEditor({ schedule, onChange }: ScheduleEditorProps) {
                 <IconPlus /> Adicionar Horário
               </Button>
             </div>
-            
+
             {slots.length === 0 ? (
               <Text className="text-gray-400" as="p">Nenhum horário configurado</Text>
             ) : (
@@ -68,7 +68,7 @@ export function ScheduleEditor({ schedule, onChange }: ScheduleEditorProps) {
                 {slots.map((slot, index) => (
                   <div key={index} className="flex items-center gap-4 bg-gray-900/50 p-3 rounded-lg">
                     <div className="flex items-center gap-2">
-                      <Text className="text-white" as="label">De:</Text>
+                      <Text className="text-white" as="p">De:</Text>
                       <input
                         type="time"
                         value={slot.start}
@@ -77,7 +77,7 @@ export function ScheduleEditor({ schedule, onChange }: ScheduleEditorProps) {
                       />
                     </div>
                     <div className="flex items-center gap-2">
-                      <Text className="text-white" as="label">Até:</Text>
+                      <Text className="text-white" as="p">Até:</Text>
                       <input
                         type="time"
                         value={slot.end}
