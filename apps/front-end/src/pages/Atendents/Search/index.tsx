@@ -24,7 +24,7 @@ export function AtendentsSearchPage() {
 
     <>
       {isMobile ? (
-        <MobileAtendentsListComponent pages={pagination.pages} page={Number(searchParams.get('page')) || 1} atendents={atendents} setSearchParams={setSearchParams} />
+        <MobileAtendentsListComponent pages={pagination?.pages} page={Number(searchParams.get('page')) || 1} atendents={atendents} setSearchParams={setSearchParams} />
       ) : (
         <>
           <Panel className="mb-10  min-h-screen max-w-[1400px] ml-auto mr-auto">

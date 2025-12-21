@@ -4,7 +4,7 @@ import { SetURLSearchParams, useNavigate } from "react-router-dom";
 import { AtendentType } from "../../../@types/atendent.type";
 import { Pagination } from "./pagination";
 
-export function MobileAtendentsListComponent({ atendents, setSearchParams, page, pages }: { pages: number, page: number, setSearchParams: SetURLSearchParams, atendents?: AtendentType[] }) {
+export function MobileAtendentsListComponent({ atendents, setSearchParams, page, pages }: { pages?: number, page: number, setSearchParams: SetURLSearchParams, atendents?: AtendentType[] }) {
   const navigate = useNavigate()
   return (
     <>
