@@ -3,6 +3,7 @@ import { useHeaderController } from "./useHeaderController";
 import { LoginButtons } from "./LoginButtons";
 import { UserButtons } from "./UserButtons";
 import { AtendentButtons } from "./AtendentButtons";
+import { NotificationBell } from "../Notifications/NotificationBell";
 import { Link } from "react-router-dom";
 
 export function Header() {
@@ -55,6 +56,7 @@ export function Header() {
         ) : (
           <>
             <div className="flex flex-row items-center gap-5">
+              <NotificationBell />
               {isAtendent ? (
                 <AtendentButtons />
               ) : (
