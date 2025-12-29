@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { login } from "../../api/login";
-import { Button, IconLockDots, IconMail, IconPhone, Input, Text } from "@app/ui";
-import useStore from "../../state";
+import { Button, IconLockDots, IconMail, Input } from "@app/ui";
+import { GoogleLogin } from "@react-oauth/google";
+import { loginWithGoogle as loginWithGoogleAPI } from "../../api/login-google";
 
 interface LoginForm {
   login: string;
@@ -15,7 +15,6 @@ export function LoginPage() {
   const [searchParams] = useSearchParams({
     redirect: '',
   })
-  const [useEmail, setUseEmail] = useState<boolean>(true)
   const { register, formState: { errors }, handleSubmit } = useForm()
   const { mutateAsync } = useMutation({
     mutationFn: (data: LoginForm) => login(data),
@@ -29,7 +28,20 @@ export function LoginPage() {
     localStorage.setItem('isAtendent', 'false')
     window.location.replace('/')
   };
-  const { isMobile } = useStore()
+
+  const loginWithGoogle = async (accessToken: string) => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('isAtendent')
+    const response = await loginWithGoogleAPI(accessToken);
+    console.log('response api', response)
+    if (response.accessToken && response.accessToken.trim() !== '') {
+      localStorage.setItem('accessToken', response.accessToken)
+      localStorage.setItem('isAtendent', 'false')
+    } else {
+      throw new Error('Token não recebido do servidor');
+    }
+    window.location.replace('/')
+  };
   return (
     <>
       <div style={{ backgroundImage: 'url("/stars2.png")' }} className="h-full w-full inset-0">
@@ -43,18 +55,7 @@ export function LoginPage() {
 
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-white ">
-                  <div className={`flex mb-4 gap-5 ${isMobile ? 'flex-col' : 'flex-row'}`}>
-                    <label className="flex items-center text-white">
-                      <input type="radio" onClick={() => setUseEmail(true)} className="mr-2" checked={useEmail} />
-                      <span>Usar Email</span>
-                    </label>
-                    <label className="flex items-center text-white">
-                      <input type="radio" onClick={() => setUseEmail(false)} className="mr-2" checked={!useEmail} />
-                      <span>Usar Número de Telefone</span>
-                    </label>
-                  </div>
-
-                  {useEmail ? (<div>
+                  <div>
                     <label className="text-left text-white" htmlFor="Name">Email</label>
                     <div className="relative text-white-dark">
                       <Input id="Name" type="text" placeholder="Digite seu email" {...register('login', { required: true })} className="form-input !ps-10 placeholder:text-white-dark" />
@@ -73,17 +74,7 @@ export function LoginPage() {
                       </div>
                       {errors.password && (<p className="font-bold text-danger">Campo Obrigatório</p>)}
                     </div>
-                  </div>) : (<div>
-                    <label className="text-white" htmlFor="Name">Telefone</label>
-                    <div className="relative text-white-dark">
-                      <Input {...register('telNum', { required: true })} id="Name" placeholder="Digite seu número de telefone" className="form-input !ps-10 placeholder:text-white-dark" />
-                      <span className="absolute start-4 top-1/2 -translate-y-1/2">
-                        <IconPhone />
-                      </span>
-                    </div>
-                    {errors.telNum && (<p className="font-bold text-danger">Campo Obrigatório</p>)}
-
-                  </div>)}
+                  </div>
 
 
                   <Button type="submit" className="btn btn-primary !mt-6 w-full border-0 uppercase ">
@@ -95,16 +86,15 @@ export function LoginPage() {
                   <span className="relative px-2 font-extrabold uppercase text-white bg-white-dark rounded">Outras formas de entrar</span>
                 </div>
 
-                <div className="flex flex-col mb-10">
-                  <div className="flex flex-row border border-black p-2 items-center justify-center">
-                    <img src="https://www.cdnlogo.com/logos/g/35/google-icon.svg" className="w-[50px] h-[50px]" />
-                    <Text className="ml-5 text-white" as="span">Entrar com Google</Text>
-                  </div>
+                <div className='mr-auto ml-auto flex justify-center mb-5'>
+                  <GoogleLogin onSuccess={
+                    async (response) => await loginWithGoogle(response.credential || '')
+                  } onError={() => console.log('login failed')} width={'300px'} />
                 </div>
 
                 <div className="text-center text-white mb-5">
                   Não possui uma conta?&nbsp;
-                  <Link to={`${searchParams.get('redirect') !== '' ? "/signup?redirect=" + searchParams.get('redirect') : "/signup"}`} className="uppercase text-primary underline transition">
+                  <Link to={`${searchParams.get('redirect') !== '' ? "/signup?redirect=" + searchParams.get('redirect') : "/signup"}`} className="uppercase relative px-2 font-extrabold uppercase text-white bg-white-dark rounded underline transition">
                     Cadastrar
                   </Link>
                 </div>

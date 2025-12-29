@@ -1,11 +1,10 @@
-import { Button, HSeparator, IconLockDots, IconMail, IconPhone, Input, Text } from "@app/ui"
+import { Button, HSeparator, IconLockDots, IconMail, IconPhone, Input } from "@app/ui"
 import { useLoginController } from "./useLoginController"
 import SignUpPage from "./Signup"
-
-
+import { GoogleLogin } from '@react-oauth/google';
 
 export function Login({ redirectUrl }: { redirectUrl?: string }) {
-  const { errors, handleSubmit, isMobile, onSubmit, register, searchParams, setUseEmail, useEmail, setSearchParams } = useLoginController({ redirectUrl })
+  const { errors, handleSubmit, onSubmit, register, searchParams, useEmail, setSearchParams, loginWithGoogle } = useLoginController({ redirectUrl })
 
   return (
     <>
@@ -22,16 +21,7 @@ export function Login({ redirectUrl }: { redirectUrl?: string }) {
                     <HSeparator />
                   </div>
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-white">
-                    <div className={`flex text-lg mb-4 gap-5 ${isMobile ? 'flex-col' : 'flex-row'}`}>
-                      <label className="flex items-center text-white">
-                        <input type="radio" onClick={() => setUseEmail(false)} className="mr-2" checked={!useEmail} />
-                        <span>Usar Número de Telefone</span>
-                      </label>
-                      <label className="flex items-center text-white">
-                        <input type="radio" onClick={() => setUseEmail(true)} className="mr-2" checked={useEmail} />
-                        <span>Usar Email</span>
-                      </label>
-                    </div>
+
 
                     {useEmail ? (<div>
                       <label className="text-left text-white" htmlFor="Name">Email</label>
@@ -74,11 +64,11 @@ export function Login({ redirectUrl }: { redirectUrl?: string }) {
                     <span className="relative px-2 font-extrabold uppercase text-white bg-white-dark rounded">Outras formas de entrar</span>
                   </div>
 
-                  <div className="flex flex-col mb-10">
-                    <div className="flex flex-row bg-[#3403918f] border rounded-xl border-black p-2 items-center justify-center">
-                      <img src="https://www.cdnlogo.com/logos/g/35/google-icon.svg" className="w-[50px] h-[50px]" />
-                      <Text className="ml-5 text-lg font-bold text-white" as="span">Entrar com Google</Text>
-                    </div>
+
+                  <div className='mr-auto ml-auto flex justify-center mb-5'>
+                    <GoogleLogin onSuccess={
+                      async (response) => await loginWithGoogle(response.credential || '')
+                    } onError={() => console.log('login failed')} width={'300px'} />
                   </div>
 
                   <div className="text-center text-white mb-5 text-lg">

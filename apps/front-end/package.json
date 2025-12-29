@@ -10,11 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "mantine-datatable": "^1.8.8",
     "@mantine/core": "^5.10.5",
     "@mantine/hooks": "^5.10.5",
     "@radix-ui/react-slot": "^1.1.2",
     "@react-google-maps/api": "^2.20.6",
+    "@react-oauth/google": "^0.13.4",
     "@tanstack/react-query": "^5.66.9",
     "@tanstack/react-table": "^8.21.3",
     "@tsparticles/engine": "^3.8.1",
@@ -27,6 +27,7 @@
     "dayjs": "^1.11.13",
     "embla-carousel-react": "^8.5.2",
     "lucide-react": "^0.438.0",
+    "mantine-datatable": "^1.8.8",
     "react": "^18.3.1",
     "react-calendar": "^6.0.0",
     "react-date-picker": "^12.0.1",

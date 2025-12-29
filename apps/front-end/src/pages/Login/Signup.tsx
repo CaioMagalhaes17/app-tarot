@@ -1,15 +1,14 @@
-import { Button, IconLockDots, IconMail, IconPhone, IconUser, Input, Text } from "@app/ui";
+import { Button, IconLockDots, IconMail, IconUser, Input, Text } from "@app/ui";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { signup } from "../../api/signup";
-import useStore from "../../state";
-import Swal from "sweetalert2";
+import { loginWithGoogle as loginWithGoogleAPI } from "../../api/login-google";
 import { sendVerifyLink } from "../../api/sendVerifyLink";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function SignUpPage() {
-  const [useEmail, setUseEmail] = useState<boolean>(true)
   const [emailSent, setEmailSent] = useState(false)
   const { register, handleSubmit, formState: { errors }, setError, getValues } = useForm()
   const { mutateAsync } = useMutation({
@@ -23,13 +22,7 @@ export default function SignUpPage() {
 
 
   async function onSubmit(data: FieldValues) {
-    if (!useEmail) {
-      Swal.fire({
-        title: 'Login com número de telefone temporariamente indisponível',
-        text: 'Utilize email e senha enquanto',
-        icon: 'error'
-      })
-    }
+
     localStorage.removeItem('accessToken')
     localStorage.removeItem('isAtendent')
     if (data.password !== data.passwordConfirm) {
@@ -56,13 +49,18 @@ export default function SignUpPage() {
 
   }
 
-  async function handleRegisterWithGoogle() {
-    Swal.fire({
-      title: 'Login com Google temporariamente indisponível',
-      text: 'Utilize email e senha por enquanto',
-      icon: 'error'
-    })
-  }
+  const loginWithGoogle = async (accessToken: string) => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('isAtendent')
+    const response = await loginWithGoogleAPI(accessToken);
+    if (response.accessToken && response.accessToken.trim() !== '') {
+      localStorage.setItem('accessToken', response.accessToken)
+      localStorage.setItem('isAtendent', 'false')
+    } else {
+      throw new Error('Token não recebido do servidor');
+    }
+    window.location.replace('/')
+  };
 
   async function handleResendLink() {
     const { name, email } = getValues()
@@ -72,7 +70,6 @@ export default function SignUpPage() {
     })
   }
 
-  const { isMobile } = useStore()
 
   return (
     <>
@@ -98,67 +95,45 @@ export default function SignUpPage() {
                         </div>
                         {errors.name && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
                       </div>
-                      <div className={`flex mb-4 gap-5 ${isMobile ? 'flex-col' : 'flex-row'}`}>
-                        <label className="flex items-center text-white">
-                          <input type="radio" onClick={() => setUseEmail(true)} className="mr-2" checked={useEmail} />
-                          <span>Usar Email</span>
-                        </label>
-                        <label className="flex items-center text-white">
-                          <input type="radio" onClick={() => setUseEmail(false)} className="mr-2" checked={!useEmail} />
-                          <span>Usar Número de Telefone</span>
-                        </label>
-                      </div>
 
-                      {useEmail ? (
-                        <>
-                          <div>
-                            <label htmlFor="Name">Email</label>
-                            <div className="relative text-white-dark">
-                              <Input {...register('email', { required: true })} type="text" placeholder="Digite seu email" className="form-input !ps-10 placeholder:text-white-dark" />
-                              <span className="absolute start-4 top-1/2 -translate-y-1/2">
-                                <IconMail />
-                              </span>
-                            </div>
-                            {errors.name && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
 
-                          </div>
-                          <div className="mt-5">
-                            <label htmlFor="Name">Senha</label>
-                            <div className="relative text-white-dark">
-                              <Input
-                                {...register('password', { required: { message: 'Campo Obrigatório*', value: true }, minLength: { message: 'Sua senha deve conter no mínimo 8 caracteres', value: 8 } })}
-                                type="password"
-                                placeholder="Digite sua senha"
-                                className="form-input !ps-10 placeholder:text-white-dark"
-                              />
-                              <span className="absolute start-4 top-1/2 -translate-y-1/2">
-                                <IconLockDots />
-                              </span>
-                            </div>
-                            {errors.password && (<p className="font-bold text-danger text-left">{errors.password.message?.toString() || 'Campo Obrigatório*'}</p>)}
-                          </div>
-                          <div className="mt-5">
-                            <label htmlFor="Name">Confirmar senha</label>
-                            <div className="relative text-white-dark">
-                              <Input {...register('passwordConfirm', { required: true })} type="password" placeholder="Confirme sua senha" className="form-input !ps-10 placeholder:text-white-dark" />
-                              <span className="absolute start-4 top-1/2 -translate-y-1/2">
-                                <IconLockDots />
-                              </span>
-                            </div>
-                            {errors.passwordConfirm && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
-                            {errors.passwordConfirm?.type === 'confirmError' && (<p className="font-bold text-danger text-left">{errors.passwordConfirm?.message as string}</p>)}
-                          </div>
-                        </>
-                      ) : (<div>
-                        <label htmlFor="Name">Telefone</label>
+                      <div>
+                        <label htmlFor="Name">Email</label>
                         <div className="relative text-white-dark">
-                          <Input  {...register('numTel', { required: true })} placeholder="Digite seu número de telefone" className="form-input !ps-10 placeholder:text-white-dark" />
+                          <Input {...register('email', { required: true })} type="text" placeholder="Digite seu email" className="form-input !ps-10 placeholder:text-white-dark" />
                           <span className="absolute start-4 top-1/2 -translate-y-1/2">
-                            <IconPhone />
+                            <IconMail />
                           </span>
                         </div>
-                        {errors.numTel && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
-                      </div>)}
+                        {errors.name && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
+
+                      </div>
+                      <div className="mt-5">
+                        <label htmlFor="Name">Senha</label>
+                        <div className="relative text-white-dark">
+                          <Input
+                            {...register('password', { required: { message: 'Campo Obrigatório*', value: true }, minLength: { message: 'Sua senha deve conter no mínimo 8 caracteres', value: 8 } })}
+                            type="password"
+                            placeholder="Digite sua senha"
+                            className="form-input !ps-10 placeholder:text-white-dark"
+                          />
+                          <span className="absolute start-4 top-1/2 -translate-y-1/2">
+                            <IconLockDots />
+                          </span>
+                        </div>
+                        {errors.password && (<p className="font-bold text-danger text-left">{errors.password.message?.toString() || 'Campo Obrigatório*'}</p>)}
+                      </div>
+                      <div className="mt-5">
+                        <label htmlFor="Name">Confirmar senha</label>
+                        <div className="relative text-white-dark">
+                          <Input {...register('passwordConfirm', { required: true })} type="password" placeholder="Confirme sua senha" className="form-input !ps-10 placeholder:text-white-dark" />
+                          <span className="absolute start-4 top-1/2 -translate-y-1/2">
+                            <IconLockDots />
+                          </span>
+                        </div>
+                        {errors.passwordConfirm && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
+                        {errors.passwordConfirm?.type === 'confirmError' && (<p className="font-bold text-danger text-left">{errors.passwordConfirm?.message as string}</p>)}
+                      </div>
                       <Button type="submit" className="btn btn-primary !mt-6 w-full border-0 uppercase ">
                         Cadastrar
                       </Button>
@@ -168,17 +143,16 @@ export default function SignUpPage() {
                       <span className="relative px-2 font-extrabold uppercase text-white bg-white-dark rounded">Outras formas de criar conta</span>
                     </div>
 
-                    <button onClick={() => handleRegisterWithGoogle()} className="w-full flex flex-col mb-10 rounded-xl bg-black">
-                      <div className="flex flex-row p-2 items-center justify-center">
-                        <img src="https://www.cdnlogo.com/logos/g/35/google-icon.svg" className="w-[50px] h-[50px]" />
-                        <Text className="ml-5 text-dark dark:text-white" as="span">Cadastrar com Google</Text>
-                      </div>
-                    </button>
+                    <div className='mr-auto ml-auto flex justify-center mb-5'>
+                      <GoogleLogin text="signup_with" onSuccess={
+                        async (response) => await loginWithGoogle(response.credential || '')
+                      } onError={() => console.log('login failed')} width={'300px'} />
+                    </div>
 
 
                     <div className="text-center text-dark dark:text-white mb-5">
                       Já possui uma conta?&nbsp;
-                      <Link to="/login" className="uppercase text-primary underline transition">
+                      <Link to="/login" className="uppercase relative px-2 font-extrabold uppercase text-white bg-white-dark rounded underline transition">
                         Entrar
                       </Link>
                     </div>
