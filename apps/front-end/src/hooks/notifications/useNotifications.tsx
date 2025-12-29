@@ -38,15 +38,25 @@ export function useNotifications() {
       ? 'http://localhost:3000' 
       : 'https://app-tarot-backend.fly.dev';
 
+    let shouldReconnect = true;
+    let authErrorCount = 0;
+    const MAX_AUTH_ERRORS = 2;
+
     const newSocket = io(`${baseURL}/notifications`, {
       auth: {
         token: `Bearer ${token}`,
       },
       transports: ["websocket", "polling"],
+      reconnection: true,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      reconnectionAttempts: 5,
     });
 
     newSocket.on("connect", () => {
       console.log("Conectado ao WebSocket de notificações");
+      // Reset contador de erros de auth quando conecta com sucesso
+      authErrorCount = 0;
     });
 
     newSocket.on("new_notification", (notification: Notification) => {
@@ -74,14 +84,43 @@ export function useNotifications() {
 
     newSocket.on("connect_error", (error) => {
       console.error("Erro ao conectar ao WebSocket:", error);
+      
+      // Detecta erro de autenticação
+      const isAuthError = error.message?.includes('auth') || 
+                         error.message?.includes('unauthorized') || 
+                         error.message?.includes('401') ||
+                         error.message?.includes('403');
+      
+      if (isAuthError) {
+        authErrorCount++;
+        console.error(`Erro de autenticação no WebSocket (${authErrorCount}/${MAX_AUTH_ERRORS}).`);
+        
+        // Se exceder o limite de erros de auth, para de tentar reconectar
+        if (authErrorCount >= MAX_AUTH_ERRORS) {
+          console.error("Muitos erros de autenticação. Desabilitando reconexão.");
+          shouldReconnect = false;
+          newSocket.io.opts.reconnection = false;
+          newSocket.disconnect();
+        }
+      } else {
+        // Reset contador se não for erro de auth
+        authErrorCount = 0;
+      }
     });
 
     newSocket.on("disconnect", (reason) => {
       console.log("Desconectado do WebSocket:", reason);
       
+      // Se não deve reconectar (erro de auth), não faz nada
+      if (!shouldReconnect) {
+        console.log("Reconexão desabilitada devido a erros de autenticação.");
+        return;
+      }
+      
+      // Não reconecta manualmente - deixa o Socket.io gerenciar com backoff exponencial
+      // Se o servidor desconectou, o Socket.io tentará reconectar automaticamente
       if (reason === "io server disconnect") {
-        // Servidor desconectou, reconectar manualmente
-        newSocket.connect();
+        console.log("Servidor desconectou. Socket.io tentará reconectar automaticamente com backoff exponencial.");
       }
     });
 
@@ -89,9 +128,22 @@ export function useNotifications() {
       console.log("Reconectado após", attemptNumber, "tentativas");
     });
 
+    newSocket.on("reconnect_attempt", (attemptNumber) => {
+      console.log("Tentativa de reconexão", attemptNumber);
+    });
+
+    newSocket.on("reconnect_error", (error) => {
+      console.error("Erro ao tentar reconectar:", error);
+    });
+
+    newSocket.on("reconnect_failed", () => {
+      console.error("Falha ao reconectar após todas as tentativas");
+    });
+
     setSocket(newSocket);
 
     return () => {
+      newSocket.removeAllListeners();
       newSocket.disconnect();
     };
   }, [queryClient]);
