@@ -32,6 +32,9 @@ importers:
       '@react-google-maps/api':
         specifier: ^2.20.6
         version: 2.20.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-oauth/google':
+        specifier: ^0.13.4
+        version: 0.13.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-query':
         specifier: ^5.66.9
         version: 5.74.4(react@18.3.1)
@@ -1151,6 +1154,12 @@ packages:
 
   '@react-google-maps/marker-clusterer@2.20.0':
     resolution: {integrity: sha512-tieX9Va5w1yP88vMgfH1pHTacDQ9TgDTjox3tLlisKDXRQWdjw+QeVVghhf5XqqIxXHgPdcGwBvKY6UP+SIvLw==}
+
+  '@react-oauth/google@0.13.4':
+    resolution: {integrity: sha512-hGKyNEH+/PK8M0sFEuo3MAEk0txtHpgs94tDQit+s2LXg7b6z53NtzHfqDvoB2X8O6lGB+FRg80hY//X6hfD+w==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
@@ -4461,6 +4470,11 @@ snapshots:
   '@react-google-maps/infobox@2.20.0': {}
 
   '@react-google-maps/marker-clusterer@2.20.0': {}
+
+  '@react-oauth/google@0.13.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   '@rollup/pluginutils@5.1.4(rollup@4.40.0)':
     dependencies:
