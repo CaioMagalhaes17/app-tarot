@@ -207,7 +207,7 @@ export function AtendentsSearchPage() {
     priceMin: "0",
     priceMax: "999",
     serviceId: "all",
-    onlineOnly: "false",
+    onlineOnly: "true",
     sortBy: "rating-desc",
   });
 
@@ -323,7 +323,7 @@ export function AtendentsSearchPage() {
         </div>
 
         <div className="max-w-3xl mx-auto text-center mb-8">
-          <Text className="text-xl text-white-dark">
+          <Text as="p" className="text-xl text-white-dark">
             Escolha o Atendente que mais combina com seu momento, entre em contato e receba sua orientação espiritual personalizada.
           </Text>
         </div>
@@ -351,7 +351,7 @@ export function AtendentsSearchPage() {
           <div className="space-y-6 mt-6">
             {/* Busca */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Buscar
               </Text>
               <Input
@@ -365,7 +365,7 @@ export function AtendentsSearchPage() {
 
             {/* Avaliação Mínima */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Avaliação Mínima
               </Text>
               <div className="flex items-center gap-2">
@@ -408,7 +408,7 @@ export function AtendentsSearchPage() {
 
             {/* Serviço */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Serviço
               </Text>
               <select
@@ -455,7 +455,7 @@ export function AtendentsSearchPage() {
               </div>
 
               <div className="flex items-center gap-3">
-                <Text className="text-white-dark" as="label">
+                <Text className="text-white-dark" as="p">
                   Ordenar por:
                 </Text>
                 <select
@@ -522,14 +522,6 @@ export function AtendentsSearchPage() {
                           </Text>
                         </div>
                       </div>
-
-                      {/* Serviço */}
-                      <div className="mb-3">
-                        <Text className="text-white-dark text-sm" as="span">
-                          🔮 {services?.find(s => s.id === atendent.serviceId)?.name || "Serviço"}
-                        </Text>
-                      </div>
-
                       {/* Bio */}
                       <Text className="text-white-dark text-sm mb-4 line-clamp-3 flex-1" as="p">
                         {atendent.bio}
@@ -551,7 +543,7 @@ export function AtendentsSearchPage() {
                           onClick={() => navigate(`/atendents/profile/${atendent.id}`)}
                           className="btn-sm btn-outline-primary"
                         >
-                          <IconUser size={16} />
+                          <IconUser />
                           <span className="ml-2">Ver Perfil</span>
                         </Button>
                       </div>
