@@ -198,7 +198,7 @@ type Filters = {
 export function AtendentsSearchPage() {
   const { isMobile } = useStore();
   const navigate = useNavigate();
-  
+
   const [searchParams, setSearchParams] = useSearchParams({
     page: "1",
     search: "",
@@ -320,7 +320,7 @@ export function AtendentsSearchPage() {
           </span>
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
-        
+
         <div className="max-w-3xl mx-auto text-center mb-8">
           <Text className="text-xl text-white-dark">
             Escolha o Atendente que mais combina com seu momento, entre em contato e receba sua orientação espiritual personalizada.
@@ -385,7 +385,7 @@ export function AtendentsSearchPage() {
 
             {/* Faixa de Preço */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Preço por Minuto
               </Text>
               <select
@@ -395,7 +395,7 @@ export function AtendentsSearchPage() {
                   updateFilter("priceMin", min);
                   updateFilter("priceMax", max);
                 }}
-                className="form-select-custom w-full"
+                className="form-select-custom w-full bg-black"
               >
                 {priceRanges.map((range, index) => (
                   <option key={index} value={`${range.min}-${range.max}`}>
@@ -407,13 +407,13 @@ export function AtendentsSearchPage() {
 
             {/* Especialidade */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Especialidade
               </Text>
               <select
                 value={filters.specialty}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateFilter("specialty", e.target.value)}
-                className="form-select-custom w-full"
+                className="form-select-custom w-full bg-black"
               >
                 <option value="all">Todas</option>
                 {specialties.map((spec) => (
@@ -451,7 +451,7 @@ export function AtendentsSearchPage() {
                   {filteredAtendents.length} atendente{filteredAtendents.length !== 1 ? "s" : ""} encontrado{filteredAtendents.length !== 1 ? "s" : ""}
                 </Text>
               </div>
-              
+
               <div className="flex items-center gap-3">
                 <Text className="text-white-dark" as="label">
                   Ordenar por:
@@ -459,7 +459,7 @@ export function AtendentsSearchPage() {
                 <select
                   value={filters.sortBy}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateFilter("sortBy", e.target.value)}
-                  className="form-select-custom"
+                  className="form-select-custom bg-black"
                 >
                   {sortOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -494,7 +494,7 @@ export function AtendentsSearchPage() {
                             <div className="absolute bottom-0 right-0 w-4 h-4 bg-success rounded-full border-2 border-dark"></div>
                           )}
                         </div>
-                        
+
                         <div className="flex-1 min-w-0">
                           <Text className="text-white text-xl font-bold mb-1 truncate" as="h3">
                             {atendent.name}
@@ -536,16 +536,15 @@ export function AtendentsSearchPage() {
                       {/* Status e Botão */}
                       <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
                         <Text
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            atendent.online
-                              ? "bg-success/20 text-success border border-success/30"
-                              : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
-                          }`}
+                          className={`text-xs px-2 py-1 rounded-full ${atendent.online
+                            ? "bg-success/20 text-success border border-success/30"
+                            : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
+                            }`}
                           as="span"
                         >
                           {atendent.online ? "Online" : "Offline"}
                         </Text>
-                        
+
                         <Button
                           onClick={() => navigate(`/atendents/profile/${atendent.id}`)}
                           className="btn-sm btn-outline-primary"
