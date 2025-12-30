@@ -7,6 +7,8 @@ import useStore from "../../../state";
 import { useMemo } from "react";
 import { AtendentType } from "../../../@types/atendent.type";
 import { useGetAllServices } from "../../../hooks/services/useGetAllServices";
+import { useSearchAtendents } from "../../../hooks/atendents/useSearchAtendents";
+import { useMocks } from "../../../utils/config";
 
 // Tipo estendido para dados mockados
 type AtendentWithExtras = AtendentType & {
@@ -199,6 +201,7 @@ export function AtendentsSearchPage() {
   const { isMobile } = useStore();
   const navigate = useNavigate();
   const { services, isLoading: isLoadingServices } = useGetAllServices();
+  const useMocksFlag = useMocks();
   
   const [searchParams, setSearchParams] = useSearchParams({
     page: "1",
@@ -210,6 +213,15 @@ export function AtendentsSearchPage() {
     onlineOnly: "false",
     sortBy: "rating-desc",
   });
+
+  // Busca da API (quando não está usando mocks)
+  const { atendents: apiAtendents, pagination: apiPagination } = useSearchAtendents(
+    {
+      limit: 6,
+      page: Number(searchParams.get("page")) || 1,
+    },
+    searchParams
+  );
 
   const filters: Filters = useMemo(() => ({
     search: searchParams.get("search") || "",
@@ -223,8 +235,22 @@ export function AtendentsSearchPage() {
     sortBy: searchParams.get("sortBy") || "rating-desc",
   }), [searchParams]);
 
-  // Os dados mockados já incluem price, online e specialty
-  const atendentsWithPrices = mockAtendents;
+  // Decide entre usar mocks ou dados da API
+  // Se usar mocks, aplica os campos extras. Se usar API, tenta adaptar os dados
+  const atendentsWithPrices = useMemo(() => {
+    if (useMocksFlag) {
+      return mockAtendents;
+    } else {
+      // Se não usar mocks, adapta os dados da API para incluir os campos extras necessários
+      // Por enquanto, adiciona valores padrão para campos que não existem na API
+      return (apiAtendents || []).map((atendent) => ({
+        ...atendent,
+        price: 3.99, // Valor padrão - pode ser ajustado quando a API retornar esse campo
+        online: true, // Valor padrão - pode ser ajustado quando a API retornar esse campo
+        serviceId: searchParams.get("serviceId") || "1", // Valor padrão
+      })) as AtendentWithExtras[];
+    }
+  }, [useMocksFlag, apiAtendents, searchParams]);
 
   const filteredAtendents = useMemo(() => {
     let filtered = [...atendentsWithPrices];
@@ -279,9 +305,15 @@ export function AtendentsSearchPage() {
 
   const currentPage = Number(searchParams.get("page")) || 1;
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(filteredAtendents.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedAtendents = filteredAtendents.slice(startIndex, startIndex + itemsPerPage);
+  
+  // Se usar mocks, calcula paginação localmente. Se usar API, usa a paginação da API
+  const totalPages = useMocksFlag 
+    ? Math.ceil(filteredAtendents.length / itemsPerPage)
+    : (apiPagination?.pages || 1);
+  
+  const paginatedAtendents = useMocksFlag
+    ? filteredAtendents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+    : filteredAtendents; // API já retorna paginado, então aplicamos apenas os filtros locais
 
   const updateFilter = (key: string, value: string | number | boolean) => {
     const newParams = new URLSearchParams(searchParams);
