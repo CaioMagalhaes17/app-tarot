@@ -6,12 +6,13 @@ import { Pagination } from "./pagination";
 import useStore from "../../../state";
 import { useMemo } from "react";
 import { AtendentType } from "../../../@types/atendent.type";
+import { useGetAllServices } from "../../../hooks/services/useGetAllServices";
 
 // Tipo estendido para dados mockados
 type AtendentWithExtras = AtendentType & {
   price: number;
   online: boolean;
-  specialty: string;
+  serviceId: string;
 };
 
 // Dados mockados
@@ -23,7 +24,7 @@ const mockAtendents: AtendentWithExtras[] = [
     bio: "Médium especializada em consultas de tarot e cartomancia. Mais de 10 anos de experiência ajudando pessoas a encontrarem respostas.",
     price: 3.99,
     online: true,
-    specialty: "Tarot",
+    serviceId: "1",
     user: {
       id: "1",
       login: "maria@example.com",
@@ -42,7 +43,7 @@ const mockAtendents: AtendentWithExtras[] = [
     bio: "Astrólogo e numerólogo com conhecimento profundo em mapas astrais e previsões personalizadas.",
     price: 4.49,
     online: true,
-    specialty: "Astrologia",
+    serviceId: "2",
     user: {
       id: "2",
       login: "joao@example.com",
@@ -61,7 +62,7 @@ const mockAtendents: AtendentWithExtras[] = [
     bio: "Especialista em leitura de cartas, cristalomancia e conexão espiritual. Atendimento humanizado e acolhedor.",
     price: 4.99,
     online: true,
-    specialty: "Cartomancia",
+    serviceId: "3",
     user: {
       id: "3",
       login: "ana@example.com",
@@ -80,7 +81,7 @@ const mockAtendents: AtendentWithExtras[] = [
     bio: "Médium reconhecido internacionalmente. Consultas em português, espanhol e inglês. Especializado em amor e carreira.",
     price: 5.49,
     online: false,
-    specialty: "Numerologia",
+    serviceId: "4",
     user: {
       id: "4",
       login: "carlos@example.com",
@@ -99,7 +100,7 @@ const mockAtendents: AtendentWithExtras[] = [
     bio: "Taróloga intuitiva focada em autoconhecimento e desenvolvimento pessoal. Mais de 5000 consultas realizadas.",
     price: 5.99,
     online: true,
-    specialty: "Búzios",
+    serviceId: "5",
     user: {
       id: "5",
       login: "fernanda@example.com",
@@ -118,7 +119,7 @@ const mockAtendents: AtendentWithExtras[] = [
     bio: "Especialista em runas nórdicas e vikings. Consultas profundas sobre destino e propósito de vida.",
     price: 6.49,
     online: true,
-    specialty: "Runas",
+    serviceId: "6",
     user: {
       id: "6",
       login: "roberto@example.com",
@@ -137,7 +138,7 @@ const mockAtendents: AtendentWithExtras[] = [
     bio: "Médium e psicóloga espiritual. Combina técnicas tradicionais com abordagens modernas para um atendimento completo.",
     price: 6.99,
     online: false,
-    specialty: "Cristalomancia",
+    serviceId: "1",
     user: {
       id: "7",
       login: "juliana@example.com",
@@ -156,7 +157,7 @@ const mockAtendents: AtendentWithExtras[] = [
     bio: "Especialista em búzios e oráculos. Consultas rápidas e eficazes para decisões importantes.",
     price: 7.49,
     online: true,
-    specialty: "Tarot",
+    serviceId: "1",
     user: {
       id: "8",
       login: "pedro@example.com",
@@ -170,7 +171,6 @@ const mockAtendents: AtendentWithExtras[] = [
   },
 ];
 
-const specialties = ["Tarot", "Astrologia", "Numerologia", "Cartomancia", "Búzios", "Runas", "Cristalomancia"];
 const priceRanges = [
   { label: "Todos os preços", min: 0, max: 999 },
   { label: "Até R$ 2,99/min", min: 0, max: 2.99 },
@@ -190,7 +190,7 @@ type Filters = {
   search: string;
   minRating: number;
   priceRange: { min: number; max: number };
-  specialty: string;
+  serviceId: string;
   onlineOnly: boolean;
   sortBy: string;
 };
@@ -198,6 +198,7 @@ type Filters = {
 export function AtendentsSearchPage() {
   const { isMobile } = useStore();
   const navigate = useNavigate();
+  const { services, isLoading: isLoadingServices } = useGetAllServices();
 
   const [searchParams, setSearchParams] = useSearchParams({
     page: "1",
@@ -205,7 +206,7 @@ export function AtendentsSearchPage() {
     minRating: "0",
     priceMin: "0",
     priceMax: "999",
-    specialty: "all",
+    serviceId: "all",
     onlineOnly: "false",
     sortBy: "rating-desc",
   });
@@ -217,7 +218,7 @@ export function AtendentsSearchPage() {
       min: Number(searchParams.get("priceMin")) || 0,
       max: Number(searchParams.get("priceMax")) || 999,
     },
-    specialty: searchParams.get("specialty") || "all",
+    serviceId: searchParams.get("serviceId") || "all",
     onlineOnly: searchParams.get("onlineOnly") === "true",
     sortBy: searchParams.get("sortBy") || "rating-desc",
   }), [searchParams]);
@@ -247,9 +248,9 @@ export function AtendentsSearchPage() {
       (a) => a.price >= filters.priceRange.min && a.price <= filters.priceRange.max
     );
 
-    // Filtro de especialidade
-    if (filters.specialty !== "all") {
-      filtered = filtered.filter((a) => a.specialty === filters.specialty);
+    // Filtro de serviço
+    if (filters.serviceId !== "all") {
+      filtered = filtered.filter((a) => a.serviceId === filters.serviceId);
     }
 
     // Filtro online
@@ -302,7 +303,7 @@ export function AtendentsSearchPage() {
     filters.minRating > 0 ||
     filters.priceRange.min > 0 ||
     filters.priceRange.max < 999 ||
-    filters.specialty !== "all" ||
+    filters.serviceId !== "all" ||
     filters.onlineOnly;
 
   if (isMobile) {
@@ -405,20 +406,21 @@ export function AtendentsSearchPage() {
               </select>
             </div>
 
-            {/* Especialidade */}
+            {/* Serviço */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="p">
-                Especialidade
+              <Text className="text-white font-semibold mb-2 block" as="label">
+                Serviço
               </Text>
               <select
-                value={filters.specialty}
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateFilter("specialty", e.target.value)}
+                value={filters.serviceId}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateFilter("serviceId", e.target.value)}
                 className="form-select-custom w-full bg-black"
+                disabled={isLoadingServices}
               >
-                <option value="all">Todas</option>
-                {specialties.map((spec) => (
-                  <option key={spec} value={spec}>
-                    {spec}
+                <option value="all">Todos os serviços</option>
+                {services?.map((service) => (
+                  <option key={service.id} value={service.id}>
+                    {service.name}
                   </option>
                 ))}
               </select>
@@ -521,10 +523,10 @@ export function AtendentsSearchPage() {
                         </div>
                       </div>
 
-                      {/* Especialidade */}
+                      {/* Serviço */}
                       <div className="mb-3">
                         <Text className="text-white-dark text-sm" as="span">
-                          🔮 {atendent.specialty}
+                          🔮 {services?.find(s => s.id === atendent.serviceId)?.name || "Serviço"}
                         </Text>
                       </div>
 
