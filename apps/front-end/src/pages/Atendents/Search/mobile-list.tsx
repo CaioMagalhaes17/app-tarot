@@ -1,4 +1,4 @@
-import { Button, HSeparator, IconUser, Input, Panel, Text } from "@app/ui";
+import { Button, IconUser, Input, Panel, Text } from "@app/ui";
 import { Star } from "lucide-react";
 import { SetURLSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 import { AtendentType } from "../../../@types/atendent.type";
@@ -35,11 +35,11 @@ const sortOptions = [
   { value: "name-desc", label: "Nome Z-A" },
 ];
 
-export function MobileAtendentsListComponent({ 
-  atendents, 
-  setSearchParams, 
-  page, 
-  pages 
+export function MobileAtendentsListComponent({
+  atendents,
+  setSearchParams,
+  page,
+  pages
 }: MobileAtendentsListComponentProps) {
   const navigate = useNavigate();
   const { services, isLoading: isLoadingServices } = useGetAllServices();
@@ -91,9 +91,9 @@ export function MobileAtendentsListComponent({
           </span>
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
-        
+
         <div className="text-center mb-6">
-          <Text className="text-lg text-white-dark">
+          <Text as="p" className="text-lg text-white-dark">
             Escolha o Atendente que mais combina com seu momento
           </Text>
         </div>
@@ -117,7 +117,7 @@ export function MobileAtendentsListComponent({
           <div className="grid grid-cols-2 gap-3">
             {/* Avaliação Mínima */}
             <div>
-              <Text className="text-white text-sm font-semibold mb-1 block" as="label">
+              <Text className="text-white text-sm font-semibold mb-1 block" as="p">
                 Avaliação Min.
               </Text>
               <div className="flex items-center gap-2">
@@ -138,7 +138,7 @@ export function MobileAtendentsListComponent({
 
             {/* Preço */}
             <div>
-              <Text className="text-white text-sm font-semibold mb-1 block" as="label">
+              <Text className="text-white text-sm font-semibold mb-1 block" as="p">
                 Preço
               </Text>
               <select
@@ -162,7 +162,7 @@ export function MobileAtendentsListComponent({
           {/* Serviço e Online */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Text className="text-white text-sm font-semibold mb-1 block" as="label">
+              <Text className="text-white text-sm font-semibold mb-1 block" as="p">
                 Serviço
               </Text>
               <select
@@ -197,7 +197,7 @@ export function MobileAtendentsListComponent({
 
           {/* Ordenação */}
           <div>
-            <Text className="text-white text-sm font-semibold mb-1 block" as="label">
+            <Text className="text-white text-sm font-semibold mb-1 block" as="p">
               Ordenar por
             </Text>
             <select
@@ -255,7 +255,7 @@ export function MobileAtendentsListComponent({
                         <div className="absolute bottom-0 right-0 w-4 h-4 bg-success rounded-full border-2 border-dark"></div>
                       )}
                     </div>
-                    
+
                     <div className="flex-1 min-w-0">
                       <Text className="text-white text-xl font-bold mb-1 truncate" as="h3">
                         {atendent.name}
@@ -297,21 +297,20 @@ export function MobileAtendentsListComponent({
                   {/* Status e Botão */}
                   <div className="flex items-center justify-between pt-4 border-t border-white/10">
                     <Text
-                      className={`text-xs px-2 py-1 rounded-full ${
-                        atendent.online
-                          ? "bg-success/20 text-success border border-success/30"
-                          : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
-                      }`}
+                      className={`text-xs px-2 py-1 rounded-full ${atendent.online
+                        ? "bg-success/20 text-success border border-success/30"
+                        : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
+                        }`}
                       as="span"
                     >
                       {atendent.online ? "Online" : "Offline"}
                     </Text>
-                    
+
                     <Button
                       onClick={() => navigate(`/atendents/profile/${atendent.id}`)}
                       className="btn-sm btn-outline-primary"
                     >
-                      <IconUser size={16} />
+                      <IconUser />
                       <span className="ml-2">Ver Perfil</span>
                     </Button>
                   </div>

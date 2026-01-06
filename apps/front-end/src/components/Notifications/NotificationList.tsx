@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Button, Text } from "@app/ui";
 import { useNotifications } from "../../hooks/notifications/useNotifications";
 import { Notification } from "../../@types/notification.type";
@@ -9,9 +9,7 @@ import "dayjs/locale/pt-br";
 dayjs.extend(relativeTime);
 dayjs.locale("pt-br");
 
-type NotificationListProps = {
-  onClose: () => void;
-}
+
 
 const getNotificationIcon = (type: Notification['type']) => {
   switch (type) {
@@ -39,7 +37,7 @@ const getNotificationColor = (type: Notification['type']) => {
   }
 };
 
-export function NotificationList({ onClose }: NotificationListProps) {
+export function NotificationList() {
   const { notifications, unreadCount, isLoading, markAsRead, markAllAsRead } = useNotifications();
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -61,7 +59,7 @@ export function NotificationList({ onClose }: NotificationListProps) {
   }
 
   return (
-    <div 
+    <div
       ref={listRef}
       className="absolute right-0 top-full mt-2 w-96 max-h-[500px] overflow-hidden bg-[#1a1a1a] border border-gray-600 rounded-lg shadow-lg z-50 flex flex-col"
     >
@@ -89,9 +87,8 @@ export function NotificationList({ onClose }: NotificationListProps) {
             {notifications.map((notification) => (
               <div
                 key={notification.id}
-                className={`p-4 hover:bg-gray-800/50 cursor-pointer transition-colors ${
-                  !notification.isRead ? 'bg-gray-900/30' : ''
-                }`}
+                className={`p-4 hover:bg-gray-800/50 cursor-pointer transition-colors ${!notification.isRead ? 'bg-gray-900/30' : ''
+                  }`}
                 onClick={() => {
                   if (!notification.isRead) {
                     handleMarkAsRead(notification.id);
@@ -102,8 +99,8 @@ export function NotificationList({ onClose }: NotificationListProps) {
                   <span className="text-2xl">{getNotificationIcon(notification.type)}</span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
-                      <Text 
-                        className={`font-bold ${getNotificationColor(notification.type)}`} 
+                      <Text
+                        className={`font-bold ${getNotificationColor(notification.type)}`}
                         as="h3"
                       >
                         {notification.title}
