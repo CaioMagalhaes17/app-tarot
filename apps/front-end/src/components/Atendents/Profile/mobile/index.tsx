@@ -38,8 +38,8 @@ export function MobileAtendentProfileComponent({
             <div className="flex max-w-[1100px] ml-auto mr-auto relative flex-row  font-bold gap-5">
               <img width={'130px'} src={profileImg} className="h-[130px] rounded-3xl sombra" />
               <div className="flex flex-col max-w-[550px]">
-                <Text className="text-5xl font-smythe text-dark dark:text-white" as="h1">{name}</Text>
-                <Text className="px-2 rounded-xl bg-green w-fit text-white text-lg mb-2" as="h1">Online</Text>
+                <Text className="text-4xl font-smythe text-dark dark:text-white" as="h1">{name}</Text>
+                <Text className="px-2 rounded-xl bg-green w-fit text-white mb-2" as="h1">Online</Text>
 
                 <div className="flex flex-row ">
                   {[...Array(5)].map((_, index) => (
@@ -101,8 +101,8 @@ export function MobileAtendentProfileComponent({
                       <img src={item.service.serviceImg} className="rounded-xl h-[150px]" />
                       <Text className="text-white font-smythe text-2xl mt-2" as="h1">{item.service.name}</Text>
                       <Text className="mt-2 mb-2" as="span">{item.description}</Text>
-                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${(item.price / 100).toFixed(2).replace('.', ',')}</Text>
-                      <Button className="btn-primary">Consultar</Button>
+                      <Text className="text-success text-lg mt-auto mb-5" as="span">R${(item.price / 100).toFixed(2).replace('.', ',')}</Text>
+                      <Button className="btn-primary mt-auto">Consultar</Button>
                     </div>
                   ))}
                 </div>

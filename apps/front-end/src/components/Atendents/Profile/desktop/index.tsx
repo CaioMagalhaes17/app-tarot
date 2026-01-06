@@ -57,8 +57,8 @@ export function AtendentProfileComponent({
               <div className="ml-auto" />
               <div className="flex flex-col items-center gap-5">
                 <Button onClick={() => navigate('schedule')} className="btn-primary btn-xl flex flex-row gap-2 w-full"><IconChat /> Consulta por Chat</Button>
-                <Button className="btn-purple btn-xl flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
-                <Button className="btn-warning btn-xl  w-full  flex flex-row gap-2"><Star />Avaliações</Button>
+                <Button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn-purple btn-xl flex w-full flex-row gap-2"><IconMoon />Serviços</Button>
+                <Button onClick={() => document.getElementById('feedbacks')?.scrollIntoView({ behavior: 'smooth' })} className="btn-warning btn-xl  w-full  flex flex-row gap-2"><Star />Feedbacks</Button>
                 <ScheduleViewModal
                   schedule={schedule}
                   trigger={
@@ -87,7 +87,7 @@ export function AtendentProfileComponent({
             </div>
 
             <Panel className="max-w-[1300px] flex flex-col ml-auto mr-auto font-bold mb-20">
-              <div className="flex items-center gap-4 mb-5">
+              <div id="services" className="flex items-center gap-4 mb-5">
                 <div className="flex-1 border-t border-gray-300"></div>
                 <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Serviços</h1>
                 <div className="flex-1 border-t border-gray-300"></div>
@@ -99,12 +99,12 @@ export function AtendentProfileComponent({
               ) : (
                 <div className="flex flex-row gap-20 justify-center">
                   {services.filter(service => service.isActive).map((item) => (
-                    <div key={item.id} className="flex flex-col w-[220px]">
-                      <img src={item.service.serviceImg} className="rounded-xl h-[180px]" />
-                      <Text className="text-white font-smythe text-4xl mt-2" as="h1">{item.service.name}</Text>
+                    <div key={item.id} className="flex flex-col w-[150px]">
+                      <img src={item.service.serviceImg} className="rounded-xl h-[150px]" />
+                      <Text className="text-white font-smythe text-3xl mt-2" as="h1">{item.service.name}</Text>
                       <Text className="mt-2 mb-5" as="span">{item.description}</Text>
-                      <Text className="text-success text-lg mt-2 mb-5" as="span">R${(item.price / 100).toFixed(2).replace('.', ',')}</Text>
-                      <Button onClick={() => navigate('schedule')} className="btn-outline-primary ">Consultar</Button>
+                      <Text className="text-success text-lg mt-auto mb-5" as="span">R${(item.price / 100).toFixed(2).replace('.', ',')}</Text>
+                      <Button onClick={() => navigate('schedule')} className="btn-outline-primary mt-auto">Consultar</Button>
                     </div>
                   ))}
                 </div>
@@ -112,7 +112,7 @@ export function AtendentProfileComponent({
             </Panel>
 
             <Panel className="max-w-[1300px] mr-auto ml-auto">
-              <div className="flex items-center gap-4 mb-5">
+              <div id="feedbacks" className="flex items-center gap-4 mb-5">
                 <div className="flex-1 border-t border-gray-300"></div>
                 <h1 className="text-white text-7xl whitespace-nowrap px-2 font-smythe">Depoimento de usuários</h1>
                 <div className="flex-1 border-t border-gray-300"></div>
