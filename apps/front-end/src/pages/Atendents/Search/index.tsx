@@ -214,13 +214,24 @@ export function AtendentsSearchPage() {
     sortBy: "rating-desc",
   });
 
+  // Obtém o nome do serviço a partir do serviceId para passar para a API
+  const serviceName = useMemo(() => {
+    const serviceId = searchParams.get("serviceId");
+    if (!serviceId || serviceId === "all" || !services) {
+      return undefined;
+    }
+    const service = services.find(s => s.id === serviceId);
+    return service?.name;
+  }, [searchParams, services]);
+
   // Busca da API (quando não está usando mocks)
   const { atendents: apiAtendents, pagination: apiPagination } = useSearchAtendents(
     {
       limit: 6,
       page: Number(searchParams.get("page")) || 1,
     },
-    searchParams
+    searchParams,
+    serviceName
   );
 
   const filters: Filters = useMemo(() => ({

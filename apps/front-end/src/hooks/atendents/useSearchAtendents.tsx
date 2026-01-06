@@ -5,7 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 
 export function useSearchAtendents(
   pagination: { limit: number; page: number },
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
+  service?: string
 ) {
   const [atendents, setAtendents] = useState<AtendentType[]>()
 
@@ -14,13 +15,15 @@ export function useSearchAtendents(
       'search-atendents',
       pagination.page,
       pagination.limit,
-      searchParams.toString()
+      searchParams.toString(),
+      service
     ],
     queryFn: () =>
       getAtendents({
         page: pagination.page,
         limit: pagination.limit,
         search: searchParams.get('search') || undefined,
+        service: service,
       }),
   })
 
