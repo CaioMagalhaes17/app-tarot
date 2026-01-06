@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { IconBell } from "@app/ui";
 import { useNotifications } from "../../hooks/notifications/useNotifications";
 import { NotificationList } from "./NotificationList";
@@ -39,11 +39,9 @@ export function NotificationBell() {
           </span>
         )}
       </button>
-      
+
       {isOpen && (
-        <NotificationList 
-          onClose={() => setIsOpen(false)}
-        />
+        <NotificationList />
       )}
     </div>
   );

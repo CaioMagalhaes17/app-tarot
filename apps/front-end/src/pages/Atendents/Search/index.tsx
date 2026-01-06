@@ -202,7 +202,7 @@ export function AtendentsSearchPage() {
   const navigate = useNavigate();
   const { services, isLoading: isLoadingServices } = useGetAllServices();
   const useMocksFlag = useMocks();
-  
+
   const [searchParams, setSearchParams] = useSearchParams({
     page: "1",
     search: "",
@@ -210,7 +210,7 @@ export function AtendentsSearchPage() {
     priceMin: "0",
     priceMax: "999",
     serviceId: "all",
-    onlineOnly: "false",
+    onlineOnly: "true",
     sortBy: "rating-desc",
   });
 
@@ -316,12 +316,12 @@ export function AtendentsSearchPage() {
 
   const currentPage = Number(searchParams.get("page")) || 1;
   const itemsPerPage = 6;
-  
+
   // Se usar mocks, calcula paginação localmente. Se usar API, usa a paginação da API
-  const totalPages = useMocksFlag 
+  const totalPages = useMocksFlag
     ? Math.ceil(filteredAtendents.length / itemsPerPage)
     : (apiPagination?.pages || 1);
-  
+
   const paginatedAtendents = useMocksFlag
     ? filteredAtendents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
     : filteredAtendents; // API já retorna paginado, então aplicamos apenas os filtros locais
@@ -364,9 +364,9 @@ export function AtendentsSearchPage() {
           </span>
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
-        
+
         <div className="max-w-3xl mx-auto text-center mb-8">
-          <Text className="text-xl text-white-dark">
+          <Text as="p" className="text-xl text-white-dark">
             Escolha o Atendente que mais combina com seu momento, entre em contato e receba sua orientação espiritual personalizada.
           </Text>
         </div>
@@ -394,7 +394,7 @@ export function AtendentsSearchPage() {
           <div className="space-y-6 mt-6">
             {/* Busca */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Buscar
               </Text>
               <Input
@@ -408,7 +408,7 @@ export function AtendentsSearchPage() {
 
             {/* Avaliação Mínima */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Avaliação Mínima
               </Text>
               <div className="flex items-center gap-2">
@@ -429,7 +429,7 @@ export function AtendentsSearchPage() {
 
             {/* Faixa de Preço */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Preço por Minuto
               </Text>
               <select
@@ -439,7 +439,7 @@ export function AtendentsSearchPage() {
                   updateFilter("priceMin", min);
                   updateFilter("priceMax", max);
                 }}
-                className="form-select-custom w-full"
+                className="form-select-custom w-full bg-black"
               >
                 {priceRanges.map((range, index) => (
                   <option key={index} value={`${range.min}-${range.max}`}>
@@ -451,13 +451,13 @@ export function AtendentsSearchPage() {
 
             {/* Serviço */}
             <div>
-              <Text className="text-white font-semibold mb-2 block" as="label">
+              <Text className="text-white font-semibold mb-2 block" as="p">
                 Serviço
               </Text>
               <select
                 value={filters.serviceId}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateFilter("serviceId", e.target.value)}
-                className="form-select-custom w-full"
+                className="form-select-custom w-full bg-black"
                 disabled={isLoadingServices}
               >
                 <option value="all">Todos os serviços</option>
@@ -496,15 +496,15 @@ export function AtendentsSearchPage() {
                   {filteredAtendents.length} atendente{filteredAtendents.length !== 1 ? "s" : ""} encontrado{filteredAtendents.length !== 1 ? "s" : ""}
                 </Text>
               </div>
-              
+
               <div className="flex items-center gap-3">
-                <Text className="text-white-dark" as="label">
+                <Text className="text-white-dark" as="p">
                   Ordenar por:
                 </Text>
                 <select
                   value={filters.sortBy}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateFilter("sortBy", e.target.value)}
-                  className="form-select-custom"
+                  className="form-select-custom bg-black"
                 >
                   {sortOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -539,7 +539,7 @@ export function AtendentsSearchPage() {
                             <div className="absolute bottom-0 right-0 w-4 h-4 bg-success rounded-full border-2 border-dark"></div>
                           )}
                         </div>
-                        
+
                         <div className="flex-1 min-w-0">
                           <Text className="text-white text-xl font-bold mb-1 truncate" as="h3">
                             {atendent.name}
@@ -565,14 +565,6 @@ export function AtendentsSearchPage() {
                           </Text>
                         </div>
                       </div>
-
-                      {/* Serviço */}
-                      <div className="mb-3">
-                        <Text className="text-white-dark text-sm" as="span">
-                          🔮 {services?.find(s => s.id === atendent.serviceId)?.name || "Serviço"}
-                        </Text>
-                      </div>
-
                       {/* Bio */}
                       <Text className="text-white-dark text-sm mb-4 line-clamp-3 flex-1" as="p">
                         {atendent.bio}
@@ -581,21 +573,20 @@ export function AtendentsSearchPage() {
                       {/* Status e Botão */}
                       <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
                         <Text
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            atendent.online
-                              ? "bg-success/20 text-success border border-success/30"
-                              : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
-                          }`}
+                          className={`text-xs px-2 py-1 rounded-full ${atendent.online
+                            ? "bg-success/20 text-success border border-success/30"
+                            : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
+                            }`}
                           as="span"
                         >
                           {atendent.online ? "Online" : "Offline"}
                         </Text>
-                        
+
                         <Button
                           onClick={() => navigate(`/atendents/profile/${atendent.id}`)}
                           className="btn-sm btn-outline-primary"
                         >
-                          <IconUser size={16} />
+                          <IconUser />
                           <span className="ml-2">Ver Perfil</span>
                         </Button>
                       </div>

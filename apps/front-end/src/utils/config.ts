@@ -5,7 +5,7 @@ let config: { USE_MOCKS: boolean } | null = null;
  * Carrega a configuração do arquivo env.json
  * Por padrão, se não conseguir carregar, retorna USE_MOCKS = false
  */
-export async function loadConfig(): Promise<{ USE_MOCKS: boolean }> {
+export async function loadConfig(): Promise<{ USE_MOCKS: boolean } | null> {
   if (config !== null) {
     return config;
   }

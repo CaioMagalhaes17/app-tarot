@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useCallback } from "react";
 import { io, Socket } from "socket.io-client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -8,6 +10,7 @@ import { markAllNotificationsAsRead } from "../../api/notifications/markAllAsRea
 
 export function useNotifications() {
   const [socket, setSocket] = useState<Socket | null>(null);
+  console.log(socket)
   const [unreadCount, setUnreadCount] = useState(0);
   const queryClient = useQueryClient();
 
@@ -34,8 +37,8 @@ export function useNotifications() {
       return;
     }
 
-    const baseURL = window.location.hostname === 'localhost' 
-      ? 'http://localhost:3000' 
+    const baseURL = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
       : 'https://app-tarot-backend.fly.dev';
 
     let shouldReconnect = true;
@@ -61,7 +64,7 @@ export function useNotifications() {
 
     newSocket.on("new_notification", (notification: Notification) => {
       console.log("Nova notificação recebida:", notification);
-      
+
       // Atualiza o cache do React Query
       queryClient.setQueryData(['notifications'], (old: any) => {
         if (!old) return { notifications: [notification] };
@@ -84,17 +87,17 @@ export function useNotifications() {
 
     newSocket.on("connect_error", (error) => {
       console.error("Erro ao conectar ao WebSocket:", error);
-      
+
       // Detecta erro de autenticação
-      const isAuthError = error.message?.includes('auth') || 
-                         error.message?.includes('unauthorized') || 
-                         error.message?.includes('401') ||
-                         error.message?.includes('403');
-      
+      const isAuthError = error.message?.includes('auth') ||
+        error.message?.includes('unauthorized') ||
+        error.message?.includes('401') ||
+        error.message?.includes('403');
+
       if (isAuthError) {
         authErrorCount++;
         console.error(`Erro de autenticação no WebSocket (${authErrorCount}/${MAX_AUTH_ERRORS}).`);
-        
+
         // Se exceder o limite de erros de auth, para de tentar reconectar
         if (authErrorCount >= MAX_AUTH_ERRORS) {
           console.error("Muitos erros de autenticação. Desabilitando reconexão.");
@@ -110,13 +113,13 @@ export function useNotifications() {
 
     newSocket.on("disconnect", (reason) => {
       console.log("Desconectado do WebSocket:", reason);
-      
+
       // Se não deve reconectar (erro de auth), não faz nada
       if (!shouldReconnect) {
         console.log("Reconexão desabilitada devido a erros de autenticação.");
         return;
       }
-      
+
       // Não reconecta manualmente - deixa o Socket.io gerenciar com backoff exponencial
       // Se o servidor desconectou, o Socket.io tentará reconectar automaticamente
       if (reason === "io server disconnect") {
@@ -152,7 +155,7 @@ export function useNotifications() {
   const markAsRead = useCallback(async (id: string) => {
     try {
       await markNotificationAsRead(id);
-      
+
       // Atualiza o cache
       queryClient.setQueryData(['notifications'], (old: any) => {
         if (!old) return old;
@@ -174,7 +177,7 @@ export function useNotifications() {
   const markAllAsRead = useCallback(async () => {
     try {
       await markAllNotificationsAsRead();
-      
+
       // Atualiza o cache
       queryClient.setQueryData(['notifications'], (old: any) => {
         if (!old) return old;
