@@ -3,6 +3,7 @@ import useStore from "../../../../state"
 import { useEffect, useMemo } from "react"
 import Swal from "sweetalert2"
 import { useGetAtendentAvailability } from "../../../../hooks/atendents/useGetAtendentAvailability"
+import { useGetAtendentServices } from "../../../../hooks/atendents/useGetAtendentServices"
 import dayjs from "dayjs"
 import { AvailabilityDay, AvailableSlot } from "../../../../@types/availability.type"
 
@@ -23,6 +24,9 @@ export function useScheduleController() {
     atendentId,
     { startDate, endDate }
   )
+
+  // Busca serviços do atendente
+  const { services, isLoading: isLoadingServices } = useGetAtendentServices(atendentId)
   // Calcula os horários disponíveis baseado na data selecionada
   const avaliableHours = useMemo(() => {
     if (!availability || !userStore.dateTime.date) {
@@ -70,6 +74,8 @@ export function useScheduleController() {
     setDateTime: userStore.setDateTime,
     avaliableHours,
     availability,
-    isLoadingAvailability
+    isLoadingAvailability,
+    services,
+    isLoadingServices
   }
 }

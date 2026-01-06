@@ -11,7 +11,7 @@ import { ChooseDate } from "./components/ChooseDate";
 import dayjs from 'dayjs'
 
 export function SchedulePage() {
-  const { dateTime, step, isMobile, setSearchParams, isLogged, clientInfos, service } = useScheduleController()
+  const { dateTime, step, isMobile, setSearchParams, isLogged, clientInfos, service, services, isLoadingServices } = useScheduleController()
 
   const location = useLocation()
   const steps = [
@@ -119,7 +119,7 @@ export function SchedulePage() {
 
           {
             step === '2' && (
-              <ChooseService />
+              <ChooseService services={services || []} isLoadingServices={isLoadingServices} />
             )
           }
 
